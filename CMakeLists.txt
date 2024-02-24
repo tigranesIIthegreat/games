@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(checkers)
+project(games)
 set(CMAKE_CXX_STANDARD 20)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fsanitize=undefined,address -Wall -Wextra -Werror")
@@ -16,8 +16,8 @@ add_subdirectory(dependencies/SDL)
 add_subdirectory(dependencies/SDL_image)
 
 add_subdirectory(core)
-add_subdirectory(game)
+add_subdirectory(checkers)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE game)
+target_link_libraries(${PROJECT_NAME} PRIVATE checkers)
