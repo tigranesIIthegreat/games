@@ -1,4 +1,4 @@
-#include <game/window.hpp>
+#include <core/window.hpp>
 
 namespace checkers {
 

@@ -1,4 +1,6 @@
-#include <game/window.hpp>
+#include <core/window.hpp>
+
+namespace core {
 
 class Renderable {
 public:
@@ -9,3 +11,5 @@ public:
 private:
   core::WindowRef _window;
 };
+
+} // namespace core

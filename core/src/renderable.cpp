@@ -1,9 +1,9 @@
 #include "renderable.hpp"
 
-namespace checkers {
+namespace core {
 
 Renderable::Renderable(core::WindowRef window) : _window{window} {}
 
 void Renderable::render() {}
 
-} // namespace checkers
+} // namespace core
