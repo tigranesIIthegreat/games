@@ -7,7 +7,7 @@
 namespace sdl {
 class Window {
 public:
-    Window(const std::string& title, int width, int height, int flags);
+    Window(const std::string& title, int width, int height);
     ~Window();
 
 public:

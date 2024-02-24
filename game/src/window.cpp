@@ -6,8 +6,8 @@ namespace sdl {
 
 size_t Window::_instance_count = 0;
 
-Window::Window(const std::string &title, int width, int height, int flags)
-    : _title(title), _width(width), _height(height), _flags(flags) {
+Window::Window(const std::string &title, int width, int height)
+    : _title(title), _width(width), _height(height), _flags{} {
     if (_instance_count++ == 0) 
         _initialize_system();
     set_sdl_window();
@@ -17,8 +17,9 @@ Window::Window(const std::string &title, int width, int height, int flags)
 Window::~Window() {
     SDL_DestroyRenderer(_sdl_renderer);
     SDL_DestroyWindow(_sdl_window);
-    if (--_instance_count == 0)
+    if (--_instance_count == 0) {
         _deinitialize_system();
+    }
 }
 
 void Window::_initialize_system() {
@@ -28,7 +29,6 @@ void Window::_initialize_system() {
 }
 
 void Window::_deinitialize_system() {
-    assert(_instance_count == 0);
     SDL_Quit();
 }
 
@@ -42,7 +42,7 @@ void Window::set_sdl_window() {
 
 void Window::set_sdl_renderer() {
     _sdl_renderer = SDL_CreateRenderer(_sdl_window, nullptr, SDL_RENDERER_ACCELERATED);
-    if (_sdl_renderer) {
+    if (_sdl_renderer == nullptr) {
         _deinitialize_system();
         throw std::runtime_error(std::string(SDL_GetError()));
     }
