@@ -1,5 +1,11 @@
+#include <game/window.hpp>
+
 class Renderable {
 public:
-    void update();
-    void render();
+  Renderable(core::WindowRef window);
+  virtual void update() = 0;
+  virtual void render();
+
+private:
+  core::WindowRef _window;
 };
