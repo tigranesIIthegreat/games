@@ -2,7 +2,7 @@
 
 namespace checkers {
 
-Game::Game() : _window{sdl::Window("Checkers", 800, 600)} {}
+Game::Game() : _window{std::make_shared<sdl::Window>("Checkers", 800, 600)} {}
 
 void Game::run() {
     SDL_Event e;
