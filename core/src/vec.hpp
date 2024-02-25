@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cmath>
+#include <initializer_list>
 #include <string>
 
 namespace core {
@@ -11,7 +12,9 @@ class Vec {
 public:
     Vec() = default;
     Vec(const std::array<TYPE, SIZE>& vec);
+    Vec(std::initializer_list<TYPE> values);
 
+public:
     const TYPE& operator[](size_t index) const;
     TYPE& operator[](size_t index);
     size_t size() const;
@@ -37,7 +40,7 @@ private:
     void checkIndexValidity(size_t index) const;
 
 private:
-    std::array<TYPE, SIZE> _vec{};
+    std::array<TYPE, SIZE> data{};
 };
 
 template <size_t SIZE, typename TYPE>
@@ -47,12 +50,12 @@ Vec<SIZE, TYPE> Vec<SIZE, TYPE>::normalized() const {
 
 template <size_t SIZE, typename TYPE>
 bool Vec<SIZE, TYPE>::equals(const Vec<SIZE, TYPE>& other) const {
-    if (_vec.size() != other._vec.size()) {
+    if (data.size() != other.data.size()) {
         return false;
     }
 
-    for (size_t i{}; i < _vec.size(); ++i) {
-        if (_vec[i] != other._vec[i]) {
+    for (size_t i{}; i < data.size(); ++i) {
+        if (data[i] != other.data[i]) {
             return false;
         }
     }
@@ -62,13 +65,13 @@ bool Vec<SIZE, TYPE>::equals(const Vec<SIZE, TYPE>& other) const {
 template <size_t SIZE, typename TYPE>
 bool Vec<SIZE, TYPE>::equalsWithEpsilon(const Vec<SIZE, TYPE>& other,
                                         TYPE epsilon) const {
-    if (_vec.size() != other._vec.size()) {
+    if (data.size() != other.data.size()) {
         return false;
     }
 
     // TODO: find a better way than 10 * epsilon
-    for (size_t i{}; i < _vec.size(); ++i) {
-        if (std::abs(_vec[i] - other._vec[i]) > 10 * epsilon) {
+    for (size_t i{}; i < data.size(); ++i) {
+        if (std::abs(data[i] - other.data[i]) > 10 * epsilon) {
             return false;
         }
     }
@@ -76,18 +79,27 @@ bool Vec<SIZE, TYPE>::equalsWithEpsilon(const Vec<SIZE, TYPE>& other,
 }
 
 template <size_t SIZE, typename TYPE>
-Vec<SIZE, TYPE>::Vec(const std::array<TYPE, SIZE>& vec) : _vec{vec} {}
+Vec<SIZE, TYPE>::Vec(const std::array<TYPE, SIZE>& vec) : data{vec} {}
+
+template <size_t SIZE, typename TYPE>
+Vec<SIZE, TYPE>::Vec(std::initializer_list<TYPE> values) {
+    if (values.size() != SIZE) {
+        throw std::invalid_argument(
+            "Initializer list size does not match Vec size.");
+    }
+    std::copy(values.begin(), values.end(), data.begin());
+}
 
 template <size_t SIZE, typename TYPE>
 TYPE& Vec<SIZE, TYPE>::operator[](size_t index) {
     checkIndexValidity(index);
-    return _vec[index];
+    return data[index];
 }
 
 template <size_t SIZE, typename TYPE>
 const TYPE& Vec<SIZE, TYPE>::operator[](size_t index) const {
     checkIndexValidity(index);
-    return _vec[index];
+    return data[index];
 }
 
 template <size_t SIZE, typename TYPE>
@@ -98,8 +110,8 @@ size_t Vec<SIZE, TYPE>::size() const {
 template <size_t SIZE, typename TYPE>
 TYPE Vec<SIZE, TYPE>::length() const {
     TYPE resultSquared{};
-    for (size_t i{}; i < _vec.size(); ++i) {
-        resultSquared += std::pow(_vec[i], 2);
+    for (size_t i{}; i < data.size(); ++i) {
+        resultSquared += std::pow(data[i], 2);
     }
     return std::sqrt(resultSquared);
 }
@@ -176,7 +188,7 @@ Vec<SIZE, TYPE>& Vec<SIZE, TYPE>::operator/=(TYPE num) {
 
 template <size_t SIZE, typename TYPE>
 void Vec<SIZE, TYPE>::checkIndexValidity(size_t index) const {
-    if (index < 0 || index >= _vec.size()) {
+    if (index < 0 || index >= data.size()) {
         throw std::runtime_error("invalid index " + std::to_string(index) +
                                  " for vec with size " + std::to_string(SIZE));
     }
@@ -265,5 +277,6 @@ Vec<SIZE, TYPE> operator/(const Vec<SIZE, TYPE>& lhs, TYPE num) {
 }
 
 using Vec2 = Vec<2, float>;
+using Vec4 = Vec<4, float>;
 
 } // namespace core
