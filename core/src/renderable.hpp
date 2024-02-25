@@ -1,15 +1,22 @@
-#include <core/window.hpp>
+#pragma once
+
+#include "rect.hpp"
+#include "texture.hpp"
+#include "window.hpp"
 
 namespace core {
 
 class Renderable {
 public:
-    Renderable(core::WindowRef window);
-    virtual void update() = 0;
+    Renderable(Rect coords, Texture& texture, WindowRef window);
+    virtual void update_coords() = 0;
+    virtual void update_texture();
     virtual void render();
 
 private:
-    core::WindowRef _window;
+    Rect _coords;
+    Texture _texture;
+    WindowRef _window;
 };
 
 }  // namespace core

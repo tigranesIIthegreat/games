@@ -1,3 +1,5 @@
+#pragma once
+
 #include <core/window.hpp>
 
 namespace checkers {

@@ -2,8 +2,17 @@
 
 namespace core {
 
-Renderable::Renderable(core::WindowRef window) : _window{window} {}
+Renderable::Renderable(Rect coords, Texture& texture, WindowRef window) 
+    : _coords{coords}
+    , _texture{texture}
+    , _window{window} {}
 
-void Renderable::render() {}
+void Renderable::update_texture() {
+    _texture.update();
+}
+
+void Renderable::render() {
+    _texture.render(_coords);
+}
 
 }  // namespace core

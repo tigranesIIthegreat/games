@@ -1,3 +1,5 @@
+#pragma once
+
 #include "rect.hpp"
 #include "window.hpp"
 
