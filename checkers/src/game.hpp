@@ -4,11 +4,11 @@ namespace checkers {
 
 class Game {
 public:
-  Game();
-  void run();
+    Game();
+    void run();
 
 private:
-  core::WindowRef _window;
+    core::WindowRef _window;
 };
 
-} // namespace checkers
+}  // namespace checkers

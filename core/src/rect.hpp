@@ -8,4 +8,4 @@ struct Rect {
     float height{};
 };
 
-} // namespace core
+}  // namespace core
