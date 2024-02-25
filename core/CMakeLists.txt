@@ -4,6 +4,7 @@ add_library(
     include/core/rect.hpp
     include/core/renderable.hpp
     include/core/texture.hpp
+    include/core/vec.hpp
     include/core/window.hpp
 )
 
