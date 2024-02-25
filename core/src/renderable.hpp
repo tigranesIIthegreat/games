@@ -11,6 +11,7 @@ public:
     Renderable(Vec2 coords, float width, float height, Texture& texture, WindowRef window);
     virtual void update_coords() = 0;
     virtual void update_texture();
+    virtual void update();
     virtual void render();
 
 private:
