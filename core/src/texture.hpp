@@ -1,6 +1,6 @@
 #pragma once
 
-#include "rect.hpp"
+#include "vec.hpp"
 #include "window.hpp"
 
 #include <string>
@@ -16,7 +16,7 @@ public:
 
 public:
     void update();
-    void render(Rect destination);
+    void render(Vec2 coords, float width, float height);
 
 private:
     std::string _path;

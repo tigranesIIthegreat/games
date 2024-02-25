@@ -2,8 +2,10 @@
 
 namespace core {
 
-Renderable::Renderable(Rect coords, Texture& texture, WindowRef window) 
+Renderable::Renderable(Vec2 coords, float width, float height, Texture& texture, WindowRef window) 
     : _coords{coords}
+    , _width{width}
+    , _height{height}
     , _texture{texture}
     , _window{window} {}
 
@@ -12,7 +14,7 @@ void Renderable::update_texture() {
 }
 
 void Renderable::render() {
-    _texture.render(_coords);
+    _texture.render(_coords, _width, _height);
 }
 
 }  // namespace core

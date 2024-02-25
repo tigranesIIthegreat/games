@@ -31,12 +31,12 @@ void Texture::update() {
     _current_row = frameNumber / _col_count % _row_count;
 }
 
-void Texture::render(Rect destination) {
-    SDL_FRect src{_frame_width * static_cast<float>(_current_col),
-                  _frame_height * static_cast<float>(_current_row),
-                  _frame_width, _frame_height};
-    SDL_FRect dst{destination.x, destination.y, destination.width, destination.height};
-    SDL_RenderTexture(_window->_sdl_renderer, _sdl_texture, &src, &dst);
+void Texture::render(Vec2 coords, float width, float height) {
+    SDL_FRect source{_frame_width * static_cast<float>(_current_col),
+                     _frame_height * static_cast<float>(_current_row),
+                     _frame_width, _frame_height};
+    SDL_FRect destination{coords[0], coords[1], width, height};
+    SDL_RenderTexture(_window->_sdl_renderer, _sdl_texture, &source, &destination);
 }
 
 }  // namespace core

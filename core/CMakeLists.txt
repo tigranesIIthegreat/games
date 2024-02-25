@@ -1,7 +1,6 @@
 add_library(
 	core_headers INTERFACE
 	include/core/inputable.hpp
-    include/core/rect.hpp
     include/core/renderable.hpp
     include/core/texture.hpp
     include/core/vec.hpp
@@ -16,7 +15,6 @@ target_include_directories(
 
 add_library(
     core STATIC
-    src/rect.cpp
     src/renderable.cpp
     src/texture.cpp
     src/window.cpp
