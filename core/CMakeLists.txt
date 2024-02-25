@@ -1,5 +1,6 @@
 add_library(
 	core_headers INTERFACE
+    include/core/event.hpp
 	include/core/inputable.hpp
     include/core/movable.hpp
     include/core/renderable.hpp
@@ -16,6 +17,7 @@ target_include_directories(
 
 add_library(
     core STATIC
+    src/event.hpp
     src/movable.cpp
     src/renderable.cpp
     src/texture.cpp
