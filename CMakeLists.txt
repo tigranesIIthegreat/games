@@ -15,6 +15,10 @@ add_subdirectory(dependencies/googletest)
 add_subdirectory(dependencies/SDL)
 add_subdirectory(dependencies/SDL_image)
 
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_SOURCE_DIR}/cmake")
+include(add_test)
+
+add_subdirectory(test)
 add_subdirectory(core)
 add_subdirectory(checkers)
 

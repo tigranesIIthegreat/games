@@ -37,8 +37,8 @@ target_link_libraries(
     INTERFACE
 )
 
-# add_subdirectory(test)
-# enable_testing()
+add_subdirectory(test)
+enable_testing()
 
 target_include_directories(
     core_headers INTERFACE 
