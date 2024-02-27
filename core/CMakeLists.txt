@@ -20,6 +20,7 @@ add_library(
     core STATIC
     src/event.cpp
     src/game.cpp
+    src/inputable.cpp
     src/movable.cpp
     src/renderable.cpp
     src/texture.cpp
