@@ -7,7 +7,10 @@
 
 namespace core {
 
-class Inputable {};
+class Inputable {
+public:
+    virtual void handle_inputs() = 0;
+};
 
 enum class KeyboardKey { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 2, SPACE = 4 };
 
