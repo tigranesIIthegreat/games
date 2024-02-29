@@ -5,6 +5,7 @@ add_library(
     include/core/game_state.hpp
     include/core/game.hpp
 	include/core/inputable.hpp
+    include/core/keyboard_keys.hpp
     include/core/movable.hpp
     include/core/renderable.hpp
     include/core/texture.hpp
