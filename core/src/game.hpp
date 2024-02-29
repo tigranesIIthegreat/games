@@ -1,8 +1,11 @@
 #pragma once
 
-#include "window.hpp"
-
+#include <memory>
+#include <stack>
 #include <string>
+
+#include "game_state.hpp"
+#include "window.hpp"
 
 namespace core {
 
@@ -21,9 +24,14 @@ public:
     bool running() const;
 
 protected:
+    void push_state(GameStateRef state);
+    void pop_state();
+
+protected:
+    std::stack<GameStateRef> _states;
     WindowRef _window;
     bool _running;
     const size_t _frame_delay;
 };
 
-} // namespace core
+}  // namespace core

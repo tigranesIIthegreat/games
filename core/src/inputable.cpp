@@ -40,7 +40,6 @@ KeyboardInputable::KeyMapping KeyboardInputable::_mapping = {
     {KeyboardKey::X, SDL_SCANCODE_X},
     {KeyboardKey::Y, SDL_SCANCODE_Y},
     {KeyboardKey::Z, SDL_SCANCODE_Z}
-
 };
 
 void KeyboardInputable::update_inputs() {

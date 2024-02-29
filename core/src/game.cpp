@@ -3,9 +3,9 @@
 namespace core {
 
 Game::Game(const std::string& title, int width, int height, int fps)
-    : _window{std::make_shared<Window>(title, width, height)}
-    , _running{false}
-    , _frame_delay(1000.0f / fps) {}
+    : _window{std::make_shared<Window>(title, width, height)},
+      _running{false},
+      _frame_delay(1000.0f / fps) {}
 
 void Game::run() {
     _running = true;
@@ -25,6 +25,19 @@ void Game::run() {
 
 bool Game::running() const {
     return _running;
+}
+
+void Game::push_state(GameStateRef state) {
+    _states.push(state);
+    _states.top()->on_enter();
+}
+
+void Game::pop_state() {
+    if (_states.empty()) {
+        throw std::runtime_error("Cannot pop state from an empty FSM");
+    }
+    _states.top()->on_exit();
+    _states.pop();
 }
 
 }  // namespace core
