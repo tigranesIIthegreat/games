@@ -1,7 +1,6 @@
 add_library(
 	checkers_headers INTERFACE
 	include/checkers/board.hpp
-	include/checkers/clock.hpp
 	include/checkers/figure.hpp
 	include/checkers/game.hpp
     include/checkers/player.hpp
@@ -16,7 +15,6 @@ target_include_directories(
 add_library(
     checkers STATIC
     src/board.cpp
-    src/clock.cpp
     src/figure.cpp
     src/game.cpp
     src/player.cpp
