@@ -12,13 +12,17 @@ using namespace core;
 
 class Board : public Renderable {
 public:
-    void update() override;
-    void render() override;
+    Board(Vec2 coords, float width, float height, Texture& texture,
+          WindowRef window);
+
+public:
+    virtual void update() override;
+    virtual void render() override;
 
 public:
     bool is_valid_position(size_t x, size_t y) const;
     std::optional<FigureRef> at(size_t x, size_t y);
-    constexpr size_t size() const;
+    size_t size() const;
 
 private:
     static constexpr size_t _size = 8;

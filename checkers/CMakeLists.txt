@@ -4,6 +4,7 @@ add_library(
 	include/checkers/figure.hpp
 	include/checkers/game.hpp
     include/checkers/player.hpp
+    include/checkers/play_state.hpp
 )
 
 target_include_directories(
@@ -18,6 +19,7 @@ add_library(
     src/figure.cpp
     src/game.cpp
     src/player.cpp
+    src/play_state.cpp
 )
 
 target_link_libraries(checkers PUBLIC checkers_headers)

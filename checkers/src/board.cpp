@@ -2,6 +2,9 @@
 
 namespace checkers {
 
+Board::Board(Vec2 coords, float width, float height, Texture& texture, WindowRef window)
+    : Renderable{coords, width, height, texture, window} {}
+
 void Board::update() {
     Renderable::update();
     for (auto& row : _cells) {
@@ -33,7 +36,7 @@ std::optional<FigureRef> Board::at(size_t x, size_t y) {
     return _cells.at(x).at(y);
 }
 
-constexpr size_t Board::size() const {
+size_t Board::size() const {
     return _size;
 }
 

@@ -7,6 +7,8 @@ namespace core {
 
 class GameState {
 public:
+    virtual ~GameState() = default;
+public:
     virtual void update() = 0;
     virtual void render() = 0;
     virtual void on_enter() = 0;
