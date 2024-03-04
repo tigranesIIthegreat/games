@@ -12,8 +12,6 @@ public:
     virtual ~Renderable() = default;
 
 public:
-    virtual void update_coords() = 0;
-    virtual void update_texture();
     virtual void update();
     virtual void render();
 

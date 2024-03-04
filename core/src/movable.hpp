@@ -11,7 +11,7 @@ public:
             WindowRef window, Vec2 velocity, Vec2 acceleration);
 
 public:
-    virtual void update_coords() override;
+    virtual void update() override;
 
 protected:
     Vec2 _velocity;

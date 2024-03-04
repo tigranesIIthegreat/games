@@ -8,7 +8,8 @@ Movable::Movable(Vec2 coords, float width, float height, Texture& texture,
                 , _velocity{velocity}
                 , _acceleration{acceleration} {}
 
-void Movable::update_coords() {
+void Movable::update() {
+    Renderable::update();
     _velocity += _acceleration;
     _coords += _velocity;
 }

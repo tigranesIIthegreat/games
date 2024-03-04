@@ -10,11 +10,6 @@ Renderable::Renderable(Vec2 coords, float width, float height, Texture& texture,
     , _window{window} {}
 
 void Renderable::update() {
-    update_texture();
-    update_coords();
-}
-
-void Renderable::update_texture() {
     _texture.update();
 }
 
