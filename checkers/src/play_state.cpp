@@ -35,16 +35,25 @@ void PlayState::fill_board_with_figures() {
         auto side_cell_count = _board->side_cell_count();
 
         // set a white figure on the top
-        auto white_figure_x = (i + 1) % side_cell_count;
-        auto white_figure_y = (i + 1) / side_cell_count;
-        auto white_figure = _white_figures[i];
-        _board->at(white_figure_y, white_figure_x) = white_figure;
+        auto cell_number = 2 * i;
+        auto white_x = cell_number % side_cell_count;
+        auto white_y = cell_number / side_cell_count;
+        if (!_board->is_valid_position(white_y, white_x)) {
+            ++white_x;
+        }
+        auto white = _white_figures[i];
+        white->set_coords(Vec2{white_x * _cell_size, white_y * _cell_size});
+        _board->at(white_y, white_x) = white;
 
-        // set a black figure on the bottom
-        auto black_figure_x = side_cell_count - 1 - white_figure_x;
-        auto black_figure_y = side_cell_count - 1 - white_figure_y;
-        auto black_figure = _black_figures[i];
-        _board->at(black_figure_y, black_figure_x) = black_figure;
+        // // set a black figure on the bottom
+        auto black_x = side_cell_count - 1 - white_x;
+        auto black_y = side_cell_count - 1 - white_y;
+        if (!_board->is_valid_position(black_y, black_x)) {
+            ++black_x;
+        }
+        auto black = _black_figures[i];
+        black->set_coords(Vec2{black_x * _cell_size, black_y * _cell_size});
+        _board->at(black_y, black_x) = black;
     }
 }
 

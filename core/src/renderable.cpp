@@ -17,4 +17,11 @@ void Renderable::render() {
     _texture->render(_coords, _width, _height);
 }
 
+void Renderable::set_coords(Vec2 coords) {
+    _coords = coords;
+}
+Vec2 Renderable::coords() const {
+    return _coords;
+}
+
 }  // namespace core

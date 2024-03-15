@@ -15,6 +15,10 @@ public:
     virtual void update();
     virtual void render();
 
+public:
+    virtual void set_coords(Vec2 coords);
+    virtual Vec2 coords() const;
+
 protected:
     Vec2 _coords;
     float _width;
