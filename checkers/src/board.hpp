@@ -21,7 +21,7 @@ public:
 
 public:
     bool is_valid_position(size_t x, size_t y) const;
-    std::optional<FigureRef> at(size_t x, size_t y);
+    std::optional<FigureRef>& at(size_t x, size_t y);
     size_t side_cell_count() const;
 
 private:

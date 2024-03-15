@@ -2,32 +2,32 @@
 
 namespace checkers {
 
+using namespace core;
+
 PlayState::PlayState(WindowRef window) 
-    : core::GameState{window}
+    : GameState{window}
     , _player1{}
     , _player2{} {
     _board_size = std::min(_window->width(), _window->height());
-    auto board_texture = std::make_shared<core::Texture>(
+    auto board_texture = std::make_shared<Texture>(
         "/Users/tigran.sukiasyan/games/assets/checkerboard.jpg", 1920, 1920,
         _window);
-    _board = std::make_shared<Board>(core::Vec2{0, 0}, _board_size, _board_size,
-                                     board_texture, _window);
+    _board = std::make_shared<Board>(Vec2{0, 0}, _board_size, _board_size, board_texture, _window);
     _cell_size = _board_size / _board->side_cell_count();
-    auto white_man_texture = std::make_shared<core::Texture>(
-        "/Users/tigran.sukiasyan/games/assets/man_white.webp", 310, 315,
-        _window);
-    auto black_man_texture = std::make_shared<core::Texture>(
-        "/Users/tigran.sukiasyan/games/assets/man_black.webp", 310, 315,
-        _window);
+    auto white_man_texture = std::make_shared<Texture>(
+        "/Users/tigran.sukiasyan/games/assets/man_white.webp", 310, 315, _window);
+    auto black_man_texture = std::make_shared<Texture>(
+        "/Users/tigran.sukiasyan/games/assets/man_black.webp", 310, 315, _window);
     for (size_t i{}; i < _figure_count / 2; ++i) {
-        _white_figures.emplace_back(std::make_shared<Figure>(core::Vec2{0, 0}, _cell_size, _cell_size,
+        _white_figures.emplace_back(std::make_shared<Figure>(Vec2{0, 0}, _cell_size, _cell_size,
                                     white_man_texture, _window,
-                                    core::Vec2{0, 0}, core::Vec2{0, 0},
+                                    Vec2{0, 0}, Vec2{0, 0},
                                     FigureColor::WHITE, false));
-        _black_figures.emplace_back(std::make_shared<Figure>(core::Vec2{0, 0}, _cell_size, _cell_size,
-                                    black_man_texture, _window, core::Vec2{0, 0},
-                                    core::Vec2{0, 0}, FigureColor::BLACK, false));
+        _black_figures.emplace_back(std::make_shared<Figure>(Vec2{0, 0}, _cell_size, _cell_size,
+                                    black_man_texture, _window, Vec2{0, 0},
+                                    Vec2{0, 0}, FigureColor::BLACK, false));
     }
+    fill_board_with_figures();
 }
 
 void PlayState::fill_board_with_figures() {
@@ -41,8 +41,8 @@ void PlayState::fill_board_with_figures() {
         _board->at(white_figure_y, white_figure_x) = white_figure;
 
         // set a black figure on the bottom
-        auto black_figure_x = side_cell_count - white_figure_x;
-        auto black_figure_y = side_cell_count - white_figure_y;
+        auto black_figure_x = side_cell_count - 1 - white_figure_x;
+        auto black_figure_y = side_cell_count - 1 - white_figure_y;
         auto black_figure = _black_figures[i];
         _board->at(black_figure_y, black_figure_x) = black_figure;
     }

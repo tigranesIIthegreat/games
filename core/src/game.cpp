@@ -18,7 +18,7 @@ void Game::run() {
     SDL_Event e;
     while (e.type != SDL_EVENT_QUIT) {
         frame_start = SDL_GetTicks();
-        
+
         // handle_events();
         SDL_PollEvent(&e);
         update();
@@ -53,7 +53,10 @@ void Game::update() {
 }
 
 void Game::render() {
+    SDL_RenderClear(_window->_sdl_renderer);
+    SDL_SetRenderDrawColor(_window->_sdl_renderer, 0, 0, 0, 0);
     _states.top()->render();
+    SDL_RenderPresent(_window->_sdl_renderer);
 }
 
 }  // namespace core
