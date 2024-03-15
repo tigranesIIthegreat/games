@@ -2,7 +2,7 @@
 
 namespace core {
 
-Movable::Movable(Vec2 coords, float width, float height, Texture& texture,
+Movable::Movable(Vec2 coords, float width, float height, TextureRef texture,
                  WindowRef window, Vec2 velocity, Vec2 acceleration)
                 : Renderable(coords, width, height, texture, window)
                 , _velocity{velocity}

@@ -1,6 +1,6 @@
-#include <checkers/play_state.hpp>
+#include <checkers/game.hpp>
 
 int main() {
-    auto window = std::make_shared<core::Window>("checkers_demo", 800, 800);
-    checkers::PlayState play_state{window};
+    checkers::Game game{};
+    game.run();
 }

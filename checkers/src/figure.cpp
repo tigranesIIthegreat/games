@@ -2,8 +2,8 @@
 
 namespace checkers {
 
-Figure::Figure(Vec2 coords, float width, float height, Texture& texture,
-               WindowRef window, Vec2 velocity, Vec2 acceleration,
+Figure::Figure(core::Vec2 coords, float width, float height, core::TextureRef texture,
+               core::WindowRef window, core::Vec2 velocity, core::Vec2 acceleration,
                FigureColor color, bool is_king)
     : Movable{coords, width, height, texture, window, velocity, acceleration}
     , _color{color}

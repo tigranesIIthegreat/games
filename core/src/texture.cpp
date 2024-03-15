@@ -36,7 +36,11 @@ void Texture::render(Vec2 coords, float width, float height) {
                      _frame_height * static_cast<float>(_current_row),
                      _frame_width, _frame_height};
     SDL_FRect destination{coords[0], coords[1], width, height};
+
+    SDL_RenderClear(_window->_sdl_renderer);
+    SDL_SetRenderDrawColor(_window->_sdl_renderer, 0, 0, 0, 0);
     SDL_RenderTexture(_window->_sdl_renderer, _sdl_texture, &source, &destination);
+    SDL_RenderPresent(_window->_sdl_renderer);
 }
 
 }  // namespace core

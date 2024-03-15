@@ -7,7 +7,7 @@
 #include <core/game_state.hpp>
 #include <core/window.hpp>
 
-#include <array>
+#include <vector>
 
 namespace checkers {
 
@@ -26,15 +26,16 @@ private:
     void fill_board_with_figures();
 
 private:
-    static constexpr size_t figure_count = 24;
+    static constexpr size_t _figure_count = 24;
 
 private:
-    WindowRef _window;
     PlayerRef _player1;
     PlayerRef _player2;
-    std::array<FigureRef, figure_count / 2> _white_figures;
-    std::array<FigureRef, figure_count / 2> _black_figures;
+    float _board_size;
     BoardRef _board;
+    float _cell_size;
+    std::vector<FigureRef> _white_figures;
+    std::vector<FigureRef> _black_figures;
 };
 
 } // namespace checkers

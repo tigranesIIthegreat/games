@@ -3,9 +3,10 @@
 #include "vec.hpp"
 #include "window.hpp"
 
-#include <string>
-
 #include <SDL3/SDL.h>
+
+#include <memory>
+#include <string>
 
 namespace core {
 
@@ -30,5 +31,7 @@ private:
     size_t _row_count;
     size_t _col_count;
 };
+
+using TextureRef = std::shared_ptr<Texture>;
 
 }  // namespace core

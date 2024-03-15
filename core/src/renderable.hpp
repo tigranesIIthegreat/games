@@ -8,7 +8,7 @@ namespace core {
 
 class Renderable {
 public:
-    Renderable(Vec2 coords, float width, float height, Texture& texture, WindowRef window);
+    Renderable(Vec2 coords, float width, float height, TextureRef texture, WindowRef window);
     virtual ~Renderable() = default;
 
 public:
@@ -19,7 +19,7 @@ protected:
     Vec2 _coords;
     float _width;
     float _height;
-    Texture _texture;
+    TextureRef _texture;
     WindowRef _window;
 };
 

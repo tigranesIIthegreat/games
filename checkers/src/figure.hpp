@@ -6,14 +6,12 @@
 
 namespace checkers {
 
-using namespace core;
-
 enum class FigureColor { WHITE, BLACK };
 
-class Figure : public Movable {
+class Figure : public core::Movable {
 public:
-    Figure(Vec2 coords, float width, float height, Texture& texture, 
-           WindowRef window, Vec2 velocity, Vec2 acceleration, 
+    Figure(core::Vec2 coords, float width, float height, core::TextureRef texture, 
+           core::WindowRef window, core::Vec2 velocity, core::Vec2 acceleration, 
            FigureColor color, bool is_king);
 
     FigureColor color() const;

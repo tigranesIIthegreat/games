@@ -21,6 +21,7 @@ target_include_directories(
 add_library(
     core STATIC
     src/event.cpp
+    src/game_state.cpp
     src/game.cpp
     src/inputable.cpp
     src/movable.cpp

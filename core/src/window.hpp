@@ -24,7 +24,7 @@ private:
     static void _initialize_system();
     static void _deinitialize_system();
 
-private:
+public: // to be private
     std::string _title;
     int _width{};
     int _height{};

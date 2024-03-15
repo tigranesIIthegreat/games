@@ -11,21 +11,21 @@ namespace core {
 
 class Game {
 public:
-    Game(const std::string& title, int width, int height, int fps);
+    Game(const std::string& title, int width, int height, int fps = 60);
     virtual ~Game() = default;
 
 public:
-    virtual void update() = 0;
-    virtual void render() = 0;
-    virtual void handle_events() = 0;
+    virtual void update();
+    virtual void render();
+    // virtual void handle_events() = 0;
 
 public:
     void run();
     bool running() const;
 
 protected:
-    void push_state(GameStateRef state);
-    void pop_state();
+    void _push_state(GameStateRef state);
+    void _pop_state();
 
 protected:
     std::stack<GameStateRef> _states;
