@@ -3,36 +3,36 @@
         "checkerboard": {
             "path": "checkerboard.jpg",
             "frame_size": {
-                "width": 1920,
-                "height": 1920
+                "width": 64,
+                "height": 64
             }
         },
         "man_white": {
             "path": "man_white.webp",
             "frame_size": {
-                "width": 310,
-                "height": 315
+                "width": 64,
+                "height": 64
             }
         },
         "man_black": {
-            "path": "man_black.webp",
+            "path": "man_black.png",
             "frame_size": {
-                "width": 310,
-                "height": 315
+                "width": 64,
+                "height": 64
             }
         },
         "king_white": {
             "path": "king_white.webp",
             "frame_size": {
-                "width": 306,
-                "height": 326
+                "width": 64,
+                "height": 64
             }
         },
         "kinh_black": {
             "path": "kinh_black.webp",
             "frame_size": {
-                "width": 306,
-                "height": 326
+                "width": 64,
+                "height": 64
             }
         }
     }

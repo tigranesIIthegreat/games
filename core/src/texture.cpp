@@ -13,13 +13,11 @@ Texture::Texture(const std::string& path, float frame_width, float frame_heigth,
       _current_row{},
       _current_col{},
       _animation_speed{1} {
-    SDL_Surface* surface = IMG_Load(path.data());
-    _sdl_texture =
-        SDL_CreateTextureFromSurface(_window->_sdl_renderer, surface);
-    SDL_DestroySurface(surface);
-    int width{};
-    int height{};
+
+    _sdl_texture = IMG_LoadTexture(_window->_sdl_renderer, path.data()); 
+    int width{}, height{};
     SDL_QueryTexture(_sdl_texture, nullptr, nullptr, &width, &height);
+    
     _row_count = height / static_cast<int>(_frame_height);
     _col_count = width / static_cast<int>(_frame_width);
 }
