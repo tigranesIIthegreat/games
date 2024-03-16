@@ -46,6 +46,8 @@ enable_testing()
 
 target_include_directories(
     core_headers INTERFACE 
+    ${CMAKE_SOURCE_DIR}/dependencies/json
+    ${CMAKE_SOURCE_DIR}/dependencies/json/include
     ${SDL3_SOURCE_DIR}/include 
     ${SDL3_SOURCE_DIR}/include/SDL3 
     ${SDL3_image_SOURCE_DIR}/include 
@@ -55,6 +57,7 @@ target_include_directories(
 target_link_libraries(
     core 
     PRIVATE 
+    nlohmann_json::nlohmann_json
     SDL3::SDL3
     SDL3_image::SDL3_image
 )

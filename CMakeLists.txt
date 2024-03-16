@@ -12,6 +12,7 @@ if(APPLE)
 endif()
 
 add_subdirectory(dependencies/googletest)
+add_subdirectory(dependencies/json)
 add_subdirectory(dependencies/SDL)
 add_subdirectory(dependencies/SDL_image)
 
