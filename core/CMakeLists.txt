@@ -3,8 +3,7 @@ add_library(
     include/core/event.hpp
     include/core/game_state.hpp
     include/core/game.hpp
-	include/core/inputable.hpp
-    include/core/keyboard_keys.hpp
+	include/core/input.hpp
     include/core/movable.hpp
     include/core/renderable.hpp
     include/core/texture.hpp
@@ -23,7 +22,7 @@ add_library(
     src/event.cpp
     src/game_state.cpp
     src/game.cpp
-    src/inputable.cpp
+    src/input.cpp
     src/movable.cpp
     src/renderable.cpp
     src/texture.cpp

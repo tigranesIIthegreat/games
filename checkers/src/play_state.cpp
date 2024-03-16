@@ -14,12 +14,9 @@ PlayState::PlayState(WindowRef window)
     auto black_man_texture = std::make_shared<Texture>("man_black", _window);
     for (size_t i{}; i < _figure_count / 2; ++i) {
         _white_figures.emplace_back(std::make_shared<Figure>(Vec2{0, 0}, _cell_size, _cell_size,
-                                    white_man_texture, _window,
-                                    Vec2{0, 0}, Vec2{0, 0},
-                                    FigureColor::WHITE, false));
+                                    white_man_texture, _window, FigureColor::WHITE, false));
         _black_figures.emplace_back(std::make_shared<Figure>(Vec2{0, 0}, _cell_size, _cell_size,
-                                    black_man_texture, _window, Vec2{0, 0},
-                                    Vec2{0, 0}, FigureColor::BLACK, false));
+                                    black_man_texture, _window, FigureColor::BLACK, false));
     }
     fill_board_with_figures();
 }

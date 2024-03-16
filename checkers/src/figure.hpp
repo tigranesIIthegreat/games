@@ -8,11 +8,10 @@ namespace checkers {
 
 enum class FigureColor { WHITE, BLACK };
 
-class Figure : public core::Movable {
+class Figure : public core::Renderable {
 public:
     Figure(core::Vec2 coords, float width, float height, core::TextureRef texture, 
-           core::WindowRef window, core::Vec2 velocity, core::Vec2 acceleration, 
-           FigureColor color, bool is_king);
+           core::WindowRef window, FigureColor color, bool is_king);
 
     FigureColor color() const;
     bool is_king() const;

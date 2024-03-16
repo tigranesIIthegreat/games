@@ -3,9 +3,8 @@
 namespace checkers {
 
 Figure::Figure(core::Vec2 coords, float width, float height, core::TextureRef texture,
-               core::WindowRef window, core::Vec2 velocity, core::Vec2 acceleration,
-               FigureColor color, bool is_king)
-    : Movable{coords, width, height, texture, window, velocity, acceleration}
+               core::WindowRef window, FigureColor color, bool is_king)
+    : Renderable{coords, width, height, texture, window}
     , _color{color}
     , _is_king{is_king}
     , _is_high_from_board{false} {}

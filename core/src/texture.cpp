@@ -60,7 +60,7 @@ void Texture::render(Vec2 coords, float width, float height) {
                      _frame_width, _frame_height};
     SDL_FRect destination{coords[0], coords[1], width, height};
 
-    SDL_SetTextureColorMod(_sdl_texture, 200, 200, 200);
+    // TODO: SDL_SetTextureColorMod(_sdl_texture, 200, 200, 200);
     SDL_RenderTexture(_window->_sdl_renderer, _sdl_texture, &source, &destination);
 }
 
