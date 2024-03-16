@@ -16,11 +16,13 @@ void Game::run() {
     size_t frame_duration{};
 
     SDL_Event e;
-    while (e.type != SDL_EVENT_QUIT) {
+    while (_running) {
         frame_start = SDL_GetTicks();
 
         // handle_events();
         SDL_PollEvent(&e);
+        if (e.type == SDL_EVENT_QUIT)
+            _running = false;
         update();
         render();
 

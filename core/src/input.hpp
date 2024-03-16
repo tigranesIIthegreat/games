@@ -1,5 +1,7 @@
 #pragma once
 
+#include "vec.hpp"
+
 #include <array>
 #include <unordered_map>
 
@@ -7,6 +9,7 @@
 
 namespace core::input {
 
+enum class MouseButton;
 enum class Key;
 
 class Inputable {
@@ -14,65 +17,36 @@ public:
     virtual void handle_inputs() = 0;
 };
 
-class InputDevice {
+class InputManager {
 public:
-    virtual ~InputDevice() = 0;
-    virtual void update();
-};
+    InputManager();
+    void update();
 
-class Mouse : public InputDevice {
 public:
-    virtual void update() override;
-};
+    bool is_down(Key key) const;
+    bool is_down(MouseButton button) const;
+    Vec2 mouse_position() const;
 
-class Keyboard : public InputDevice {
-public:
-    bool is_key_down(Key key) const;
-    virtual void update() override;
+private:
+    void _update_mouse_state();
+    void _update_keyboard_state();
 
 private:
     using KeyMapping = std::unordered_map<Key, SDL_Scancode>;
-    const uint8_t* _keyboard_state;
     static KeyMapping _key_mapping;
+    std::array<bool, 3> _mouse_button_states;
+    Vec2 _mouse_position;
+    const uint8_t* _keyboard_states;
+    SDL_Event _event;
 };
 
+enum class MouseButton { LEFT, MIDDLE, RIGHT };
+
 enum class Key {
-    UNKNOWN,
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-    RETURN,
-    ESCAPE,
-    BACKSPACE,
-    TAB,
-    SPACE,
-    A,
-    B,
-    C,
-    D,
-    E,
-    F,
-    G,
-    H,
-    I,
-    J,
-    K,
-    L,
-    M,
-    N,
-    O,
-    P,
-    Q,
-    R,
-    S,
-    T,
-    U,
-    V,
-    W,
-    X,
-    Y,
-    Z
+    UNKNOWN, UP, DOWN, LEFT, RIGHT,
+    RETURN, ESCAPE, BACKSPACE, TAB, SPACE,
+    A, B, C, D, E, F, G, H, I, J, K, L, M,
+    N, O, P, Q, R, S, T, U, V, W, X, Y, Z
 };
 
 } // namespace core::input

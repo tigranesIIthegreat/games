@@ -4,20 +4,46 @@
 
 namespace core::input {
 
-void InputDevice::update() {
+InputManager:: InputManager() {
+    std::fill(std::begin(_mouse_button_states), std::end(_mouse_button_states), false);
+}
+
+void  InputManager::update() {
+    SDL_PollEvent(&_event);
     SDL_PumpEvents();
+    _update_mouse_state();
+    _update_keyboard_state();
 }
 
-void Keyboard::update() {
-    InputDevice::update();
-    _keyboard_state = SDL_GetKeyboardState(nullptr);
+bool InputManager::is_down(Key key) const {
+    return _keyboard_states[_key_mapping[key]] == 1;
 }
 
-bool Keyboard::is_key_down(Key key) const {
-    return _keyboard_state[_key_mapping[key]] == 1;
+bool InputManager::is_down(MouseButton button) const {
+    return _mouse_button_states[static_cast<size_t>(button)];
 }
 
-Keyboard::KeyMapping Keyboard::_key_mapping = {
+Vec2 InputManager::mouse_position() const {
+    return _mouse_position;
+}
+
+void InputManager::_update_mouse_state() {
+    if (_event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
+        _mouse_button_states[_event.button.button - 1] = true;
+    }
+    else if (_event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
+        _mouse_button_states[_event.button.button - 1] = false;
+    }
+    else if (_event.type == SDL_EVENT_MOUSE_MOTION) {
+        _mouse_position = {_event.motion.x, _event.motion.y};
+    }
+}
+
+void InputManager::_update_keyboard_state() {
+    _keyboard_states = SDL_GetKeyboardState(nullptr);
+}
+
+ InputManager::KeyMapping  InputManager::_key_mapping = {
     {Key::UNKNOWN, SDL_SCANCODE_UNKNOWN},
     {Key::UP, SDL_SCANCODE_UP},
     {Key::DOWN, SDL_SCANCODE_DOWN},
