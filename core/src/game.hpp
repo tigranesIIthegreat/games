@@ -11,7 +11,7 @@ namespace core {
 
 class Game {
 public:
-    Game(const std::string& title, int width, int height, int fps = 120);
+    Game(const std::string& title, int width, int height, int fps = 60);
     virtual ~Game() = default;
 
 public:

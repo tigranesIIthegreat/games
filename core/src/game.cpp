@@ -3,8 +3,6 @@
 #include "vec.hpp"
 #include "texture.hpp"
 
-#include <iostream>
-
 namespace core {
 
 Game::Game(const std::string& title, int width, int height, int fps)

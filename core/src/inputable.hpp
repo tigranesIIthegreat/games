@@ -11,12 +11,7 @@ namespace core {
 
 class Inputable {
 public:
-    virtual void handle_inputs() = 0;
-};
-
-class KeyboardInputable : public Inputable {
-public:
-    KeyboardInputable();
+    Inputable();
 
 public:
     bool is_key_down(KeyboardKey key) const;
@@ -27,7 +22,7 @@ private:
 
 private:
     using KeyMapping = std::unordered_map<KeyboardKey, SDL_Scancode>;
-    static KeyMapping _mapping;
+    static KeyMapping _key_mapping;
 };
 
 } // namespace core
