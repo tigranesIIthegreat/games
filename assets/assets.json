@@ -8,7 +8,7 @@
             }
         },
         "man_white": {
-            "path": "man_white.webp",
+            "path": "man_white.png",
             "frame_size": {
                 "width": 64,
                 "height": 64
@@ -22,14 +22,14 @@
             }
         },
         "king_white": {
-            "path": "king_white.webp",
+            "path": "king_white.png",
             "frame_size": {
                 "width": 64,
                 "height": 64
             }
         },
-        "kinh_black": {
-            "path": "kinh_black.webp",
+        "king_black": {
+            "path": "kinh_black.png",
             "frame_size": {
                 "width": 64,
                 "height": 64
