@@ -3,7 +3,6 @@ add_library(
 	include/checkers/board.hpp
 	include/checkers/figure.hpp
 	include/checkers/game.hpp
-    include/checkers/player.hpp
     include/checkers/play_state.hpp
 )
 
@@ -18,7 +17,6 @@ add_library(
     src/board.cpp
     src/figure.cpp
     src/game.cpp
-    src/player.cpp
     src/play_state.cpp
 )
 

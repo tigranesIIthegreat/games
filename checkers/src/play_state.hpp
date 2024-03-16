@@ -2,7 +2,6 @@
 
 #include "board.hpp"
 #include "figure.hpp"
-#include "player.hpp"
 
 #include <core/game_state.hpp>
 #include <core/window.hpp>
@@ -29,8 +28,6 @@ private:
     static constexpr size_t _figure_count = 24;
 
 private:
-    PlayerRef _player1;
-    PlayerRef _player2;
     float _board_size;
     BoardRef _board;
     float _cell_size;

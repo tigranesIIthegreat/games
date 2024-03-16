@@ -5,9 +5,7 @@ namespace checkers {
 using namespace core;
 
 PlayState::PlayState(WindowRef window) 
-    : GameState{window}
-    , _player1{}
-    , _player2{} {
+    : GameState{window} {
     _board_size = std::min(_window->width(), _window->height());
     auto board_texture = std::make_shared<Texture>("checkerboard", _window);
     _board = std::make_shared<Board>(Vec2{0, 0}, _board_size, _board_size, board_texture, _window);
