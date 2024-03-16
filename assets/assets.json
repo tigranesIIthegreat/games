@@ -3,8 +3,8 @@
         "checkerboard": {
             "path": "checkerboard.jpg",
             "frame_size": {
-                "width": 64,
-                "height": 64
+                "width": 1920,
+                "height": 1920
             }
         },
         "man_white": {

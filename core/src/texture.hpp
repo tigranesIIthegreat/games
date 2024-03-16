@@ -12,18 +12,18 @@ namespace core {
 
 class Texture {
 public:
-    Texture(const std::string& path, float frame_width, float frame_heigth,
-            WindowRef window);
+    Texture(const std::string& asset_name, WindowRef window);
 
 public:
     void update();
     void render(Vec2 coords, float width, float height);
 
 private:
+    std::string _asset_name;
+    WindowRef _window;
     std::string _path;
     float _frame_width;
     float _frame_height;
-    WindowRef _window;
     SDL_Texture* _sdl_texture;
     size_t _current_row;
     size_t _current_col;
