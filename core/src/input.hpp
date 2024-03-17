@@ -26,8 +26,10 @@ public:
     bool is_down(Key key) const;
     bool is_down(MouseButton button) const;
     Vec2 mouse_position() const;
+    bool need_to_quit() const;
 
 private:
+    void _update_quitting_necessity();
     void _update_mouse_state();
     void _update_keyboard_state();
 
@@ -38,6 +40,7 @@ private:
     Vec2 _mouse_position;
     const uint8_t* _keyboard_states;
     SDL_Event _event;
+    bool _need_to_quit;
 };
 
 enum class MouseButton { LEFT, MIDDLE, RIGHT };

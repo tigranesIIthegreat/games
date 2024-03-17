@@ -1,23 +1,24 @@
 #pragma once
 
+#include "game_state.hpp"
+#include "input.hpp"
+#include "window.hpp"
+
 #include <memory>
 #include <stack>
 #include <string>
 
-#include "game_state.hpp"
-#include "window.hpp"
-
 namespace core {
 
-class Game {
+class Game : public input::Inputable {
 public:
     Game(const std::string& title, int width, int height, int fps = 60);
     virtual ~Game() = default;
 
 public:
+    virtual void handle_inputs();
     virtual void update();
     virtual void render();
-    // virtual void handle_events() = 0;
 
 public:
     void run();
@@ -30,6 +31,7 @@ protected:
 protected:
     std::stack<GameStateRef> _states;
     WindowRef _window;
+    input::InputManager _input_manager;
     bool _running;
     const size_t _frame_delay;
 };

@@ -8,4 +8,9 @@ Game::Game()
     _push_state(std::make_shared<PlayState>(_window));
 }
 
+void Game::handle_inputs() {
+    core::Game::handle_inputs();
+    // TODO: add game input logic
+}
+
 } // namespace checkers

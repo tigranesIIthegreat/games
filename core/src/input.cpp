@@ -6,11 +6,14 @@ namespace core::input {
 
 InputManager:: InputManager() {
     std::fill(std::begin(_mouse_button_states), std::end(_mouse_button_states), false);
+    update();
 }
 
 void  InputManager::update() {
     SDL_PollEvent(&_event);
     SDL_PumpEvents();
+
+    _update_quitting_necessity();
     _update_mouse_state();
     _update_keyboard_state();
 }
@@ -25,6 +28,16 @@ bool InputManager::is_down(MouseButton button) const {
 
 Vec2 InputManager::mouse_position() const {
     return _mouse_position;
+}
+
+bool InputManager::need_to_quit() const {
+    return _need_to_quit;
+}
+
+void InputManager::_update_quitting_necessity() {
+    if (_event.type == SDL_EVENT_QUIT) {
+        _need_to_quit = true;
+    }
 }
 
 void InputManager::_update_mouse_state() {

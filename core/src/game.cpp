@@ -15,14 +15,10 @@ void Game::run() {
     size_t frame_start{};
     size_t frame_duration{};
 
-    SDL_Event e;
     while (_running) {
         frame_start = SDL_GetTicks();
 
-        // handle_events();
-        SDL_PollEvent(&e);
-        if (e.type == SDL_EVENT_QUIT)
-            _running = false;
+        handle_inputs();
         update();
         render();
 
@@ -50,7 +46,14 @@ void Game::_pop_state() {
     _states.pop();
 }
 
+void Game::handle_inputs() {
+    if (_input_manager.need_to_quit()) {
+        _running = false;
+    }
+}
+
 void Game::update() {
+    _input_manager.update();
     _states.top()->update();
 }
 
