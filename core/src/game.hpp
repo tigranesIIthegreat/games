@@ -19,7 +19,7 @@ public:
     void run();
 
 protected:
-    virtual void _one_iteration() = 0;
+    void _one_iteration();
     virtual void _handle_inputs();
     void _update();
     void _render();

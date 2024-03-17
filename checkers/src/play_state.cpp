@@ -18,10 +18,13 @@ PlayState::PlayState(WindowRef window)
         _black_figures.emplace_back(std::make_shared<Figure>(Vec2{0, 0}, _cell_size, _cell_size,
                                     black_man_texture, _window, FigureColor::BLACK, false));
     }
-    fill_board_with_figures();
+    _fill_board_with_figures();
+
+    _players[0] = std::make_shared<Player>(_white_figures);
+    _players[1] = std::make_shared<Player>(_black_figures);
 }
 
-void PlayState::fill_board_with_figures() {
+void PlayState::_fill_board_with_figures() {
     for (size_t i{}; i < _figure_count / 2; ++i) {
         auto side_cell_count = _board->side_cell_count();
 
@@ -36,7 +39,7 @@ void PlayState::fill_board_with_figures() {
         white->set_coords(Vec2{white_x * _cell_size, white_y * _cell_size});
         _board->at(white_y, white_x) = white;
 
-        // // set a black figure on the bottom
+        // set a black figure on the bottom
         auto black_x = side_cell_count - 1 - white_x;
         auto black_y = side_cell_count - 1 - white_y;
         if (!_board->is_valid_position(black_y, black_x)) {
@@ -48,12 +51,20 @@ void PlayState::fill_board_with_figures() {
     }
 }
 
+void PlayState::_switch_players() {
+    _current_player_index = 1 - _current_player_index;
+}
+
 void PlayState::render() {
     _board->render();
 }
 
 void PlayState::update() {
     // TODO:
+}
+
+void PlayState::one_iteration() {
+    // TODO: add iteration logic
 }
 
 void PlayState::on_enter() {

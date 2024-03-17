@@ -2,6 +2,7 @@
 
 #include "board.hpp"
 #include "figure.hpp"
+#include "player.hpp"
 
 #include <core/game_state.hpp>
 #include <core/window.hpp>
@@ -15,6 +16,7 @@ public:
     PlayState(WindowRef window);
 
 public:
+    virtual void one_iteration() override;
     virtual void on_enter() override;
     virtual void on_exit() override;
     virtual void update() override;
@@ -22,7 +24,8 @@ public:
     virtual std::string name() override;
 
 private:
-    void fill_board_with_figures();
+    void _fill_board_with_figures();
+    void _switch_players();
 
 private:
     static constexpr size_t _figure_count = 24;
@@ -33,6 +36,8 @@ private:
     float _cell_size;
     std::vector<FigureRef> _white_figures;
     std::vector<FigureRef> _black_figures;
+    std::array<PlayerRef, 2> _players;
+    std::size_t _current_player_index;
 };
 
 } // namespace checkers

@@ -2,18 +2,23 @@
 
 #include "figure.hpp"
 
+#include <memory>
 #include <vector>
 
 namespace checkers {
 
 class Player {
 public:
-    Player(const std::vector<FigureRef>& figures, FigureColor color);
+    Player(const std::vector<FigureRef>& figures);
     virtual ~Player() = default;
+
+public:
+    void play();
 
 private:
     std::vector<FigureRef> _figures;
-    FigureColor _color;
 };
+
+using PlayerRef = std::shared_ptr<Player>;
 
 } // namespace checkers

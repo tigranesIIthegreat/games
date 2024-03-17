@@ -49,6 +49,10 @@ void Game::_handle_inputs() {
     }
 }
 
+void Game::_one_iteration() {
+    _states.top()->one_iteration();
+}
+
 void Game::_update() {
     _input_manager.update();
     _states.top()->update();

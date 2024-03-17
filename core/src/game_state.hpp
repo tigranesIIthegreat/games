@@ -13,6 +13,7 @@ public:
     virtual ~GameState() = default;
 
 public:
+    virtual void one_iteration() = 0;
     virtual void update() = 0;
     virtual void render() = 0;
     virtual void on_enter() = 0;

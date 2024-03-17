@@ -13,8 +13,4 @@ void Game::_handle_inputs() {
     // TODO: add state changing logic
 }
 
-void Game::_one_iteration() {
-    // TODO: add iteration logic
-}
-
 } // namespace checkers
