@@ -18,19 +18,16 @@ void Game::run() {
     while (_running) {
         frame_start = SDL_GetTicks();
 
-        handle_inputs();
-        update();
-        render();
+        _handle_inputs();
+        _one_iteration();
+        _update();
+        _render();
 
         frame_duration = frame_start - SDL_GetTicks();
         if (frame_duration < _frame_delay) {
             SDL_Delay(static_cast<int>(_frame_delay - frame_duration));
         }
     }
-}
-
-bool Game::running() const {
-    return _running;
 }
 
 void Game::_push_state(GameStateRef state) {
@@ -46,18 +43,18 @@ void Game::_pop_state() {
     _states.pop();
 }
 
-void Game::handle_inputs() {
+void Game::_handle_inputs() {
     if (_input_manager.need_to_quit()) {
         _running = false;
     }
 }
 
-void Game::update() {
+void Game::_update() {
     _input_manager.update();
     _states.top()->update();
 }
 
-void Game::render() {
+void Game::_render() {
     SDL_RenderClear(_window->_sdl_renderer);
     SDL_SetRenderDrawColor(_window->_sdl_renderer, 0, 0, 0, 0);
     _states.top()->render();

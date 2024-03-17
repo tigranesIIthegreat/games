@@ -13,8 +13,8 @@ enum class MouseButton;
 enum class Key;
 
 class Inputable {
-public:
-    virtual void handle_inputs() = 0;
+private:
+    virtual void _handle_inputs() = 0;
 };
 
 class InputManager {

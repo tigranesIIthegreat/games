@@ -16,13 +16,13 @@ public:
     virtual ~Game() = default;
 
 public:
-    virtual void handle_inputs();
-    virtual void update();
-    virtual void render();
-
-public:
     void run();
-    bool running() const;
+
+protected:
+    virtual void _one_iteration() = 0;
+    virtual void _handle_inputs();
+    void _update();
+    void _render();
 
 protected:
     void _push_state(GameStateRef state);

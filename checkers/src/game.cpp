@@ -8,9 +8,13 @@ Game::Game()
     _push_state(std::make_shared<PlayState>(_window));
 }
 
-void Game::handle_inputs() {
-    core::Game::handle_inputs();
-    // TODO: add game input logic
+void Game::_handle_inputs() {
+    core::Game::_handle_inputs();
+    // TODO: add state changing logic
+}
+
+void Game::_one_iteration() {
+    // TODO: add iteration logic
 }
 
 } // namespace checkers

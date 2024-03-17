@@ -11,8 +11,9 @@ class Game : public core::Game {
 public:
     Game();
 
-public:
-    virtual void handle_inputs() override;
+private:
+    virtual void _handle_inputs() override;
+    virtual void _one_iteration() override;
 
 private:
     PlayState _play_state;
