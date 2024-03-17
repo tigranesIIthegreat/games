@@ -24,7 +24,7 @@ void Game::run() {
 
         frame_duration = frame_start - SDL_GetTicks();
         if (frame_duration < _frame_delay) {
-            SDL_Delay((int)(_frame_delay - frame_duration));
+            SDL_Delay(static_cast<int>(_frame_delay - frame_duration));
         }
     }
 }
