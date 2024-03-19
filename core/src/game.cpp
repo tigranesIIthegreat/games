@@ -6,9 +6,10 @@
 namespace core {
 
 Game::Game(const std::string& title, int width, int height, int fps)
-    : _window{std::make_shared<Window>(title, width, height)},
-      _running{false},
-      _frame_delay(1000.0f / fps) {}
+    : _window{std::make_shared<Window>(title, width, height)}
+    , _input_manager{std::make_shared<input::InputManager>()}
+    , _running{false}
+    , _frame_delay(1000.0f / fps) {}
 
 void Game::run() {
     _running = true;
@@ -44,7 +45,7 @@ void Game::_pop_state() {
 }
 
 void Game::_handle_inputs() {
-    if (_input_manager.need_to_quit()) {
+    if (_input_manager->need_to_quit()) {
         _running = false;
     }
 }
@@ -54,7 +55,7 @@ void Game::_one_iteration() {
 }
 
 void Game::_update() {
-    _input_manager.update();
+    _input_manager->update();
     _states.top()->update();
 }
 

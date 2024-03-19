@@ -1,12 +1,14 @@
 #include "player.hpp"
+#include <iostream> // TODO: remove
 
 namespace checkers {
 
-Player::Player(const std::vector<FigureRef>& figures)
-    : _figures{figures} {}
+Player::Player(const std::string& name, const std::vector<FigureRef>& figures)
+    : _name{name}
+    , _figures{figures} {}
 
 void Player::play() {
-    // TODO: add playing logic
+    // TODO: play logic
 }
 
 } // namespace checkers

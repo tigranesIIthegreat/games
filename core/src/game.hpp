@@ -31,7 +31,7 @@ protected:
 protected:
     std::stack<GameStateRef> _states;
     WindowRef _window;
-    input::InputManager _input_manager;
+    input::InputManagerRef _input_manager;
     bool _running;
     const size_t _frame_delay;
 };

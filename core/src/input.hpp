@@ -3,6 +3,7 @@
 #include "vec.hpp"
 
 #include <array>
+#include <memory>
 #include <unordered_map>
 
 #include <SDL3/SDL.h>
@@ -51,5 +52,7 @@ enum class Key {
     A, B, C, D, E, F, G, H, I, J, K, L, M,
     N, O, P, Q, R, S, T, U, V, W, X, Y, Z
 };
+
+using InputManagerRef = std::shared_ptr<InputManager>;
 
 } // namespace core::input

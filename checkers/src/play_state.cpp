@@ -20,8 +20,9 @@ PlayState::PlayState(WindowRef window)
     }
     _fill_board_with_figures();
 
-    _players[0] = std::make_shared<Player>(_white_figures);
-    _players[1] = std::make_shared<Player>(_black_figures);
+    _players[0] = std::make_shared<Player>("player1", _white_figures);
+    _players[1] = std::make_shared<Player>("player2", _black_figures);
+    _current_player_index = 0;
 }
 
 void PlayState::_fill_board_with_figures() {
@@ -64,7 +65,8 @@ void PlayState::update() {
 }
 
 void PlayState::one_iteration() {
-    // TODO: add iteration logic
+    _players[_current_player_index]->play();
+    _switch_players();
 }
 
 void PlayState::on_enter() {

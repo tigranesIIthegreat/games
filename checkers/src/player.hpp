@@ -3,19 +3,21 @@
 #include "figure.hpp"
 
 #include <memory>
+#include <string>
 #include <vector>
 
 namespace checkers {
 
 class Player {
 public:
-    Player(const std::vector<FigureRef>& figures);
+    Player(const std::string& name, const std::vector<FigureRef>& figures);
     virtual ~Player() = default;
 
 public:
     void play();
 
 private:
+    std::string _name;
     std::vector<FigureRef> _figures;
 };
 
