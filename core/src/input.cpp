@@ -35,9 +35,7 @@ bool InputManager::need_to_quit() const {
 }
 
 void InputManager::_update_quitting_necessity() {
-    if (_event.type == SDL_EVENT_QUIT) {
-        _need_to_quit = true;
-    }
+    _need_to_quit = _event.type == SDL_EVENT_QUIT;
 }
 
 void InputManager::_update_mouse_state() {

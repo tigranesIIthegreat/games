@@ -13,9 +13,6 @@ public:
 
 private:
     virtual void _handle_inputs() override;
-
-private:
-    PlayState _play_state;
 };
 
 } // namespace checkers

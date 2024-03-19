@@ -1,5 +1,6 @@
 #pragma once
 
+#include "input.hpp"
 #include "window.hpp"
 
 #include <memory>
@@ -7,9 +8,9 @@
 
 namespace core {
 
-class GameState {
+class GameState : public input::Inputable {
 public:
-    GameState(WindowRef _window);
+    GameState(WindowRef _window, input::InputManagerRef input_manager);
     virtual ~GameState() = default;
 
 public:
@@ -19,9 +20,10 @@ public:
     virtual void on_enter() = 0;
     virtual void on_exit() = 0;
     virtual std::string name() = 0;
-
+    
 protected:
     WindowRef _window;
+    input::InputManagerRef _input_manager;
 };
 
 using GameStateRef = std::shared_ptr<GameState>;

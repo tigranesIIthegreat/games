@@ -13,7 +13,7 @@ namespace checkers {
 
 class PlayState : public core::GameState {
 public:
-    PlayState(WindowRef window);
+    PlayState(WindowRef window, core::input::InputManagerRef input_manager);
 
 public:
     virtual void one_iteration() override;
@@ -26,6 +26,9 @@ public:
 private:
     void _fill_board_with_figures();
     void _switch_players();
+
+protected:
+    virtual void _handle_inputs() override;
 
 private:
     static constexpr size_t _figure_count = 24;

@@ -2,7 +2,8 @@
 
 namespace core {
 
-GameState::GameState(WindowRef window)
-    : _window{window} {}
+GameState::GameState(WindowRef window, input::InputManagerRef input_manager)
+    : _window{window} 
+    , _input_manager{input_manager} {}
 
 } // namespace core

@@ -20,7 +20,7 @@ public:
 
 protected:
     void _one_iteration();
-    virtual void _handle_inputs();
+    virtual void _handle_inputs() override;
     void _update();
     void _render();
 
