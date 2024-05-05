@@ -29,9 +29,6 @@ private:
     size_t _animation_speed;
     size_t _row_count;
     size_t _col_count;
-
-public:
-    std::uint8_t _brightness;
 };
 
 using TextureRef = std::shared_ptr<Texture>;

@@ -30,8 +30,7 @@ Texture::Texture(const std::string& asset_name, WindowRef window)
       _window{window},
       _current_row{},
       _current_col{},
-      _animation_speed{1},
-      _brightness{255} {
+      _animation_speed{1}{
 
     static auto all_assets = assets();
     auto asset = all_assets[asset_name];
@@ -62,7 +61,6 @@ void Texture::render(Rect position) {
     SDL_FRect sdl_destination{position[0], position[1], position[2],
                               position[3]};
 
-    SDL_SetTextureColorMod(_sdl_texture, _brightness, _brightness, _brightness);
     SDL_RenderTexture(_window->_sdl_renderer, _sdl_texture, &source,
                       &sdl_destination);
 }

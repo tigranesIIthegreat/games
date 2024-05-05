@@ -36,9 +36,9 @@ void Figure::_handle_inputs() {
         _position[1] <= mouse_position[1] and
         mouse_position[1] <= _position[1] + _position[3]) {
 
-        _texture->_brightness = 255;
+        // TODO: mouse hovers
     } else {
-        _texture->_brightness = 200;
+        // TODO: mouse does not hover
     }
 }
 
