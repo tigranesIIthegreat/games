@@ -13,11 +13,6 @@ namespace core::input {
 enum class MouseButton;
 enum class Key;
 
-class Inputable {
-public:
-    virtual void _handle_inputs() = 0;
-};
-
 class InputManager {
 public:
     InputManager();
@@ -42,6 +37,15 @@ private:
     const uint8_t* _keyboard_states;
     SDL_Event _event;
     bool _need_to_quit;
+};
+
+using InputManagerRef = std::shared_ptr<InputManager>;
+
+class Inputable {
+public:
+    virtual void _handle_inputs() = 0;
+private:
+    InputManagerRef _input_manager;
 };
 
 enum class MouseButton { LEFT, MIDDLE, RIGHT };
@@ -85,6 +89,5 @@ enum class Key {
     Z
 };
 
-using InputManagerRef = std::shared_ptr<InputManager>;
 
 }  // namespace core::input

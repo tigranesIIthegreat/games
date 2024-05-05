@@ -1,6 +1,5 @@
 add_library(
 	core_headers INTERFACE
-    include/core/event.hpp
     include/core/game_state.hpp
     include/core/game.hpp
 	include/core/input.hpp
@@ -19,7 +18,6 @@ target_include_directories(
 
 add_library(
     core STATIC
-    src/event.cpp
     src/game_state.cpp
     src/game.cpp
     src/input.cpp
