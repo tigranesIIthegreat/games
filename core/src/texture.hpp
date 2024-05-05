@@ -2,19 +2,13 @@
 
 #include "vec.hpp"
 #include "window.hpp"
-
-#include <SDL3/SDL.h>
-
-#include <memory>
-#include <string>
+#include <map>
 
 namespace core {
 
 class Texture {
 public:
     Texture(const std::string& asset_name, WindowRef window);
-
-public:
     void update();
     void render(Rect position);
 
@@ -32,5 +26,16 @@ private:
 };
 
 using TextureRef = std::shared_ptr<Texture>;
+
+class TextureManager {
+public:
+    TextureManager(WindowRef window);
+    TextureRef create(const std::string& asset_name);
+
+private:
+    WindowRef _window;
+    std::map<std::string, TextureRef> _textures;
+    static size_t _instance_count;
+};
 
 }  // namespace core

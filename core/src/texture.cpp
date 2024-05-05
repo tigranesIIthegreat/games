@@ -65,4 +65,21 @@ void Texture::render(Rect position) {
                       &sdl_destination);
 }
 
+size_t TextureManager::_instance_count = 0;
+
+TextureManager::TextureManager(WindowRef window) 
+    : _window{window}
+    , _textures{} {
+    if (_instance_count++ != 0)
+        throw std::runtime_error("only one instance of Texture Manager can be instanciated");
+}
+
+TextureRef TextureManager::create(const std::string& asset_name) {
+    if (_textures.find(asset_name) == _textures.end()) {
+        auto texture = std::make_shared<Texture>(asset_name, _window);
+        // _textures.emplace(std::make_pair(asset_name, texture));
+    }
+    return _textures[asset_name];
+}
+
 }  // namespace core
