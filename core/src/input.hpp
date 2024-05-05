@@ -14,7 +14,7 @@ enum class MouseButton;
 enum class Key;
 
 class Inputable {
-private:
+public:
     virtual void _handle_inputs() = 0;
 };
 
@@ -26,7 +26,7 @@ public:
 public:
     bool is_down(Key key) const;
     bool is_down(MouseButton button) const;
-    Vec2 mouse_position() const;
+    Point mouse_position() const;
     bool need_to_quit() const;
 
 private:
@@ -38,7 +38,7 @@ private:
     using KeyMapping = std::unordered_map<Key, SDL_Scancode>;
     static KeyMapping _key_mapping;
     std::array<bool, 3> _mouse_button_states;
-    Vec2 _mouse_position;
+    Point _mouse_position;
     const uint8_t* _keyboard_states;
     SDL_Event _event;
     bool _need_to_quit;
@@ -47,12 +47,44 @@ private:
 enum class MouseButton { LEFT, MIDDLE, RIGHT };
 
 enum class Key {
-    UNKNOWN, UP, DOWN, LEFT, RIGHT,
-    RETURN, ESCAPE, BACKSPACE, TAB, SPACE,
-    A, B, C, D, E, F, G, H, I, J, K, L, M,
-    N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+    UNKNOWN,
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    RETURN,
+    ESCAPE,
+    BACKSPACE,
+    TAB,
+    SPACE,
+    A,
+    B,
+    C,
+    D,
+    E,
+    F,
+    G,
+    H,
+    I,
+    J,
+    K,
+    L,
+    M,
+    N,
+    O,
+    P,
+    Q,
+    R,
+    S,
+    T,
+    U,
+    V,
+    W,
+    X,
+    Y,
+    Z
 };
 
 using InputManagerRef = std::shared_ptr<InputManager>;
 
-} // namespace core::input
+}  // namespace core::input

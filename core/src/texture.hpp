@@ -16,12 +16,11 @@ public:
 
 public:
     void update();
-    void render(Vec2 coords, float width, float height);
+    void render(Rect position);
 
 private:
     std::string _asset_name;
     WindowRef _window;
-    std::string _path;
     float _frame_width;
     float _frame_height;
     SDL_Texture* _sdl_texture;
@@ -30,6 +29,9 @@ private:
     size_t _animation_speed;
     size_t _row_count;
     size_t _col_count;
+
+public:
+    std::uint8_t _brightness;
 };
 
 using TextureRef = std::shared_ptr<Texture>;

@@ -1,7 +1,7 @@
 #include "texture.hpp"
 
-#include <nlohmann/json.hpp>
 #include <SDL3_image/SDL_image.h>
+#include <nlohmann/json.hpp>
 
 #include <fstream>
 
@@ -23,14 +23,15 @@ nlohmann::json assets() {
     return data["assets"];
 }
 
-} // namespace
+}  // namespace
 
 Texture::Texture(const std::string& asset_name, WindowRef window)
-    : _asset_name{asset_name}
-    , _window{window}
-    , _current_row{}
-    , _current_col{}
-    , _animation_speed{1} {
+    : _asset_name{asset_name},
+      _window{window},
+      _current_row{},
+      _current_col{},
+      _animation_speed{1},
+      _brightness{255} {
 
     static auto all_assets = assets();
     auto asset = all_assets[asset_name];
@@ -39,10 +40,10 @@ Texture::Texture(const std::string& asset_name, WindowRef window)
     _frame_width = asset["frame_size"]["width"];
     _frame_height = asset["frame_size"]["height"];
 
-    _sdl_texture = IMG_LoadTexture(_window->_sdl_renderer, asset_path.data()); 
+    _sdl_texture = IMG_LoadTexture(_window->_sdl_renderer, asset_path.data());
     int width{}, height{};
     SDL_QueryTexture(_sdl_texture, nullptr, nullptr, &width, &height);
-    
+
     _row_count = height / static_cast<int>(_frame_height);
     _col_count = width / static_cast<int>(_frame_width);
 }
@@ -54,14 +55,16 @@ void Texture::update() {
     _current_row = frameNumber / _col_count % _row_count;
 }
 
-void Texture::render(Vec2 coords, float width, float height) {
+void Texture::render(Rect position) {
     SDL_FRect source{_frame_width * static_cast<float>(_current_col),
                      _frame_height * static_cast<float>(_current_row),
                      _frame_width, _frame_height};
-    SDL_FRect destination{coords[0], coords[1], width, height};
+    SDL_FRect sdl_destination{position[0], position[1], position[2],
+                              position[3]};
 
-    // TODO: SDL_SetTextureColorMod(_sdl_texture, 200, 200, 200);
-    SDL_RenderTexture(_window->_sdl_renderer, _sdl_texture, &source, &destination);
+    SDL_SetTextureColorMod(_sdl_texture, _brightness, _brightness, _brightness);
+    SDL_RenderTexture(_window->_sdl_renderer, _sdl_texture, &source,
+                      &sdl_destination);
 }
 
 }  // namespace core

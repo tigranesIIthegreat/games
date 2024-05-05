@@ -2,26 +2,24 @@
 
 namespace core {
 
-Renderable::Renderable(Vec2 coords, float width, float height, TextureRef texture, WindowRef window) 
-    : _coords{coords}
-    , _width{width}
-    , _height{height}
-    , _texture{texture}
-    , _window{window} {}
+Renderable::Renderable(Rect position, TextureRef texture, WindowRef window)
+    : _position{position}, _texture{texture}, _window{window} {}
 
 void Renderable::update() {
     _texture->update();
 }
 
 void Renderable::render() {
-    _texture->render(_coords, _width, _height);
+    _texture->render(_position);
 }
 
-void Renderable::set_coords(Vec2 coords) {
-    _coords = coords;
+void Renderable::set_coords(Point position) {
+    _position[0] = position[0];
+    _position[1] = position[1];
 }
-Vec2 Renderable::coords() const {
-    return _coords;
+
+Point Renderable::coords() const {
+    return {_position[0], _position[1]};
 }
 
 }  // namespace core

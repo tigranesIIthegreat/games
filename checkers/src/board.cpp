@@ -2,8 +2,8 @@
 
 namespace checkers {
 
-Board::Board(Vec2 coords, float width, float height, TextureRef texture, WindowRef window)
-    : Renderable{coords, width, height, texture, window} {}
+Board::Board(Rect position, TextureRef texture, WindowRef window)
+    : Renderable{position, texture, window} {}
 
 void Board::update() {
     Renderable::update();
@@ -40,4 +40,4 @@ size_t Board::side_cell_count() const {
     return _side_cell_count;
 }
 
-} // namespace checkers
+}  // namespace checkers

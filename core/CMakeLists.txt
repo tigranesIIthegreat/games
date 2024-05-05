@@ -6,6 +6,8 @@ add_library(
 	include/core/input.hpp
     include/core/movable.hpp
     include/core/renderable.hpp
+    include/core/texture_flyweight.hpp
+    include/core/texture_manager.hpp
     include/core/texture.hpp
     include/core/vec.hpp
     include/core/window.hpp
@@ -25,6 +27,8 @@ add_library(
     src/input.cpp
     src/movable.cpp
     src/renderable.cpp
+    src/texture_flyweight.cpp
+    src/texture_manager.cpp
     src/texture.cpp
     src/window.cpp
 )

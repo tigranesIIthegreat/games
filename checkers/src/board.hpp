@@ -12,8 +12,7 @@ using namespace core;
 
 class Board : public Renderable {
 public:
-    Board(Vec2 coords, float width, float height, TextureRef texture,
-          WindowRef window);
+    Board(Rect position, TextureRef texture, WindowRef window);
 
 public:
     virtual void update() override;
@@ -26,10 +25,12 @@ public:
 
 private:
     static constexpr size_t _side_cell_count = 8;
-    using Cells = std::array<std::array<std::optional<FigureRef>, _side_cell_count>, _side_cell_count>;
+    using Cells =
+        std::array<std::array<std::optional<FigureRef>, _side_cell_count>,
+                   _side_cell_count>;
     Cells _cells;
 };
 
 using BoardRef = std::shared_ptr<Board>;
 
-} // namespace checkers
+}  // namespace checkers

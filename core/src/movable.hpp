@@ -7,15 +7,14 @@ namespace core {
 
 class Movable : public Renderable {
 public:
-    Movable(Vec2 coords, float width, float height, TextureRef texture,
-            WindowRef window, Vec2 velocity, Vec2 acceleration);
+    Movable(Rect position, TextureRef texture, WindowRef window, Point velocity, Point acceleration);
 
 public:
     virtual void update() override;
 
 protected:
-    Vec2 _velocity;
-    Vec2 _acceleration;
+    Point _velocity;
+    Point _acceleration;
 };
 
 }  // namespace core

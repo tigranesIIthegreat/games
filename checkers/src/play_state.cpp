@@ -4,19 +4,24 @@ namespace checkers {
 
 using namespace core;
 
-PlayState::PlayState(WindowRef window, core::input::InputManagerRef input_manager) 
+PlayState::PlayState(WindowRef window,
+                     core::input::InputManagerRef input_manager)
     : GameState{window, input_manager} {
     _board_size = std::min(_window->width(), _window->height());
     auto board_texture = std::make_shared<Texture>("checkerboard", _window);
-    _board = std::make_shared<Board>(Vec2{0, 0}, _board_size, _board_size, board_texture, _window);
+    _board = std::make_shared<Board>(Rect{0, 0, _board_size, _board_size},
+                                     board_texture, _window);
     _cell_size = _board_size / _board->side_cell_count();
     auto white_man_texture = std::make_shared<Texture>("man_white", _window);
     auto black_man_texture = std::make_shared<Texture>("man_black", _window);
+    Rect figure_position{0, 0, _cell_size, _cell_size};
     for (size_t i{}; i < _figure_count / 2; ++i) {
-        _white_figures.emplace_back(std::make_shared<Figure>(Vec2{0, 0}, _cell_size, _cell_size,
-                                    white_man_texture, _window, _input_manager, FigureColor::WHITE, false));
-        _black_figures.emplace_back(std::make_shared<Figure>(Vec2{0, 0}, _cell_size, _cell_size,
-                                    black_man_texture, _window, _input_manager, FigureColor::BLACK, false));
+        _white_figures.emplace_back(std::make_shared<Figure>(
+            figure_position, white_man_texture, _window,
+            _input_manager, FigureColor::WHITE, false));
+        _black_figures.emplace_back(std::make_shared<Figure>(
+            figure_position, black_man_texture, _window,
+            _input_manager, FigureColor::BLACK, false));
     }
     _fill_board_with_figures();
 
@@ -37,7 +42,7 @@ void PlayState::_fill_board_with_figures() {
             ++white_x;
         }
         auto white = _white_figures[i];
-        white->set_coords(Vec2{white_x * _cell_size, white_y * _cell_size});
+        white->set_coords(Point{white_x * _cell_size, white_y * _cell_size});
         _board->at(white_y, white_x) = white;
 
         // set a black figure on the bottom
@@ -47,7 +52,7 @@ void PlayState::_fill_board_with_figures() {
             ++black_x;
         }
         auto black = _black_figures[i];
-        black->set_coords(Vec2{black_x * _cell_size, black_y * _cell_size});
+        black->set_coords(Point{black_x * _cell_size, black_y * _cell_size});
         _board->at(black_y, black_x) = black;
     }
 }
@@ -82,7 +87,12 @@ std::string PlayState::name() {
 }
 
 void PlayState::_handle_inputs() {
-    // TODO: add input handling
+    for (auto& figure : _white_figures) {
+        figure->_handle_inputs();
+    }
+    for (auto& figure : _black_figures) {
+        figure->_handle_inputs();
+    }
 }
 
-} // namespace checkers
+}  // namespace checkers

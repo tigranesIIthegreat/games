@@ -11,16 +11,17 @@ enum class FigureColor { WHITE, BLACK };
 
 class Figure : public core::Renderable, public core::input::Inputable {
 public:
-    Figure(core::Vec2 coords, float width, float height, core::TextureRef texture, 
-           core::WindowRef window, core::input::InputManagerRef input_manager, 
-           FigureColor color, bool is_king);
+    Figure(core::Rect position,
+           core::TextureRef texture, core::WindowRef window,
+           core::input::InputManagerRef input_manager, FigureColor color,
+           bool is_king);
 
     FigureColor color() const;
     bool is_king() const;
     bool is_selected() const;
     void set_selected(bool selected);
 
-private:
+public:
     virtual void _handle_inputs() override;
 
 private:

@@ -48,6 +48,7 @@ void Game::_handle_inputs() {
     if (_input_manager->need_to_quit()) {
         _running = false;
     }
+    _states.top()->_handle_inputs();
 }
 
 void Game::_one_iteration() {

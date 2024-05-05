@@ -1,14 +1,14 @@
 #pragma once
 
-#include "vec.hpp"
 #include "texture.hpp"
+#include "vec.hpp"
 #include "window.hpp"
 
 namespace core {
 
 class Renderable {
 public:
-    Renderable(Vec2 coords, float width, float height, TextureRef texture, WindowRef window);
+    Renderable(Rect position, TextureRef texture, WindowRef window);
     virtual ~Renderable() = default;
 
 public:
@@ -16,13 +16,11 @@ public:
     virtual void render();
 
 public:
-    virtual void set_coords(Vec2 coords);
-    virtual Vec2 coords() const;
+    virtual void set_coords(Point position);
+    virtual Point coords() const;
 
 protected:
-    Vec2 _coords;
-    float _width;
-    float _height;
+    Rect _position;
     TextureRef _texture;
     WindowRef _window;
 };

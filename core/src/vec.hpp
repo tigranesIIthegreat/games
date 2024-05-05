@@ -276,6 +276,7 @@ Vec<SIZE, TYPE> operator/(const Vec<SIZE, TYPE>& lhs, TYPE num) {
     return result;
 }
 
-using Vec2 = Vec<2, float>;
+using Point = Vec<2, float>;
+using Rect = Vec<4, float>;
 
 } // namespace core
