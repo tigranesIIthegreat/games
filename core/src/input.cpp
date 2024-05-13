@@ -4,8 +4,8 @@
 
 namespace core::input {
 
-InputManagerRef InputManager::get_instance() {
-    static InputManagerRef instance = std::make_shared<InputManager>();
+InputManager& InputManager::get_instance() {
+    static auto instance = InputManager();
     return instance;
 }
 

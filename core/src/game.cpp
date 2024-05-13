@@ -44,7 +44,7 @@ void Game::_pop_state() {
 }
 
 void Game::handle_inputs() {
-    if (input::InputManager::get_instance()->need_to_quit()) {
+    if (input::InputManager::get_instance().need_to_quit()) {
         _running = false;
     }
     _states.top()->handle_inputs();
@@ -55,7 +55,7 @@ void Game::_one_iteration() {
 }
 
 void Game::_update() {
-    input::InputManager::get_instance()->update();
+    input::InputManager::get_instance().update();
     _states.top()->update();
 }
 

@@ -15,7 +15,7 @@ enum class Key;
 
 class InputManager {
 public:
-    static std::shared_ptr<InputManager> get_instance();
+    static InputManager& get_instance();
     void update();
 
 public:
@@ -29,7 +29,7 @@ private:
     void _update_mouse_state();
     void _update_keyboard_state();
 
-public:
+private:
     InputManager();
 
 private:
