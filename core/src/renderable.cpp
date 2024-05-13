@@ -3,7 +3,9 @@
 namespace core {
 
 Renderable::Renderable(Rect position, TextureRef texture, WindowRef window)
-    : _position{position}, _texture{texture}, _window{window} {}
+    : _position{position}
+    , _texture{texture}
+    , _window{window} {}
 
 void Renderable::update() {
     _texture->update();

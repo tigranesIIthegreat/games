@@ -13,10 +13,10 @@ namespace checkers {
 
 class PlayState : public core::GameState {
 public:
-    PlayState(WindowRef window, core::input::InputManagerRef input_manager);
+    PlayState(WindowRef window);
 
 public:
-    virtual void one_iteration() override;
+    virtual void run() override;
     virtual void on_enter() override;
     virtual void on_exit() override;
     virtual void update() override;
@@ -28,7 +28,7 @@ private:
     void _switch_players();
 
 protected:
-    virtual void _handle_inputs() override;
+    virtual void handle_inputs() override;
 
 private:
     static constexpr size_t _figure_count = 24;
@@ -43,4 +43,4 @@ private:
     std::size_t _current_player_index;
 };
 
-} // namespace checkers
+}  // namespace checkers

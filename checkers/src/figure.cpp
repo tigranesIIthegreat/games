@@ -6,13 +6,12 @@ namespace checkers {
 
 Figure::Figure(core::Rect position, core::TextureRef texture,
                core::WindowRef window,
-               core::input::InputManagerRef input_manager, FigureColor color,
+               FigureColor color,
                bool is_king)
-    : Renderable{position, texture, window},
-      _input_manager{input_manager},
-      _color{color},
-      _is_king{is_king},
-      _is_selected{false} {}
+    : Renderable{position, texture, window}
+    , _color{color}
+    , _is_king{is_king}
+    , _is_selected{false} {}
 
 FigureColor Figure::color() const {
     return _color;
@@ -29,8 +28,8 @@ void Figure::set_selected(bool selected) {
     _is_selected = selected;
 }
 
-void Figure::_handle_inputs() {
-    auto mouse_position = _input_manager->mouse_position();
+void Figure::handle_inputs() {
+    auto mouse_position = core::input::InputManager::get_instance()->mouse_position();
     if (_position[0] <= mouse_position[0] and
         mouse_position[0] <= _position[0] + _position[2] and
         _position[1] <= mouse_position[1] and

@@ -2,6 +2,7 @@
 
 #include "game_state.hpp"
 #include "input.hpp"
+#include "renderable.hpp"
 #include "window.hpp"
 
 #include <memory>
@@ -10,7 +11,7 @@
 
 namespace core {
 
-class Game : public input::Inputable {
+class Game : public Renderable, public input::Inputable {
 public:
     Game(const std::string& title, int width, int height, int fps = 60);
     virtual ~Game() = default;
@@ -20,7 +21,7 @@ public:
 
 protected:
     void _one_iteration();
-    virtual void _handle_inputs() override;
+    virtual void handle_inputs() override;
     void _update();
     void _render();
 
@@ -31,7 +32,6 @@ protected:
 protected:
     std::stack<GameStateRef> _states;
     WindowRef _window;
-    input::InputManagerRef _input_manager;
     bool _running;
     const size_t _frame_delay;
 };

@@ -13,7 +13,7 @@ class Figure : public core::Renderable, public core::input::Inputable {
 public:
     Figure(core::Rect position,
            core::TextureRef texture, core::WindowRef window,
-           core::input::InputManagerRef input_manager, FigureColor color,
+           FigureColor color,
            bool is_king);
 
     FigureColor color() const;
@@ -22,10 +22,9 @@ public:
     void set_selected(bool selected);
 
 public:
-    virtual void _handle_inputs() override;
+    virtual void handle_inputs() override;
 
 private:
-    core::input::InputManagerRef _input_manager;
     const FigureColor _color;
     const bool _is_king;
     bool _is_selected;

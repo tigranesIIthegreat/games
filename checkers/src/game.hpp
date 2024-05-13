@@ -12,7 +12,7 @@ public:
     Game();
 
 private:
-    virtual void _handle_inputs() override;
+    virtual void handle_inputs() override;
 };
 
 } // namespace checkers

@@ -4,9 +4,8 @@ namespace checkers {
 
 using namespace core;
 
-PlayState::PlayState(WindowRef window,
-                     core::input::InputManagerRef input_manager)
-    : GameState{window, input_manager} {
+PlayState::PlayState(WindowRef window)
+    : GameState{window} {
     _board_size = std::min(_window->width(), _window->height());
     auto board_texture = std::make_shared<Texture>("checkerboard", _window);
     _board = std::make_shared<Board>(Rect{0, 0, _board_size, _board_size},
@@ -18,10 +17,10 @@ PlayState::PlayState(WindowRef window,
     for (size_t i{}; i < _figure_count / 2; ++i) {
         _white_figures.emplace_back(std::make_shared<Figure>(
             figure_position, white_man_texture, _window,
-            _input_manager, FigureColor::WHITE, false));
+            FigureColor::WHITE, false));
         _black_figures.emplace_back(std::make_shared<Figure>(
             figure_position, black_man_texture, _window,
-            _input_manager, FigureColor::BLACK, false));
+            FigureColor::BLACK, false));
     }
     _fill_board_with_figures();
 
@@ -69,7 +68,7 @@ void PlayState::update() {
     // TODO:
 }
 
-void PlayState::one_iteration() {
+void PlayState::run() {
     _players[_current_player_index]->play();
     _switch_players();
 }
@@ -86,12 +85,12 @@ std::string PlayState::name() {
     return "play";
 }
 
-void PlayState::_handle_inputs() {
+void PlayState::handle_inputs() {
     for (auto& figure : _white_figures) {
-        figure->_handle_inputs();
+        figure->handle_inputs();
     }
     for (auto& figure : _black_figures) {
-        figure->_handle_inputs();
+        figure->handle_inputs();
     }
 }
 

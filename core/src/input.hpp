@@ -15,7 +15,7 @@ enum class Key;
 
 class InputManager {
 public:
-    InputManager();
+    static std::shared_ptr<InputManager> get_instance();
     void update();
 
 public:
@@ -28,6 +28,9 @@ private:
     void _update_quitting_necessity();
     void _update_mouse_state();
     void _update_keyboard_state();
+
+public:
+    InputManager();
 
 private:
     using KeyMapping = std::unordered_map<Key, SDL_Scancode>;
@@ -43,9 +46,7 @@ using InputManagerRef = std::shared_ptr<InputManager>;
 
 class Inputable {
 public:
-    virtual void _handle_inputs() = 0;
-private:
-    InputManagerRef _input_manager;
+    virtual void handle_inputs() = 0;
 };
 
 enum class MouseButton { LEFT, MIDDLE, RIGHT };

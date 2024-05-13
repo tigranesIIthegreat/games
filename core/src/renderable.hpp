@@ -8,6 +8,7 @@ namespace core {
 
 class Renderable {
 public:
+    Renderable() = default;
     Renderable(Rect position, TextureRef texture, WindowRef window);
     virtual ~Renderable() = default;
 

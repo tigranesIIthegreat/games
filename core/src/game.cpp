@@ -1,13 +1,12 @@
 #include "game.hpp"
 
-#include "vec.hpp"
 #include "texture.hpp"
+#include "vec.hpp"
 
 namespace core {
 
 Game::Game(const std::string& title, int width, int height, int fps)
     : _window{std::make_shared<Window>(title, width, height)}
-    , _input_manager{std::make_shared<input::InputManager>()}
     , _running{false}
     , _frame_delay(1000.0f / fps) {}
 
@@ -19,7 +18,7 @@ void Game::run() {
     while (_running) {
         frame_start = SDL_GetTicks();
 
-        _handle_inputs();
+        handle_inputs();
         _one_iteration();
         _update();
         _render();
@@ -44,19 +43,19 @@ void Game::_pop_state() {
     _states.pop();
 }
 
-void Game::_handle_inputs() {
-    if (_input_manager->need_to_quit()) {
+void Game::handle_inputs() {
+    if (input::InputManager::get_instance()->need_to_quit()) {
         _running = false;
     }
-    _states.top()->_handle_inputs();
+    _states.top()->handle_inputs();
 }
 
 void Game::_one_iteration() {
-    _states.top()->one_iteration();
+    _states.top()->run();
 }
 
 void Game::_update() {
-    _input_manager->update();
+    input::InputManager::get_instance()->update();
     _states.top()->update();
 }
 

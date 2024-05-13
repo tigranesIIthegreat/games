@@ -4,6 +4,11 @@
 
 namespace core::input {
 
+InputManagerRef InputManager::get_instance() {
+    static InputManagerRef instance = std::make_shared<InputManager>();
+    return instance;
+}
+
 InputManager::InputManager() {
     std::fill(std::begin(_mouse_button_states), std::end(_mouse_button_states),
               false);

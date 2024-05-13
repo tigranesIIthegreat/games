@@ -10,11 +10,11 @@ namespace core {
 
 class GameState : public input::Inputable {
 public:
-    GameState(WindowRef _window, input::InputManagerRef input_manager);
+    GameState(WindowRef _window);
     virtual ~GameState() = default;
+    virtual void run() = 0;
 
 public:
-    virtual void one_iteration() = 0;
     virtual void update() = 0;
     virtual void render() = 0;
     virtual void on_enter() = 0;
