@@ -2,8 +2,8 @@
 
 namespace checkers {
 
-Board::Board(Rect position, TextureRef texture, WindowRef window)
-    : Renderable{position, texture, window} {}
+Board::Board(Rect position, TextureRef texture)
+    : Renderable{position, texture} {}
 
 void Board::update() {
     Renderable::update();

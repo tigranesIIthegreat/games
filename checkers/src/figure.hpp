@@ -12,7 +12,7 @@ enum class FigureColor { WHITE, BLACK };
 class Figure : public core::Renderable, public core::input::Inputable {
 public:
     Figure(core::Rect position,
-           core::TextureRef texture, core::WindowRef window,
+           core::TextureRef texture,
            FigureColor color,
            bool is_king);
 

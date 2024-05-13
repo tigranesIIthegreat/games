@@ -8,13 +8,12 @@ namespace core {
 
 class Texture {
 public:
-    Texture(const std::string& asset_name, WindowRef window);
+    Texture(const std::string& asset_name);
     void update();
     void render(Rect position);
 
 private:
     std::string _asset_name;
-    WindowRef _window;
     float _frame_width;
     float _frame_height;
     SDL_Texture* _sdl_texture;
@@ -29,11 +28,10 @@ using TextureRef = std::shared_ptr<Texture>;
 
 class TextureManager {
 public:
-    TextureManager(WindowRef window);
+    TextureManager();
     TextureRef create(const std::string& asset_name);
 
 private:
-    WindowRef _window;
     std::map<std::string, TextureRef> _textures;
     static size_t _instance_count;
 };

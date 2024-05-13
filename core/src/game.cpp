@@ -5,9 +5,8 @@
 
 namespace core {
 
-Game::Game(const std::string& title, int width, int height, int fps)
-    : _window{std::make_shared<Window>(title, width, height)}
-    , _running{false}
+Game::Game(int fps)
+    : _running{false}
     , _frame_delay(1000.0f / fps) {}
 
 void Game::run() {
@@ -60,10 +59,11 @@ void Game::_update() {
 }
 
 void Game::_render() {
-    SDL_RenderClear(_window->_sdl_renderer);
-    SDL_SetRenderDrawColor(_window->_sdl_renderer, 0, 0, 0, 0);
+    decltype(auto) window = Window::get_instance();
+    SDL_RenderClear(window._sdl_renderer);
+    SDL_SetRenderDrawColor(window._sdl_renderer, 0, 0, 0, 0);
     _states.top()->render();
-    SDL_RenderPresent(_window->_sdl_renderer);
+    SDL_RenderPresent(window._sdl_renderer);
 }
 
 }  // namespace core

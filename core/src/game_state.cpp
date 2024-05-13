@@ -2,7 +2,6 @@
 
 namespace core {
 
-GameState::GameState(WindowRef window)
-    : _window{window} {}
+GameState::GameState() {}
 
 } // namespace core

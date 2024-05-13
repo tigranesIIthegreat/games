@@ -4,22 +4,22 @@ namespace checkers {
 
 using namespace core;
 
-PlayState::PlayState(WindowRef window)
-    : GameState{window} {
-    _board_size = std::min(_window->width(), _window->height());
-    auto board_texture = std::make_shared<Texture>("checkerboard", _window);
+PlayState::PlayState() {
+    decltype(auto) window = Window::get_instance();
+    _board_size = std::min(window.width(), window.height());
+    auto board_texture = std::make_shared<Texture>("checkerboard");
     _board = std::make_shared<Board>(Rect{0, 0, _board_size, _board_size},
-                                     board_texture, _window);
+                                     board_texture);
     _cell_size = _board_size / _board->side_cell_count();
-    auto white_man_texture = std::make_shared<Texture>("man_white", _window);
-    auto black_man_texture = std::make_shared<Texture>("man_black", _window);
+    auto white_man_texture = std::make_shared<Texture>("man_white");
+    auto black_man_texture = std::make_shared<Texture>("man_black");
     Rect figure_position{0, 0, _cell_size, _cell_size};
     for (size_t i{}; i < _figure_count / 2; ++i) {
         _white_figures.emplace_back(std::make_shared<Figure>(
-            figure_position, white_man_texture, _window,
+            figure_position, white_man_texture,
             FigureColor::WHITE, false));
         _black_figures.emplace_back(std::make_shared<Figure>(
-            figure_position, black_man_texture, _window,
+            figure_position, black_man_texture,
             FigureColor::BLACK, false));
     }
     _fill_board_with_figures();

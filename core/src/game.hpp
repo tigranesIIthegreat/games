@@ -13,7 +13,7 @@ namespace core {
 
 class Game : public Renderable, public input::Inputable {
 public:
-    Game(const std::string& title, int width, int height, int fps = 60);
+    Game(int fps = 60);
     virtual ~Game() = default;
 
 public:
@@ -31,7 +31,6 @@ protected:
 
 protected:
     std::stack<GameStateRef> _states;
-    WindowRef _window;
     bool _running;
     const size_t _frame_delay;
 };

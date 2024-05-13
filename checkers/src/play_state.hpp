@@ -13,7 +13,7 @@ namespace checkers {
 
 class PlayState : public core::GameState {
 public:
-    PlayState(WindowRef window);
+    PlayState();
 
 public:
     virtual void run() override;

@@ -25,9 +25,8 @@ nlohmann::json assets() {
 
 }  // namespace
 
-Texture::Texture(const std::string& asset_name, WindowRef window)
+Texture::Texture(const std::string& asset_name)
     : _asset_name{asset_name},
-      _window{window},
       _current_row{},
       _current_col{},
       _animation_speed{1}{
@@ -39,7 +38,7 @@ Texture::Texture(const std::string& asset_name, WindowRef window)
     _frame_width = asset["frame_size"]["width"];
     _frame_height = asset["frame_size"]["height"];
 
-    _sdl_texture = IMG_LoadTexture(_window->_sdl_renderer, asset_path.data());
+    _sdl_texture = IMG_LoadTexture(Window::get_instance()._sdl_renderer, asset_path.data());
     int width{}, height{};
     SDL_QueryTexture(_sdl_texture, nullptr, nullptr, &width, &height);
 
@@ -61,22 +60,21 @@ void Texture::render(Rect position) {
     SDL_FRect sdl_destination{position[0], position[1], position[2],
                               position[3]};
 
-    SDL_RenderTexture(_window->_sdl_renderer, _sdl_texture, &source,
+    SDL_RenderTexture(Window::get_instance()._sdl_renderer, _sdl_texture, &source,
                       &sdl_destination);
 }
 
 size_t TextureManager::_instance_count = 0;
 
-TextureManager::TextureManager(WindowRef window) 
-    : _window{window}
-    , _textures{} {
+TextureManager::TextureManager() 
+    : _textures{} {
     if (_instance_count++ != 0)
         throw std::runtime_error("only one instance of Texture Manager can be instanciated");
 }
 
 TextureRef TextureManager::create(const std::string& asset_name) {
     if (_textures.find(asset_name) == _textures.end()) {
-        auto texture = std::make_shared<Texture>(asset_name, _window);
+        auto texture = std::make_shared<Texture>(asset_name);
         // _textures.emplace(std::make_pair(asset_name, texture));
     }
     return _textures[asset_name];

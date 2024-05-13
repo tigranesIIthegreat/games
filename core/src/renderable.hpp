@@ -9,7 +9,7 @@ namespace core {
 class Renderable {
 public:
     Renderable() = default;
-    Renderable(Rect position, TextureRef texture, WindowRef window);
+    Renderable(Rect position, TextureRef texture);
     virtual ~Renderable() = default;
 
 public:
@@ -23,7 +23,6 @@ public:
 protected:
     Rect _position;
     TextureRef _texture;
-    WindowRef _window;
 };
 
 }  // namespace core

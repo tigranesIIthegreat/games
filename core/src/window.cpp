@@ -6,6 +6,11 @@ namespace core {
 
 size_t Window::_instance_count = 0;
 
+Window& Window::get_instance() {
+    static auto intance = Window("checkers", 512, 512);
+    return intance;
+}
+
 Window::Window(const std::string& title, int width, int height)
     : _title(title), _width(width), _height(height), _flags{} {
     if (_instance_count++ == 0)

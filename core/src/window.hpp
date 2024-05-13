@@ -7,7 +7,7 @@
 namespace core {
 class Window {
 public:
-    Window(const std::string& title, int width, int height);
+    static Window& get_instance();
     ~Window();
 
 public:
@@ -17,6 +17,9 @@ public:
 
 public:
     friend class Texture;
+
+private:
+    Window(const std::string& title, int width, int height);
 
 private:
     void set_sdl_window();

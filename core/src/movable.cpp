@@ -2,9 +2,9 @@
 
 namespace core {
 
-Movable::Movable(Rect position, TextureRef texture, WindowRef window,
+Movable::Movable(Rect position, TextureRef texture,
                  Point velocity, Point acceleration)
-    : Renderable(position, texture, window),
+    : Renderable(position, texture),
       _velocity{velocity},
       _acceleration{acceleration} {}
 

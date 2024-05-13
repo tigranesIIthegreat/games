@@ -12,7 +12,7 @@ using namespace core;
 
 class Board : public Renderable {
 public:
-    Board(Rect position, TextureRef texture, WindowRef window);
+    Board(Rect position, TextureRef texture);
 
 public:
     virtual void update() override;
