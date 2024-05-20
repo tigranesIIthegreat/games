@@ -6,10 +6,6 @@ Renderable::Renderable(Rect position, TextureRef texture)
     : _position{position}
     , _texture{texture} {}
 
-void Renderable::update() {
-    _texture->update();
-}
-
 void Renderable::render() {
     _texture->render(_position);
 }

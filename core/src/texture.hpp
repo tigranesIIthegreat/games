@@ -9,8 +9,10 @@ namespace core {
 class Texture {
 public:
     Texture(const std::string& asset_name);
-    void update();
     void render(Rect position);
+
+private:
+    void update();
 
 private:
     std::string _asset_name;
@@ -26,14 +28,14 @@ private:
 
 using TextureRef = std::shared_ptr<Texture>;
 
-class TextureManager {
-public:
-    TextureManager();
-    TextureRef create(const std::string& asset_name);
+// class TextureManager {
+// public:
+//     TextureManager();
+//     TextureRef create(const std::string& asset_name);
 
-private:
-    std::map<std::string, TextureRef> _textures;
-    static size_t _instance_count;
-};
+// private:
+//     std::map<std::string, TextureRef> _textures;
+//     static size_t _instance_count;
+// };
 
 }  // namespace core

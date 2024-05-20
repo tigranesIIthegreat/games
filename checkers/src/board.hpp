@@ -15,8 +15,7 @@ public:
     Board(Rect position, TextureRef texture);
 
 public:
-    virtual void update() override;
-    virtual void render() override;
+    // virtual void render() override;
 
 public:
     bool is_valid_position(size_t x, size_t y) const;

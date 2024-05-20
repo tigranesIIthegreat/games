@@ -14,9 +14,7 @@ public:
     const std::string& title() const;
     int width() const noexcept;
     int height() const noexcept;
-
-public:
-    friend class Texture;
+    SDL_Renderer* sdl_renderer();
 
 private:
     Window(const std::string& title, int width, int height);
@@ -27,7 +25,7 @@ private:
     static void _initialize_system();
     static void _deinitialize_system();
 
-public: // to be private
+private:
     std::string _title;
     int _width{};
     int _height{};

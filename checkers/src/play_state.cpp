@@ -62,10 +62,9 @@ void PlayState::_switch_players() {
 
 void PlayState::render() {
     _board->render();
-}
-
-void PlayState::update() {
-    // TODO:
+    decltype(auto) render = std::mem_fn(&Figure::render);
+    std::for_each(_white_figures.begin(), _white_figures.end(), render);
+    std::for_each(_black_figures.begin(), _black_figures.end(), render);
 }
 
 void PlayState::run() {

@@ -19,7 +19,8 @@ void Game::run() {
 
         handle_inputs();
         _one_iteration();
-        _update();
+        // _update();
+        input::InputManager::get_instance().update();
         _render();
 
         frame_duration = frame_start - SDL_GetTicks();
@@ -55,15 +56,14 @@ void Game::_one_iteration() {
 
 void Game::_update() {
     input::InputManager::get_instance().update();
-    _states.top()->update();
 }
 
 void Game::_render() {
-    decltype(auto) window = Window::get_instance();
-    SDL_RenderClear(window._sdl_renderer);
-    SDL_SetRenderDrawColor(window._sdl_renderer, 0, 0, 0, 0);
+    decltype(auto) renderer = Window::get_instance().sdl_renderer();
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     _states.top()->render();
-    SDL_RenderPresent(window._sdl_renderer);
+    SDL_RenderPresent(renderer);
 }
 
 }  // namespace core

@@ -66,4 +66,8 @@ int Window::height() const noexcept {
     return _height;
 }
 
+SDL_Renderer* Window::sdl_renderer() {
+    return _sdl_renderer;
+}
+
 }  // namespace core

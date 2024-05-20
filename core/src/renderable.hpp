@@ -13,8 +13,7 @@ public:
     virtual ~Renderable() = default;
 
 public:
-    virtual void update();
-    virtual void render();
+    void render();
 
 public:
     virtual void set_coords(Point position);

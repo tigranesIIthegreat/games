@@ -10,8 +10,6 @@ InputManager& InputManager::get_instance() {
 }
 
 InputManager::InputManager() {
-    std::fill(std::begin(_mouse_button_states), std::end(_mouse_button_states),
-              false);
     update();
 }
 
@@ -29,7 +27,7 @@ bool InputManager::is_down(Key key) const {
 }
 
 bool InputManager::is_down(MouseButton button) const {
-    return _mouse_button_states[static_cast<size_t>(button)];
+    return _mouse_states[static_cast<size_t>(button)];
 }
 
 Point InputManager::mouse_position() const {
@@ -46,9 +44,9 @@ void InputManager::_update_quitting_necessity() {
 
 void InputManager::_update_mouse_state() {
     if (_event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
-        _mouse_button_states[_event.button.button - 1] = true;
+        _mouse_states[_event.button.button - 1] = true;
     } else if (_event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
-        _mouse_button_states[_event.button.button - 1] = false;
+        _mouse_states[_event.button.button - 1] = false;
     } else if (_event.type == SDL_EVENT_MOUSE_MOTION) {
         _mouse_position = {_event.motion.x, _event.motion.y};
     }

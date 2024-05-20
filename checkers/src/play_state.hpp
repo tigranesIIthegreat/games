@@ -19,7 +19,6 @@ public:
     virtual void run() override;
     virtual void on_enter() override;
     virtual void on_exit() override;
-    virtual void update() override;
     virtual void render() override;
     virtual std::string name() override;
 

@@ -2,3 +2,5 @@ build/**/*
 dependencies/SDL/**/*
 dependencies/SDL_image/**/*
 .vscode/**/*
+./**/*movable.hpp
+./**/*movable.cpp

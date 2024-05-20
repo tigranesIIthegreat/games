@@ -35,7 +35,7 @@ private:
 private:
     using KeyMapping = std::unordered_map<Key, SDL_Scancode>;
     static KeyMapping _key_mapping;
-    std::array<bool, 3> _mouse_button_states;
+    std::array<bool, 3> _mouse_states;
     Point _mouse_position;
     const uint8_t* _keyboard_states;
     SDL_Event _event;
