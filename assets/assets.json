@@ -29,7 +29,21 @@
             }
         },
         "king_black": {
-            "path": "kinh_black.png",
+            "path": "king_black.png",
+            "frame_size": {
+                "width": 64,
+                "height": 64
+            }
+        },
+        "green50": {
+            "path": "green50.png",
+            "frame_size": {
+                "width": 64,
+                "height": 64
+            }
+        },
+        "green100": {
+            "path": "green100.png",
             "frame_size": {
                 "width": 64,
                 "height": 64
