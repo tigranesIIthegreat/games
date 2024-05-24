@@ -1,10 +1,9 @@
 #pragma once
 
+#include "cell.hpp"
 #include "figure.hpp"
-
 #include <array>
 #include <memory>
-#include <optional>
 
 namespace checkers {
 
@@ -15,19 +14,13 @@ public:
     Board(Rect position, TextureRef texture);
 
 public:
-    // virtual void render() override;
-
-public:
     bool is_valid_position(size_t x, size_t y) const;
-    std::optional<FigureRef>& at(size_t x, size_t y);
-    size_t side_cell_count() const;
+    Cell& at(size_t x, size_t y);
+    static size_t size();
 
 private:
-    static constexpr size_t _side_cell_count = 8;
-    using Cells =
-        std::array<std::array<std::optional<FigureRef>, _side_cell_count>,
-                   _side_cell_count>;
-    Cells _cells;
+    static constexpr size_t _size = 8;
+    std::array<std::array<Cell, _size>, _size> _cells;
 };
 
 using BoardRef = std::shared_ptr<Board>;
