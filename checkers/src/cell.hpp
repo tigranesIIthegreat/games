@@ -10,6 +10,7 @@ class Cell : public core::Renderable {
 public:
     Cell(core::Rect position, FigureRef figure = nullptr);
     FigureRef figure();
+    void set_figure(FigureRef figure);
 
 private:
     static core::TextureRef _green_texture;

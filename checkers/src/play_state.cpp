@@ -42,7 +42,7 @@ void PlayState::_fill_board_with_figures() {
         }
         auto white = _white_figures[i];
         white->set_coords(Point{white_x * _cell_size, white_y * _cell_size});
-        _board->at(white_y, white_x)->figure() = white;
+        _board->at(white_y, white_x)->set_figure(white);
 
         // set a black figure on the bottom
         auto black_x = size - 1 - white_x;
@@ -52,7 +52,7 @@ void PlayState::_fill_board_with_figures() {
         }
         auto black = _black_figures[i];
         black->set_coords(Point{black_x * _cell_size, black_y * _cell_size});
-        _board->at(black_y, black_x)->figure() = black;
+        _board->at(black_y, black_x)->set_figure(black);
     }
 }
 
@@ -62,9 +62,9 @@ void PlayState::_switch_players() {
 
 void PlayState::render() {
     _board->render();
-    decltype(auto) render = std::mem_fn(&Figure::render);
-    std::for_each(_white_figures.begin(), _white_figures.end(), render);
-    std::for_each(_black_figures.begin(), _black_figures.end(), render);
+    // decltype(auto) render = std::mem_fn(&Figure::render);
+    // std::for_each(_white_figures.begin(), _white_figures.end(), render);
+    // std::for_each(_black_figures.begin(), _black_figures.end(), render);
 }
 
 void PlayState::run() {

@@ -26,7 +26,7 @@ public:
 
 private:
     const FigureColor _color;
-    const bool _is_king;
+    bool _is_king;
     bool _is_selected;
 };
 

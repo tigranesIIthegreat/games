@@ -10,6 +10,11 @@ void Renderable::render() {
     if (_texture) {
         _texture->render(_position);
     }
+    for (auto& component : _components) {
+        if (component) {
+            component->render();
+        }
+    }
 }
 
 void Renderable::set_coords(Point position) {
