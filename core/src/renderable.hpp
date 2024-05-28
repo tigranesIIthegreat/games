@@ -8,7 +8,7 @@ namespace core {
 
 class Renderable {
 public:
-    Renderable() = default;
+    Renderable() = default; // TODO: should be removed
     Renderable(Rect position, TextureRef texture);
     virtual ~Renderable() = default;
 

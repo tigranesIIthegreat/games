@@ -3,13 +3,13 @@
 #include "figure.hpp"
 #include <core/renderable.hpp>
 #include <core/texture.hpp>
-#include <optional>
 
 namespace checkers {
 
-struct Cell : public core::Renderable {
-    Cell(core::Rect position = {}, std::optional<FigureRef> figure = nullptr);
-    std::optional<FigureRef> figure;
+class Cell : public core::Renderable {
+public:
+    Cell(core::Rect position, FigureRef figure = nullptr);
+    FigureRef figure();
 
 private:
     static core::TextureRef _green_texture;
