@@ -1,15 +1,13 @@
 #pragma once
 
-#include <core/input.hpp>
-#include <core/renderable.hpp>
-
+#include <core/interactive_renderable.hpp>
 #include <memory>
 
 namespace checkers {
 
 enum class FigureColor { WHITE, BLACK };
 
-class Figure : public core::Renderable, public core::input::Interactive {
+class Figure : public core::InteractiveRenderable {
 public:
     Figure(core::Rect position, core::TextureRef texture, FigureColor color,
            bool is_king);

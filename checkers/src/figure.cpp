@@ -7,7 +7,7 @@ namespace checkers {
 Figure::Figure(core::Rect position, core::TextureRef texture,
                FigureColor color,
                bool is_king)
-    : Renderable{position, texture}
+    : InteractiveRenderable{position, texture}
     , _color{color}
     , _is_king{is_king}
     , _is_selected{false} {}

@@ -1,7 +1,6 @@
 #pragma once
 
-#include "input.hpp"
-#include "renderable.hpp"
+#include "interactive_renderable.hpp"
 #include "window.hpp"
 
 #include <memory>
@@ -9,10 +8,11 @@
 
 namespace core {
 
-class GameState : public Renderable, public input::Interactive {
+class GameState : public InteractiveRenderable {
 public:
     GameState();
     virtual ~GameState() = default;
+    virtual void handle_inputs() override;
 
 public:
     virtual void run() = 0;

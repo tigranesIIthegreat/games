@@ -3,7 +3,7 @@
 namespace checkers {
 
 Board::Board(Rect position, TextureRef texture)
-    : Renderable{position, texture} {
+    : InteractiveRenderable{position, texture} {
     decltype(auto) window = Window::get_instance();
     float cell_size = std::min(window.width(), window.height()) / _size;
     _components.reserve(_size * _size);
@@ -28,5 +28,14 @@ CellRef Board::at(size_t x, size_t y) {
 size_t Board::size() {
     return _size;
 }
+
+void Board::handle_inputs() {
+    for (size_t i{}; i < _size; ++i) {
+        for (size_t j{}; j < _size; ++j) {
+            this->at(i, j)->handle_inputs();
+        }
+    }
+}
+
 
 }  // namespace checkers

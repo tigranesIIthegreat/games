@@ -47,6 +47,7 @@ void Game::handle_inputs() {
     if (input::InputManager::get_instance().need_to_quit()) {
         _running = false;
     }
+    // TODO: additional input handling
     _states.top()->handle_inputs();
 }
 
