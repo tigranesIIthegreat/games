@@ -19,7 +19,6 @@ public:
     virtual void run() override;
     virtual void on_enter() override;
     virtual void on_exit() override;
-    virtual void render() override;
     virtual std::string name() override;
 
 private:
@@ -34,7 +33,6 @@ private:
 
 private:
     float _board_size;
-    BoardRef _board;
     float _cell_size;
     std::vector<FigureRef> _white_figures;
     std::vector<FigureRef> _black_figures;
