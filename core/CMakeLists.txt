@@ -3,6 +3,7 @@ add_library(
     include/core/game_state.hpp
     include/core/game.hpp
 	include/core/input.hpp
+    include/core/interactive_renderable.hpp
     include/core/renderable.hpp
     include/core/texture.hpp
     include/core/vec.hpp
@@ -20,6 +21,7 @@ add_library(
     src/game_state.cpp
     src/game.cpp
     src/input.cpp
+    src/interactive_renderable.cpp
     src/renderable.cpp
     src/texture.cpp
     src/window.cpp
