@@ -11,7 +11,7 @@
 
 namespace core {
 
-class Game : public Renderable, public input::Inputable {
+class Game : public Renderable, public input::Interactive {
 public:
     Game(int fps = 60);
     virtual ~Game() = default;

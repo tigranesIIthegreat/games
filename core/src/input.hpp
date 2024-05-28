@@ -44,7 +44,7 @@ private:
 
 using InputManagerRef = std::shared_ptr<InputManager>;
 
-class Inputable {
+class Interactive {
 public:
     virtual void handle_inputs() = 0;
 };
@@ -89,6 +89,5 @@ enum class Key {
     Y,
     Z
 };
-
 
 }  // namespace core::input

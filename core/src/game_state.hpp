@@ -9,7 +9,7 @@
 
 namespace core {
 
-class GameState : public Renderable, public input::Inputable {
+class GameState : public Renderable, public input::Interactive {
 public:
     GameState();
     virtual ~GameState() = default;
@@ -23,4 +23,4 @@ public:
 
 using GameStateRef = std::shared_ptr<GameState>;
 
-} // namespace core
+}  // namespace core

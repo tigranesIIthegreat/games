@@ -9,11 +9,9 @@ namespace checkers {
 
 enum class FigureColor { WHITE, BLACK };
 
-class Figure : public core::Renderable, public core::input::Inputable {
+class Figure : public core::Renderable, public core::input::Interactive {
 public:
-    Figure(core::Rect position,
-           core::TextureRef texture,
-           FigureColor color,
+    Figure(core::Rect position, core::TextureRef texture, FigureColor color,
            bool is_king);
 
     FigureColor color() const;

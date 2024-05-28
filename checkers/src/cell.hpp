@@ -1,13 +1,13 @@
 #pragma once
 
-#include "figure.hpp"
 #include <core/input.hpp>
 #include <core/renderable.hpp>
 #include <core/texture.hpp>
+#include "figure.hpp"
 
 namespace checkers {
 
-class Cell : public core::Renderable, public core::input::Inputable {
+class Cell : public core::Renderable, public core::input::Interactive {
 public:
     Cell(core::Rect position, FigureRef figure = nullptr);
     FigureRef figure();
@@ -20,4 +20,4 @@ private:
 
 using CellRef = std::shared_ptr<Cell>;
 
-} // namespace checkers
+}  // namespace checkers
