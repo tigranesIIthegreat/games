@@ -1,13 +1,10 @@
 #pragma once
 
-#include <core/input.hpp>
-#include <core/renderable.hpp>
-#include <core/texture.hpp>
 #include "figure.hpp"
 
 namespace checkers {
 
-class Cell : public core::Renderable, public core::input::Interactive {
+class Cell : public core::InteractiveRenderable {
 public:
     Cell(core::Rect position, FigureRef figure = nullptr);
     FigureRef figure();
