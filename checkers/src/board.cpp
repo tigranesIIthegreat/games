@@ -16,13 +16,14 @@ Board::Board(Rect position, TextureRef texture)
     }
 }
 
-bool Board::is_valid_position(size_t y, size_t x) const {
+bool Board::is_valid_position(size_t x, size_t y) const {
     // dark squares of the board are considered to be valid
     return y < _size && x < _size && ((x + y) % 2);
 }
 
 CellRef Board::at(size_t x, size_t y) {
-    return std::static_pointer_cast<Cell>(_components.at(x * _size + y));
+    // TODO: understand why (x * _size + y) did not for diagonally !?!?!?
+    return std::static_pointer_cast<Cell>(_components.at(y * _size + x));
 }
 
 size_t Board::size() {
