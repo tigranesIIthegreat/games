@@ -15,4 +15,6 @@ private:
     static core::TextureRef _green_texture;
 };
 
+using CellRef = std::shared_ptr<Cell>;
+
 } // namespace checkers

@@ -22,6 +22,7 @@ public:
 protected:
     Rect _position;
     TextureRef _texture;
+    std::vector<std::shared_ptr<Renderable>> _components;
 };
 
 }  // namespace core
