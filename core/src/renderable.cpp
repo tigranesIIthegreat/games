@@ -7,7 +7,9 @@ Renderable::Renderable(Rect position, TextureRef texture)
     , _texture{texture} {}
 
 void Renderable::render() {
-    _texture->render(_position);
+    if (_texture) {
+        _texture->render(_position);
+    }
 }
 
 void Renderable::set_coords(Point position) {
