@@ -80,11 +80,17 @@ std::string PlayState::name() {
 }
 
 void PlayState::handle_inputs() {
-    for (auto& figure : _white_figures) {
-        figure->handle_inputs();
-    }
-    for (auto& figure : _black_figures) {
-        figure->handle_inputs();
+    // for (auto& figure : _white_figures) {
+    //     figure->handle_inputs();
+    // }
+    // for (auto& figure : _black_figures) {
+    //     figure->handle_inputs();
+    // }
+    auto board = std::static_pointer_cast<Board>(_components[0]);
+    for (size_t i{}; i < board->size(); ++i) {
+        for (size_t j{}; j < board->size(); ++j) {
+            board->at(i, j)->handle_inputs();
+        }
     }
 }
 
