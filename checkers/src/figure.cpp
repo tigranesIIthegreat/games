@@ -1,7 +1,5 @@
 #include "figure.hpp"
 
-#include <iostream>
-
 namespace checkers {
 
 Figure::Figure(core::Rect position, core::TextureRef texture,
@@ -28,7 +26,7 @@ void Figure::set_selected(bool selected) {
 }
 
 void Figure::handle_inputs() {
-    if (mouse_hovers()) {
+    if (mouse_hovers_over()) {
         // TODO: mouse hovers
     } else {
         // TODO: mouse does not hover

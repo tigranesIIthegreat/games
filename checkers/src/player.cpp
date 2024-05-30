@@ -1,5 +1,4 @@
 #include "player.hpp"
-#include <iostream> // TODO: remove
 
 namespace checkers {
 

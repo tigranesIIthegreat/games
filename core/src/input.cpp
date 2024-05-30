@@ -1,7 +1,6 @@
 #include "input.hpp"
 
 #include <algorithm>
-
 namespace core::input {
 
 InputManager& InputManager::get_instance() {
@@ -10,6 +9,7 @@ InputManager& InputManager::get_instance() {
 }
 
 InputManager::InputManager() {
+    _update_keyboard_state(false);
     update();
 }
 
@@ -23,11 +23,21 @@ void InputManager::update() {
 }
 
 bool InputManager::is_down(Key key) const {
-    return _keyboard_states[_key_mapping[key]] == 1;
+    return _current_keyboard_state[_key_mapping[key]] == 1;
 }
 
 bool InputManager::is_down(MouseButton button) const {
-    return _mouse_states[static_cast<size_t>(button)];
+    return _current_mouse_state[static_cast<size_t>(button)];
+}
+
+bool InputManager::is_pressed(Key key) const {
+    return _previous_keyboard_state[_key_mapping[key]] == 0 &&
+           _current_keyboard_state[_key_mapping[key]] == 1;
+}
+
+bool InputManager::is_clicked(MouseButton button) const {
+    return !_previous_mouse_state[static_cast<size_t>(button)] && 
+           _current_mouse_state[static_cast<size_t>(button)];
 }
 
 Point InputManager::mouse_position() const {
@@ -43,17 +53,24 @@ void InputManager::_update_quitting_necessity() {
 }
 
 void InputManager::_update_mouse_state() {
+    std::memcpy(_previous_mouse_state, _current_mouse_state,
+                sizeof(_previous_mouse_state));
     if (_event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
-        _mouse_states[_event.button.button - 1] = true;
+        _current_mouse_state[_event.button.button - 1] = true;
     } else if (_event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
-        _mouse_states[_event.button.button - 1] = false;
+        _current_mouse_state[_event.button.button - 1] = false;
     } else if (_event.type == SDL_EVENT_MOUSE_MOTION) {
         _mouse_position = {_event.motion.x, _event.motion.y};
     }
 }
 
-void InputManager::_update_keyboard_state() {
-    _keyboard_states = SDL_GetKeyboardState(nullptr);
+void InputManager::_update_keyboard_state(bool with_previous) {
+    if (with_previous) {
+        std::memcpy(_previous_keyboard_state, _current_keyboard_state,
+                    sizeof(_previous_keyboard_state));
+    }
+    std::memcpy(_current_keyboard_state, SDL_GetKeyboardState(nullptr),
+                sizeof(_current_keyboard_state));
 }
 
 InputManager::KeyMapping InputManager::_key_mapping = {

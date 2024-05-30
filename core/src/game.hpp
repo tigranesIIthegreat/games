@@ -12,7 +12,7 @@ namespace core {
 
 class Game : public InteractiveRenderable {
 public:
-    Game(int fps = 60);
+    Game(int fps = 30);
     virtual ~Game() = default;
 
 public:
