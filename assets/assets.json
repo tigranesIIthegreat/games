@@ -42,8 +42,8 @@
                 "height": 64
             }
         },
-        "green100": {
-            "path": "green100.png",
+        "green25": {
+            "path": "green25.png",
             "frame_size": {
                 "width": 64,
                 "height": 64

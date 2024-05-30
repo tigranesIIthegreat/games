@@ -2,7 +2,10 @@
 
 namespace checkers {
 
-core::TextureRef Cell::_green_texture =
+core::TextureRef Cell::_green25_texture =
+    std::make_shared<core::Texture>("green25");
+
+core::TextureRef Cell::_green50_texture =
     std::make_shared<core::Texture>("green50");
 
 Cell::Cell(core::Rect position, FigureRef figure)
@@ -24,7 +27,7 @@ void Cell::handle_inputs() {
     bool mouse_clicked = input_manager.is_clicked(core::input::MouseButton::LEFT);
     bool a_is_pressed = input_manager.is_pressed(core::input::Key::A);
     if (mouse_hovers_over() && (mouse_clicked || a_is_pressed)) {
-        _texture = _texture ? nullptr : _green_texture;
+        _texture = _texture ? nullptr : _green50_texture;
     }
 }
 

@@ -12,7 +12,8 @@ public:
     virtual void handle_inputs() override;
 
 private:
-    static core::TextureRef _green_texture;
+    static core::TextureRef _green25_texture;
+    static core::TextureRef _green50_texture;
 };
 
 using CellRef = std::shared_ptr<Cell>;
