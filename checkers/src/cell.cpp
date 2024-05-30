@@ -31,4 +31,20 @@ void Cell::handle_inputs() {
     }
 }
 
+bool Cell::can_be_selected() const {
+    return _can_be_selected;
+}
+
+void Cell::set_can_be_selected(bool can_be_selected) {
+    _can_be_selected = can_be_selected;
+}
+
+bool Cell::is_selected() const {
+    return _is_selected;
+}
+
+void Cell::set_selected(bool selected) {
+    _is_selected = selected;
+}
+
 }  // namespace checkers

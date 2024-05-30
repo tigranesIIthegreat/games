@@ -17,17 +17,12 @@ PlayState::PlayState() {
     Rect figure_position{0, 0, _cell_size, _cell_size};
     for (size_t i{}; i < _figure_count / 2; ++i) {
         _white_figures.emplace_back(std::make_shared<Figure>(
-            figure_position, white_man_texture,
-            FigureColor::WHITE, false));
+            figure_position, white_man_texture, Color::WHITE, false));
         _black_figures.emplace_back(std::make_shared<Figure>(
-            figure_position, black_man_texture,
-            FigureColor::BLACK, false));
+            figure_position, black_man_texture, Color::BLACK, false));
     }
     _fill_board_with_figures();
-
-    _players[0] = std::make_shared<Player>("player1", _white_figures);
-    _players[1] = std::make_shared<Player>("player2", _black_figures);
-    _current_player_index = 0;
+    _current_player = Color::WHITE;
 }
 
 void PlayState::_fill_board_with_figures() {
@@ -59,12 +54,8 @@ void PlayState::_fill_board_with_figures() {
 }
 
 void PlayState::_switch_players() {
-    _current_player_index = 1 - _current_player_index;
-}
-
-void PlayState::run() {
-    _players[_current_player_index]->play();
-    _switch_players();
+    _current_player =
+        _current_player == Color::WHITE ? Color::BLACK : Color::WHITE;
 }
 
 void PlayState::on_enter() {

@@ -1,22 +1,21 @@
 #pragma once
 
 #include "board.hpp"
+#include "color.hpp"
 #include "figure.hpp"
-#include "player.hpp"
-
 #include <core/game_state.hpp>
 #include <core/window.hpp>
-
 #include <vector>
 
 namespace checkers {
+
+enum class SelectionMode { SOURCE = 0, DESTINATION = 1 };
 
 class PlayState : public core::GameState {
 public:
     PlayState();
 
 public:
-    virtual void run() override;
     virtual void on_enter() override;
     virtual void on_exit() override;
     virtual std::string name() override;
@@ -36,8 +35,8 @@ private:
     float _cell_size;
     std::vector<FigureRef> _white_figures;
     std::vector<FigureRef> _black_figures;
-    std::array<PlayerRef, 2> _players;
-    std::size_t _current_player_index;
+    Color _current_player;
+    // SelectionMode _current_mode;
 };
 
 }  // namespace checkers

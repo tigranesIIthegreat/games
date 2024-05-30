@@ -14,7 +14,7 @@ public:
     virtual ~Renderable() = default;
 
 public:
-    void render();
+    virtual void render();
 
 public:
     virtual void set_coords(Point position);

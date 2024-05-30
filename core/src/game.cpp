@@ -16,13 +16,9 @@ void Game::run() {
 
     while (_running) {
         frame_start = SDL_GetTicks();
-
-        handle_inputs();
-        _one_iteration();
-        // _update();
         input::InputManager::get_instance().update();
-        _render();
-
+        handle_inputs();
+        render();
         frame_duration = frame_start - SDL_GetTicks();
         if (frame_duration < _frame_delay) {
             SDL_Delay(static_cast<int>(_frame_delay - frame_duration));
@@ -51,18 +47,11 @@ void Game::handle_inputs() {
     _states.top()->handle_inputs();
 }
 
-void Game::_one_iteration() {
-    _states.top()->run();
-}
-
-void Game::_update() {
-    input::InputManager::get_instance().update();
-}
-
-void Game::_render() {
+void Game::render() {
     decltype(auto) renderer = Window::get_instance().sdl_renderer();
-    SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    // TODO: understaand necessity of these two calls
+    // SDL_RenderClear(renderer);
+    // SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     _states.top()->render();
     SDL_RenderPresent(renderer);
 }

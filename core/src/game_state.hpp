@@ -15,7 +15,6 @@ public:
     virtual void handle_inputs() override;
 
 public:
-    virtual void run() = 0;
     virtual void on_enter() = 0;
     virtual void on_exit() = 0;
     virtual std::string name() = 0;

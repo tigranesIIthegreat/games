@@ -1,18 +1,16 @@
 #pragma once
 
+#include "color.hpp"
 #include <core/interactive_renderable.hpp>
 #include <memory>
 
 namespace checkers {
 
-enum class FigureColor { WHITE, BLACK };
-
 class Figure : public core::InteractiveRenderable {
 public:
-    Figure(core::Rect position, core::TextureRef texture, FigureColor color,
-           bool is_king);
+    Figure(core::Rect position, core::TextureRef texture, Color color, bool is_king);
 
-    FigureColor color() const;
+    Color color() const;
     bool is_king() const;
     bool is_selected() const;
     void set_selected(bool selected);
@@ -21,7 +19,7 @@ public:
     virtual void handle_inputs() override;
 
 private:
-    const FigureColor _color;
+    const Color _color;
     bool _is_king;
     bool _is_selected;
 };

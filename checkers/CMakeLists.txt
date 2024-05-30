@@ -1,11 +1,11 @@
 add_library(
 	checkers_headers INTERFACE
 	include/checkers/board.hpp
+    include/checkers/color.hpp
     include/checkers/cell.hpp
 	include/checkers/figure.hpp
 	include/checkers/game.hpp
     include/checkers/play_state.hpp
-    include/checkers/player.hpp
 )
 
 target_include_directories(
@@ -21,7 +21,6 @@ add_library(
     src/figure.cpp
     src/game.cpp
     src/play_state.cpp
-    src/player.cpp
 )
 
 target_link_libraries(checkers PUBLIC checkers_headers)

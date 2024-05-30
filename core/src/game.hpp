@@ -19,10 +19,8 @@ public:
     void run();
 
 protected:
-    void _one_iteration();
     virtual void handle_inputs() override;
-    void _update();
-    void _render();
+    virtual void render() override;
 
 protected:
     void _push_state(GameStateRef state);

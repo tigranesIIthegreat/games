@@ -11,6 +11,16 @@ public:
     void set_figure(FigureRef figure);
     virtual void handle_inputs() override;
 
+public:
+    bool can_be_selected() const;
+    void set_can_be_selected(bool);
+    bool is_selected() const;
+    void set_selected(bool);
+
+private:
+    bool _can_be_selected{};
+    bool _is_selected{};
+
 private:
     static core::TextureRef _green25_texture;
     static core::TextureRef _green50_texture;
