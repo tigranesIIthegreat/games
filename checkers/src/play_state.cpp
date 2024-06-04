@@ -14,12 +14,10 @@ PlayState::PlayState() {
     _cell_size = _board_size / board->size();
     auto white_man_texture = std::make_shared<Texture>("man_white");
     auto black_man_texture = std::make_shared<Texture>("man_black");
-    Rect figure_position{0, 0, _cell_size, _cell_size};
+    Rect position{0, 0, _cell_size, _cell_size};
     for (size_t i{}; i < _figure_count / 2; ++i) {
-        _white_figures.emplace_back(std::make_shared<Figure>(
-            figure_position, white_man_texture, Color::WHITE, false));
-        _black_figures.emplace_back(std::make_shared<Figure>(
-            figure_position, black_man_texture, Color::BLACK, false));
+        _whites.emplace_back(std::make_shared<Figure>(position, Color::WHITE));
+        _blacks.emplace_back(std::make_shared<Figure>(position, Color::BLACK));
     }
     _fill_board_with_figures();
     _current_player = Color::WHITE;
@@ -37,7 +35,7 @@ void PlayState::_fill_board_with_figures() {
         if (!board->is_valid_position(white_y, white_x)) {
             ++white_x;
         }
-        auto white = _white_figures[i];
+        auto white = _whites[i];
         white->set_coords(Point{white_x * _cell_size, white_y * _cell_size});
         board->at(white_y, white_x)->set_figure(white);
 
@@ -47,15 +45,18 @@ void PlayState::_fill_board_with_figures() {
         if (!board->is_valid_position(black_y, black_x)) {
             ++black_x;
         }
-        auto black = _black_figures[i];
+        auto black = _blacks[i];
         black->set_coords(Point{black_x * _cell_size, black_y * _cell_size});
         board->at(black_y, black_x)->set_figure(black);
     }
 }
 
 void PlayState::_switch_players() {
-    _current_player =
-        _current_player == Color::WHITE ? Color::BLACK : Color::WHITE;
+    if (_current_player == Color::WHITE) {
+        _current_player = Color::BLACK;
+    } else {
+        _current_player = Color::WHITE;
+    }
 }
 
 void PlayState::on_enter() {
@@ -74,5 +75,9 @@ void PlayState::handle_inputs() {
     auto board = std::static_pointer_cast<Board>(_components[0]);
     board->handle_inputs();
 }
+
+// std::set<CellRef> PlayState::_valid_sources_of(Color player) {
+
+// }
 
 }  // namespace checkers

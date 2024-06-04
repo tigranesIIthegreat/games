@@ -5,7 +5,7 @@
 #include "figure.hpp"
 #include <core/game_state.hpp>
 #include <core/window.hpp>
-#include <vector>
+#include <set>
 
 namespace checkers {
 
@@ -24,6 +24,11 @@ private:
     void _fill_board_with_figures();
     void _switch_players();
 
+// private:
+//     std::set<CellRef> _valid_sources_of(Color player);
+//     std::set<CellRef> _valid_destinations_of(CellRef source);
+//     void _move_figure(CellRef source, CellRef destination);
+
 protected:
     virtual void handle_inputs() override;
 
@@ -33,8 +38,8 @@ private:
 private:
     float _board_size;
     float _cell_size;
-    std::vector<FigureRef> _white_figures;
-    std::vector<FigureRef> _black_figures;
+    std::vector<FigureRef> _whites;
+    std::vector<FigureRef> _blacks;
     Color _current_player;
     // SelectionMode _current_mode;
 };

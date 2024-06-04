@@ -8,7 +8,7 @@ namespace checkers {
 
 class Figure : public core::InteractiveRenderable {
 public:
-    Figure(core::Rect position, core::TextureRef texture, Color color, bool is_king);
+    Figure(core::Rect position, Color color);
 
     Color color() const;
     bool is_king() const;
@@ -22,6 +22,13 @@ private:
     const Color _color;
     bool _is_king;
     bool _is_selected;
+
+private:
+    static core::TextureRef _white_man_texture;
+    static core::TextureRef _black_man_texture;
+    static core::TextureRef _white_king_texture;
+    static core::TextureRef _black_king_texture;
+
 };
 
 using FigureRef = std::shared_ptr<Figure>;

@@ -2,13 +2,29 @@
 
 namespace checkers {
 
-Figure::Figure(core::Rect position, core::TextureRef texture,
-               Color color,
-               bool is_king)
-    : InteractiveRenderable{position, texture}
+core::TextureRef Figure::_white_man_texture =
+    std::make_shared<core::Texture>("man_white");
+
+core::TextureRef Figure::_black_man_texture =
+    std::make_shared<core::Texture>("man_black");
+
+core::TextureRef Figure::_white_king_texture =
+    std::make_shared<core::Texture>("king_white");
+
+core::TextureRef Figure::_black_king_texture =
+    std::make_shared<core::Texture>("king_black");
+
+Figure::Figure(core::Rect position, Color color)
+    : InteractiveRenderable{position, nullptr}
     , _color{color}
-    , _is_king{is_king}
-    , _is_selected{false} {}
+    , _is_king{false}
+    , _is_selected{false} {
+    if (color == Color::WHITE) {
+        _texture = _white_man_texture;
+    } else {
+        _texture = _black_man_texture;
+    }
+}
 
 Color Figure::color() const {
     return _color;
