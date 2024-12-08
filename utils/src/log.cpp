@@ -23,6 +23,7 @@ void Logger::error(const std::string& message) {
 }
 
 void Logger::log(LoggingLevel level, const std::string& message) {
+#if defined(DEBUG)
     log_time();
     static std::string default_setting = "\e[0;37m";
     static std::string intro[] = {
@@ -31,8 +32,12 @@ void Logger::log(LoggingLevel level, const std::string& message) {
         "\e[1;31mERR: "   // ERROR
     };
 
-    std::cout << intro[static_cast<size_t>(level)] << message
-              << default_setting << std::endl;
+    std::cout << intro[static_cast<size_t>(level)] << message << default_setting
+              << std::endl;
+#else
+    (void)level;
+    (void)message;
+#endif
 }
 
 void Logger::log_time() {
