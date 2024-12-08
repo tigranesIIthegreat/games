@@ -28,7 +28,7 @@ Window::~Window() {
 }
 
 void Window::_initialize_system() {
-    if (SDL_InitSubSystem(SDL_INIT_EVERYTHING) < 0) {
+    if (!SDL_InitSubSystem(0)) {
         throw std::runtime_error(std::string(SDL_GetError()));
     }
 }
@@ -47,7 +47,7 @@ void Window::set_sdl_window() {
 
 void Window::set_sdl_renderer() {
     _sdl_renderer =
-        SDL_CreateRenderer(_sdl_window, nullptr, SDL_RENDERER_ACCELERATED);
+        SDL_CreateRenderer(_sdl_window, nullptr);
     if (_sdl_renderer == nullptr) {
         _deinitialize_system();
         throw std::runtime_error(std::string(SDL_GetError()));

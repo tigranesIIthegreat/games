@@ -39,8 +39,8 @@ Texture::Texture(const std::string& asset_name)
     _frame_height = asset["frame_size"]["height"];
 
     _sdl_texture = IMG_LoadTexture(Window::get_instance().sdl_renderer(), asset_path.data());
-    int width{}, height{};
-    SDL_QueryTexture(_sdl_texture, nullptr, nullptr, &width, &height);
+    float width{}, height{};
+    SDL_GetTextureSize(_sdl_texture, &width, &height);
 
     _row_count = height / static_cast<int>(_frame_height);
     _col_count = width / static_cast<int>(_frame_width);

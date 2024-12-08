@@ -1,9 +1,9 @@
 #pragma once
 
-#include "vec.hpp"
+#include <SDL3/SDL.h>
 #include <memory>
 #include <unordered_map>
-#include <SDL3/SDL.h>
+#include "vec.hpp"
 
 namespace core::input {
 
@@ -39,8 +39,8 @@ private:
     bool _current_mouse_state[3];
     bool _previous_mouse_state[3];
     Point _mouse_position;
-    uint8_t _current_keyboard_state[SDL_NUM_SCANCODES];
-    uint8_t _previous_keyboard_state[SDL_NUM_SCANCODES];
+    uint8_t _current_keyboard_state[SDL_SCANCODE_COUNT];
+    uint8_t _previous_keyboard_state[SDL_SCANCODE_COUNT];
     SDL_Event _event;
     bool _need_to_quit;
 };

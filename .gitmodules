@@ -4,3 +4,12 @@
 [submodule "dependencies/json"]
 	path = dependencies/json
 	url = https://github.com/nlohmann/json
+[submodule "dependencies/glog"]
+	path = dependencies/glog
+	url = https://github.com/google/glog.git
+[submodule "dependencies/SDL"]
+	path = dependencies/SDL
+	url = https://github.com/libsdl-org/SDL.git
+[submodule "dependencies/SDL_Image"]
+	path = dependencies/SDL_Image
+	url = https://github.com/libsdl-org/SDL_image.git
