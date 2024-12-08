@@ -1,5 +1,5 @@
 #include <gtest_main.hpp>
-#include <core/vec.hpp>
+#include <utils/vec.hpp>
 
 using namespace core;
 

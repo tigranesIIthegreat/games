@@ -2,8 +2,9 @@
 
 #include "input_manager.hpp"
 #include "texture.hpp"
-#include "vec.hpp"
 #include "window.hpp"
+
+#include <utils/vec.hpp>
 
 namespace core {
 

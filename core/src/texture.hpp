@@ -1,8 +1,8 @@
 #pragma once
 
-#include "vec.hpp"
-#include "window.hpp"
 #include <map>
+#include <utils/vec.hpp>
+#include "window.hpp"
 
 namespace core {
 

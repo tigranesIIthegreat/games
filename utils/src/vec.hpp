@@ -281,4 +281,4 @@ using Velocity = Vec<2, float>;
 using Acceleration = Vec<2, float>;
 using Rect = Vec<4, float>;
 
-} // namespace core
+}  // namespace core

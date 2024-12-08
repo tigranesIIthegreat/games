@@ -34,6 +34,7 @@ include(add_test)
 add_subdirectory(test)
 add_subdirectory(core)
 add_subdirectory(checkers)
+add_subdirectory(utils)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 

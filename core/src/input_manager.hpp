@@ -3,7 +3,7 @@
 #include <SDL3/SDL.h>
 #include <memory>
 #include <unordered_map>
-#include "vec.hpp"
+#include <utils/vec.hpp>
 
 namespace core::input {
 

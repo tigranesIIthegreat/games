@@ -1,13 +1,11 @@
 #include "game.hpp"
 
+#include <utils/vec.hpp>
 #include "texture.hpp"
-#include "vec.hpp"
 
 namespace core {
 
-Game::Game(int fps)
-    : _running{false}
-    , _frame_delay(1000.0f / fps) {}
+Game::Game(int fps) : _running{false}, _frame_delay(1000.0f / fps) {}
 
 void Game::run() {
     _running = true;
