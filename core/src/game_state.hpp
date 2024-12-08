@@ -1,6 +1,6 @@
 #pragma once
 
-#include "interactive_renderable.hpp"
+#include "game_object.hpp"
 #include "window.hpp"
 
 #include <memory>
@@ -8,7 +8,7 @@
 
 namespace core {
 
-class GameState : public InteractiveRenderable {
+class GameState : public GameObject {
 public:
     GameState();
     virtual ~GameState() = default;

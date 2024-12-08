@@ -4,7 +4,7 @@
 
 namespace checkers {
 
-class Cell : public core::InteractiveRenderable {
+class Cell : public core::GameObject {
 public:
     Cell(core::Rect position, FigureRef figure = nullptr);
     FigureRef figure();

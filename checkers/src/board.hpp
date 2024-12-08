@@ -1,16 +1,16 @@
 #pragma once
 
+#include <array>
+#include <core/game_object.hpp>
+#include <memory>
 #include "cell.hpp"
 #include "figure.hpp"
-#include <core/interactive_renderable.hpp>
-#include <array>
-#include <memory>
 
 namespace checkers {
 
 using namespace core;
 
-class Board : public InteractiveRenderable {
+class Board : public GameObject {
 public:
     Board(Rect position, TextureRef texture);
     virtual void handle_inputs() override;

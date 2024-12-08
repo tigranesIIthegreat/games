@@ -2,9 +2,8 @@ add_library(
 	core_headers INTERFACE
     include/core/game_state.hpp
     include/core/game.hpp
-	include/core/input.hpp
-    include/core/interactive_renderable.hpp
-    include/core/renderable.hpp
+	include/core/input_manager.hpp
+    include/core/game_object.hpp
     include/core/texture.hpp
     include/core/vec.hpp
     include/core/window.hpp
@@ -20,9 +19,8 @@ add_library(
     core STATIC
     src/game_state.cpp
     src/game.cpp
-    src/input.cpp
-    src/interactive_renderable.cpp
-    src/renderable.cpp
+    src/input_manager.cpp
+    src/game_object.cpp
     src/texture.cpp
     src/window.cpp
 )

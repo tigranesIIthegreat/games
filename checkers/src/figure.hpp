@@ -1,12 +1,12 @@
 #pragma once
 
-#include "color.hpp"
-#include <core/interactive_renderable.hpp>
+#include <core/game_object.hpp>
 #include <memory>
+#include "color.hpp"
 
 namespace checkers {
 
-class Figure : public core::InteractiveRenderable {
+class Figure : public core::GameObject {
 public:
     Figure(core::Rect position, Color color);
 
@@ -28,7 +28,6 @@ private:
     static core::TextureRef _black_man_texture;
     static core::TextureRef _white_king_texture;
     static core::TextureRef _black_king_texture;
-
 };
 
 using FigureRef = std::shared_ptr<Figure>;

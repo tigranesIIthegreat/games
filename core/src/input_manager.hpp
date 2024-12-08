@@ -1,10 +1,8 @@
 #pragma once
 
 #include "vec.hpp"
-
 #include <memory>
 #include <unordered_map>
-
 #include <SDL3/SDL.h>
 
 namespace core::input {
@@ -48,11 +46,6 @@ private:
 };
 
 using InputManagerRef = std::shared_ptr<InputManager>;
-
-class Interactive {
-public:
-    virtual void handle_inputs() = 0;
-};
 
 enum class MouseButton { LEFT, MIDDLE, RIGHT };
 

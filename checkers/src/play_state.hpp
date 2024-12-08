@@ -24,10 +24,11 @@ private:
     void _fill_board_with_figures();
     void _switch_players();
 
-// private:
-//     std::set<CellRef> _valid_sources_of(Color player);
-//     std::set<CellRef> _valid_destinations_of(CellRef source);
-//     void _move_figure(CellRef source, CellRef destination);
+private:
+
+    // std::set<CellRef> _valid_sources_of(Color player);
+    // std::set<CellRef> _valid_destinations_of(CellRef source);
+    // void _move_figure(CellRef source, CellRef destination);
 
 protected:
     virtual void handle_inputs() override;
@@ -36,10 +37,7 @@ private:
     static constexpr size_t _figure_count = 24;
 
 private:
-    float _board_size;
-    float _cell_size;
-    std::vector<FigureRef> _whites;
-    std::vector<FigureRef> _blacks;
+    std::map<Color, std::set<FigureRef>> _figures;
     Color _current_player;
     // SelectionMode _current_mode;
 };

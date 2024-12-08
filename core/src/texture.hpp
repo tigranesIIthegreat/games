@@ -9,10 +9,8 @@ namespace core {
 class Texture {
 public:
     Texture(const std::string& asset_name);
-    void render(Rect position);
-
-private:
     void update();
+    void render(Rect position);
 
 private:
     std::string _asset_name;

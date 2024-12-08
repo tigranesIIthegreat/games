@@ -9,7 +9,7 @@ core::TextureRef Cell::_green50_texture =
     std::make_shared<core::Texture>("green50");
 
 Cell::Cell(core::Rect position, FigureRef figure)
-    : core::InteractiveRenderable(position, nullptr) {
+    : core::GameObject(position, nullptr) {
     _components.push_back(figure);
 }
 
@@ -19,12 +19,14 @@ FigureRef Cell::figure() {
 
 void Cell::set_figure(FigureRef figure) {
     _components[0] = figure;
+    figure->set_coords(core::Point{_position[0], _position[1]});
 }
 
 void Cell::handle_inputs() {
     // TODO: add proper input handling
     auto& input_manager = core::input::InputManager::get_instance();
-    bool mouse_clicked = input_manager.is_clicked(core::input::MouseButton::LEFT);
+    bool mouse_clicked =
+        input_manager.is_clicked(core::input::MouseButton::LEFT);
     bool a_is_pressed = input_manager.is_pressed(core::input::Key::A);
     if (mouse_hovers_over() && (mouse_clicked || a_is_pressed)) {
         _texture = _texture ? nullptr : _green50_texture;

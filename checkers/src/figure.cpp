@@ -15,10 +15,10 @@ core::TextureRef Figure::_black_king_texture =
     std::make_shared<core::Texture>("king_black");
 
 Figure::Figure(core::Rect position, Color color)
-    : InteractiveRenderable{position, nullptr}
-    , _color{color}
-    , _is_king{false}
-    , _is_selected{false} {
+    : GameObject{position, nullptr},
+      _color{color},
+      _is_king{false},
+      _is_selected{false} {
     if (color == Color::WHITE) {
         _texture = _white_man_texture;
     } else {

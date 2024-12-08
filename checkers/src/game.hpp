@@ -3,7 +3,7 @@
 #include "play_state.hpp"
 
 #include <core/game.hpp>
-#include <core/input.hpp>
+#include <core/input_manager.hpp>
 
 namespace checkers {
 

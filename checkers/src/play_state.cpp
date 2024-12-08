@@ -6,18 +6,18 @@ using namespace core;
 
 PlayState::PlayState() {
     decltype(auto) window = Window::get_instance();
-    _board_size = std::min(window.width(), window.height());
+    auto board_size = static_cast<float>(std::min(window.width(), window.height()));
     auto board_texture = std::make_shared<Texture>("checkerboard");
-    auto board = std::make_shared<Board>(Rect{0, 0, _board_size, _board_size},
+    auto board = std::make_shared<Board>(Rect{0, 0, board_size, board_size},
                                          board_texture);
     _components.push_back(board);
-    _cell_size = _board_size / board->size();
+    auto cell_size = board_size / board->size();
     auto white_man_texture = std::make_shared<Texture>("man_white");
     auto black_man_texture = std::make_shared<Texture>("man_black");
-    Rect position{0, 0, _cell_size, _cell_size};
+    Rect position{0, 0, cell_size, cell_size};
     for (size_t i{}; i < _figure_count / 2; ++i) {
-        _whites.emplace_back(std::make_shared<Figure>(position, Color::WHITE));
-        _blacks.emplace_back(std::make_shared<Figure>(position, Color::BLACK));
+        _figures[Color::WHITE].insert(std::make_shared<Figure>(position, Color::WHITE));
+        _figures[Color::BLACK].insert(std::make_shared<Figure>(position, Color::BLACK));
     }
     _fill_board_with_figures();
     _current_player = Color::WHITE;
@@ -25,7 +25,10 @@ PlayState::PlayState() {
 
 void PlayState::_fill_board_with_figures() {
     decltype(auto) board = std::static_pointer_cast<Board>(_components[0]);
-    for (size_t i{}; i < _figure_count / 2; ++i) {
+    auto _white_iter = _figures[Color::WHITE].begin();
+    auto _black_iter = _figures[Color::BLACK].begin();
+
+    for (size_t i{}; i < _figure_count / 2; ++i, ++_white_iter, ++_black_iter) {
         auto size = board->size();
 
         // set a white figure on the top
@@ -35,9 +38,7 @@ void PlayState::_fill_board_with_figures() {
         if (!board->is_valid_position(white_y, white_x)) {
             ++white_x;
         }
-        auto white = _whites[i];
-        white->set_coords(Point{white_x * _cell_size, white_y * _cell_size});
-        board->at(white_y, white_x)->set_figure(white);
+        board->at(white_y, white_x)->set_figure(*_white_iter);
 
         // set a black figure on the bottom
         auto black_x = size - 1 - white_x;
@@ -45,9 +46,7 @@ void PlayState::_fill_board_with_figures() {
         if (!board->is_valid_position(black_y, black_x)) {
             ++black_x;
         }
-        auto black = _blacks[i];
-        black->set_coords(Point{black_x * _cell_size, black_y * _cell_size});
-        board->at(black_y, black_x)->set_figure(black);
+        board->at(black_y, black_x)->set_figure(*_black_iter);
     }
 }
 
@@ -75,9 +74,5 @@ void PlayState::handle_inputs() {
     auto board = std::static_pointer_cast<Board>(_components[0]);
     board->handle_inputs();
 }
-
-// std::set<CellRef> PlayState::_valid_sources_of(Color player) {
-
-// }
 
 }  // namespace checkers

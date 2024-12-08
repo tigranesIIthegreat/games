@@ -1,7 +1,7 @@
 #pragma once
 
+#include "game_object.hpp"
 #include "game_state.hpp"
-#include "interactive_renderable.hpp"
 #include "window.hpp"
 
 #include <memory>
@@ -10,7 +10,7 @@
 
 namespace core {
 
-class Game : public InteractiveRenderable {
+class Game : public GameObject {
 public:
     Game(int fps = 30);
     virtual ~Game() = default;
