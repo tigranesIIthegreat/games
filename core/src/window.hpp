@@ -7,7 +7,7 @@
 namespace core {
 class Window {
 public:
-    static Window& get_instance();
+    static Window& instance();
     ~Window();
 
 public:

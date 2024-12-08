@@ -28,11 +28,4 @@ target_link_libraries(
 
 target_include_directories(
     utils_headers INTERFACE 
-    ${CMAKE_SOURCE_DIR}/dependencies/glog/include
-)
-
-target_link_libraries(
-    utils 
-    PRIVATE 
-    glog::glog
 )

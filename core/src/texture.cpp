@@ -38,7 +38,7 @@ Texture::Texture(const std::string& asset_name)
     _frame_width = asset["frame_size"]["width"];
     _frame_height = asset["frame_size"]["height"];
 
-    _sdl_texture = IMG_LoadTexture(Window::get_instance().sdl_renderer(), asset_path.data());
+    _sdl_texture = IMG_LoadTexture(Window::instance().sdl_renderer(), asset_path.data());
     float width{}, height{};
     SDL_GetTextureSize(_sdl_texture, &width, &height);
 
@@ -61,7 +61,7 @@ void Texture::render(Rect position) {
     SDL_FRect sdl_destination{position[0], position[1], position[2],
                               position[3]};
 
-    decltype(auto) renderer = Window::get_instance().sdl_renderer();
+    decltype(auto) renderer = Window::instance().sdl_renderer();
     SDL_RenderTexture(renderer, _sdl_texture, &source, &sdl_destination);
 }
 

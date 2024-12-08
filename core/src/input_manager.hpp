@@ -12,7 +12,7 @@ enum class Key;
 
 class InputManager {
 public:
-    static InputManager& get_instance();
+    static InputManager& instance();
     void update();
 
 public:

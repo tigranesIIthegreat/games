@@ -3,7 +3,7 @@
 #include <algorithm>
 namespace core::input {
 
-InputManager& InputManager::get_instance() {
+InputManager& InputManager::instance() {
     static auto instance = InputManager();
     return instance;
 }
@@ -36,7 +36,7 @@ bool InputManager::is_pressed(Key key) const {
 }
 
 bool InputManager::is_clicked(MouseButton button) const {
-    return !_previous_mouse_state[static_cast<size_t>(button)] && 
+    return !_previous_mouse_state[static_cast<size_t>(button)] &&
            _current_mouse_state[static_cast<size_t>(button)];
 }
 

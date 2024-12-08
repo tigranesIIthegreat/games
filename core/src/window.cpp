@@ -6,7 +6,7 @@ namespace core {
 
 size_t Window::_instance_count = 0;
 
-Window& Window::get_instance() {
+Window& Window::instance() {
     static auto intance = Window("checkers", 512, 512);
     return intance;
 }
@@ -46,8 +46,7 @@ void Window::set_sdl_window() {
 }
 
 void Window::set_sdl_renderer() {
-    _sdl_renderer =
-        SDL_CreateRenderer(_sdl_window, nullptr);
+    _sdl_renderer = SDL_CreateRenderer(_sdl_window, nullptr);
     if (_sdl_renderer == nullptr) {
         _deinitialize_system();
         throw std::runtime_error(std::string(SDL_GetError()));

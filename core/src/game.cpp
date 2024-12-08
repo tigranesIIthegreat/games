@@ -14,7 +14,7 @@ void Game::run() {
 
     while (_running) {
         frame_start = SDL_GetTicks();
-        input::InputManager::get_instance().update();
+        input::InputManager::instance().update();
         handle_inputs();
         render();
         frame_duration = frame_start - SDL_GetTicks();
@@ -38,7 +38,7 @@ void Game::_pop_state() {
 }
 
 void Game::handle_inputs() {
-    if (input::InputManager::get_instance().need_to_quit()) {
+    if (input::InputManager::instance().need_to_quit()) {
         _running = false;
     }
     // TODO: additional input handling
@@ -46,7 +46,7 @@ void Game::handle_inputs() {
 }
 
 void Game::render() {
-    decltype(auto) renderer = Window::get_instance().sdl_renderer();
+    decltype(auto) renderer = Window::instance().sdl_renderer();
     // TODO: understaand necessity of these two calls
     // SDL_RenderClear(renderer);
     // SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);

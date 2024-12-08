@@ -5,8 +5,9 @@ namespace checkers {
 using namespace core;
 
 PlayState::PlayState() {
-    decltype(auto) window = Window::get_instance();
-    auto board_size = static_cast<float>(std::min(window.width(), window.height()));
+    decltype(auto) window = Window::instance();
+    auto board_size =
+        static_cast<float>(std::min(window.width(), window.height()));
     auto board_texture = std::make_shared<Texture>("checkerboard");
     auto board = std::make_shared<Board>(Rect{0, 0, board_size, board_size},
                                          board_texture);
@@ -16,8 +17,10 @@ PlayState::PlayState() {
     auto black_man_texture = std::make_shared<Texture>("man_black");
     Rect position{0, 0, cell_size, cell_size};
     for (size_t i{}; i < _figure_count / 2; ++i) {
-        _figures[Color::WHITE].insert(std::make_shared<Figure>(position, Color::WHITE));
-        _figures[Color::BLACK].insert(std::make_shared<Figure>(position, Color::BLACK));
+        _figures[Color::WHITE].insert(
+            std::make_shared<Figure>(position, Color::WHITE));
+        _figures[Color::BLACK].insert(
+            std::make_shared<Figure>(position, Color::BLACK));
     }
     _fill_board_with_figures();
     _current_player = Color::WHITE;

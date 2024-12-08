@@ -24,7 +24,7 @@ void Cell::set_figure(FigureRef figure) {
 
 void Cell::handle_inputs() {
     // TODO: add proper input handling
-    auto& input_manager = core::input::InputManager::get_instance();
+    auto& input_manager = core::input::InputManager::instance();
     bool mouse_clicked =
         input_manager.is_clicked(core::input::MouseButton::LEFT);
     bool a_is_pressed = input_manager.is_pressed(core::input::Key::A);
