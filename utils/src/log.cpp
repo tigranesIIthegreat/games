@@ -10,20 +10,13 @@ Logger& Logger::instance() {
     return instance;
 }
 
-void Logger::info(const std::string& message) {
-    log(LoggingLevel::INFO, message);
-}
-
-void Logger::warn(const std::string& message) {
-    log(LoggingLevel::WARN, message);
-}
-
-void Logger::error(const std::string& message) {
-    log(LoggingLevel::ERROR, message);
-}
-
-void Logger::log(LoggingLevel level, const std::string& message) {
+void Logger::log(LoggingLevel level, const char* format, ...) {
 #if defined(DEBUG)
+    va_list args;
+    va_start(args, format);
+    char buffer[1024];
+    vsnprintf(buffer, sizeof(buffer), format, args);
+
     log_time();
     static std::string default_setting = "\e[0;37m";
     static std::string intro[] = {
@@ -32,8 +25,10 @@ void Logger::log(LoggingLevel level, const std::string& message) {
         "\e[1;31mERR: "   // ERROR
     };
 
-    std::cout << intro[static_cast<size_t>(level)] << message << default_setting
-              << std::endl;
+    std::cout << intro[static_cast<size_t>(level)] << buffer 
+              << default_setting << std::endl;
+
+    va_end(args);
 #else
     (void)level;
     (void)message;
