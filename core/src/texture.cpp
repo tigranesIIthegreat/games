@@ -1,8 +1,9 @@
 #include "texture.hpp"
 
+#include <utils/log.hpp>
+
 #include <SDL3_image/SDL_image.h>
 #include <nlohmann/json.hpp>
-
 #include <fstream>
 
 namespace core {
@@ -44,6 +45,7 @@ Texture::Texture(const std::string& asset_name)
 
     _row_count = height / static_cast<int>(_frame_height);
     _col_count = width / static_cast<int>(_frame_width);
+    Logger::instance().info("Texture created: %s", asset_name.data());
 }
 
 void Texture::update() {

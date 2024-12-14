@@ -55,6 +55,7 @@ void InputManager::_update_quitting_necessity() {
 void InputManager::_update_mouse_state() {
     std::memcpy(_previous_mouse_state, _current_mouse_state,
                 sizeof(_previous_mouse_state));
+    // TODO: check current state is not corrupted
     if (_event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
         _current_mouse_state[_event.button.button - 1] = true;
     } else if (_event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
