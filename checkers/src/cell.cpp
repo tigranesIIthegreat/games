@@ -22,7 +22,7 @@ void Cell::set_figure(FigureRef figure) {
     if (figure == nullptr) {
         return;
     }
-    figure->set_coords(core::Point{_position[0], _position[1]});
+    figure->set_position(_position);
 }
 
 void Cell::handle_inputs() {

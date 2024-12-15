@@ -16,13 +16,12 @@ void GameObject::render() {
     }
 }
 
-void GameObject::set_coords(Point position) {
-    _position[0] = position[0];
-    _position[1] = position[1];
+void GameObject::set_position(Rect position) {
+    _position = position;
 }
 
-Point GameObject::coords() const {
-    return {_position[0], _position[1]};
+Rect GameObject::position() const {
+    return _position;
 }
 
 bool GameObject::mouse_hovers_over() const {

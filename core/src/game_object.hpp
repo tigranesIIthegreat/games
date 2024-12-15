@@ -16,8 +16,8 @@ public:
 
 public:
     virtual void render();
-    virtual void set_coords(Point position);
-    virtual Point coords() const;
+    virtual void set_position(Rect position);
+    virtual Rect position() const;
     bool mouse_hovers_over() const;
     virtual void handle_inputs() = 0;
 

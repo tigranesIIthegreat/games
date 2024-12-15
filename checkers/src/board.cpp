@@ -105,7 +105,7 @@ void Board::move(CellRef src, CellRef dst) {
     auto moving_figure = src->figure();
     dst->set_figure(moving_figure);
     src->set_figure(nullptr);
-    moving_figure->set_coords(dst->coords());
+    moving_figure->set_position(dst->position());
 }
 
 }  // namespace checkers
