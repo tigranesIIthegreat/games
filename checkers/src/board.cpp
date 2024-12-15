@@ -16,7 +16,8 @@ Board::Board(Rect position, TextureRef texture)
         for (int j{}; j < _size; ++j) {
             auto position =
                 Rect{i * _cell_size, j * _cell_size, _cell_size, _cell_size};
-            _components.push_back(std::make_shared<Cell>(position));
+            auto coords = Coords{i, j};
+            _components.push_back(std::make_shared<Cell>(coords, _cell_size));
         }
     }
 }
@@ -105,7 +106,7 @@ void Board::move(CellRef src, CellRef dst) {
     auto moving_figure = src->figure();
     dst->set_figure(moving_figure);
     src->set_figure(nullptr);
-    moving_figure->set_position(dst->position());
+    moving_figure->set_coords(dst->coords());
 }
 
 }  // namespace checkers

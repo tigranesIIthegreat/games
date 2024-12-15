@@ -8,8 +8,8 @@ core::TextureRef Cell::_green25_texture =
 core::TextureRef Cell::_green50_texture =
     std::make_shared<core::Texture>("green50");
 
-Cell::Cell(core::Rect position, FigureRef figure)
-    : core::GameObject(position, nullptr) {
+Cell::Cell(core::Coords coords, int size, FigureRef figure)
+    : core::GameObject(core::Rect{coords[0] * size, coords[1] * size, size, size}, nullptr) {
     _components.push_back(figure);
 }
 
@@ -41,6 +41,15 @@ void Cell::select() {
 void Cell::unselect() {
     _texture = nullptr;
     _is_selected = false;
+}
+
+core::Coords Cell::coords() const {
+    return {_position[0] / _position[2], _position[1] / _position[3]};
+}
+
+void Cell::set_coords(core::Coords coords) {
+    _position[0] = coords[0] * _position[2];
+    _position[1] = coords[1] * _position[3];
 }
 
 }  // namespace checkers

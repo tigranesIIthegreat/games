@@ -6,7 +6,7 @@ namespace checkers {
 
 class Cell : public core::GameObject {
 public:
-    Cell(core::Rect position, FigureRef figure = nullptr);
+    Cell(core::Coords coords, int size, FigureRef figure = nullptr);
     FigureRef figure();
     void set_figure(FigureRef figure);
     virtual void handle_inputs() override;
@@ -15,6 +15,8 @@ public:
     void select();
     void unselect();
     bool is_selected() const;
+    core::Coords coords() const;
+    void set_coords(core::Coords cords);
 
 private:
     bool _is_selected{};

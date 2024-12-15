@@ -13,6 +13,8 @@ public:
     Color color() const;
     bool is_king() const;
     bool is_selected() const;
+    core::Coords coords() const;
+    void set_coords(core::Coords cords);
 
 public:
     virtual void handle_inputs() override;
