@@ -34,7 +34,7 @@ bool Cell::is_selected() const {
 }
 
 void Cell::select() {
-    _texture = _green25_texture;
+    _texture = _green50_texture;
     _is_selected = true;
 }
 

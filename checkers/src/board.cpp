@@ -62,23 +62,19 @@ void Board::handle_inputs() {
         if (_current_player != cell_on_focus->figure()->color()) {
             return;
         }
-        _valid_destinations = cell_on_focus->figure()->valid_destinations();
-        if (_valid_destinations.empty()) {
+        _vd = cell_on_focus->figure()->valid_destinations();
+        if (_vd.empty()) {
             return;
         }
         cell_on_focus->select();
         _selected_source = cell_on_focus;
-        for (auto& cell : _valid_destinations) {
-            cell->select();
-        }
+        std::for_each (_vd.begin(), _vd.end(), [](auto& cell) { cell->select(); });
         switch_selection_modes();
     } else {
         // the case we want to revert source selection
         if (cell_on_focus == _selected_source) {
             cell_on_focus->unselect();
-            for (auto& cell : _valid_destinations) {
-                cell->unselect();
-            }
+            std::for_each(_vd.begin(), _vd.end(), [](auto& cell) { cell->unselect(); });
             switch_selection_modes();
             return;
         }
@@ -86,13 +82,15 @@ void Board::handle_inputs() {
             return;
         }
 
+        if (std::find(_vd.begin(), _vd.end(), cell_on_focus) == _vd.end()) {
+            return;
+        }
+
         move(_selected_source, cell_on_focus);
         _selected_source->unselect();
-        for (auto& cell : _valid_destinations) {
-            cell->unselect();
-        }
+        std::for_each(_vd.begin(), _vd.end(), [](auto& cell) { cell->unselect(); });
         _selected_source = nullptr;
-        _valid_destinations.clear();
+        _vd.clear();
         switch_players();
         switch_selection_modes();
     }

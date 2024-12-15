@@ -5,8 +5,8 @@
 #include <set>
 #include "board.hpp"
 #include "color.hpp"
-#include "man.hpp"
 #include "king.hpp"
+#include "man.hpp"
 
 namespace checkers {
 
@@ -25,7 +25,7 @@ private:
 
 private:
     // std::set<CellRef> _valid_sources_of(Color player);
-    // std::set<CellRef> _valid_destinations_of(CellRef source);
+    // std::set<CellRef> _vd_of(CellRef source);
     // void _move_figure(CellRef source, CellRef destination);
 
 protected:
