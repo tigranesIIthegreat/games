@@ -25,6 +25,9 @@ public:
     static int size();
 
 private:
+    void handle_source_selection(CellRef cell_on_focus);
+    void handle_destination_selection(CellRef cell_on_focus);
+    void remove_figures_between(CellRef src, CellRef dst);
     void switch_players();
     void switch_selection_modes();
 

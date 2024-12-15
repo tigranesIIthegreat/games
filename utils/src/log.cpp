@@ -31,7 +31,7 @@ void Logger::log(LoggingLevel level, const char* format, ...) {
     va_end(args);
 #else
     (void)level;
-    (void)message;
+    (void)format;
 #endif
 }
 

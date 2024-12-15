@@ -1,8 +1,6 @@
 #include "board.hpp"
 #include <utils/log.hpp>
 
-#include <iostream>  // TODO: remove
-
 namespace checkers {
 
 Board::Board(Rect position, TextureRef texture)
@@ -24,7 +22,7 @@ Board::Board(Rect position, TextureRef texture)
 
 bool Board::is_valid_position(int x, int y) const {
     // dark squares of the board are considered to be valid
-    return y < _size && x < _size && ((x + y) % 2);
+    return 0 <= y && y < _size && 0 <= x && x < _size && ((x + y) % 2);
 }
 
 CellRef Board::at(int x, int y) {
@@ -55,45 +53,9 @@ void Board::handle_inputs() {
     if (cell_on_focus == nullptr) {
         return;
     }
-    if (_current_selection == SelectionMode::SOURCE) {
-        if (cell_on_focus->figure() == nullptr) {
-            return;
-        }
-        if (_current_player != cell_on_focus->figure()->color()) {
-            return;
-        }
-        _vd = cell_on_focus->figure()->valid_destinations();
-        if (_vd.empty()) {
-            return;
-        }
-        cell_on_focus->select();
-        _selected_source = cell_on_focus;
-        std::for_each (_vd.begin(), _vd.end(), [](auto& cell) { cell->select(); });
-        switch_selection_modes();
-    } else {
-        // the case we want to revert source selection
-        if (cell_on_focus == _selected_source) {
-            cell_on_focus->unselect();
-            std::for_each(_vd.begin(), _vd.end(), [](auto& cell) { cell->unselect(); });
-            switch_selection_modes();
-            return;
-        }
-        if (cell_on_focus->figure()) {
-            return;
-        }
-
-        if (std::find(_vd.begin(), _vd.end(), cell_on_focus) == _vd.end()) {
-            return;
-        }
-
-        move(_selected_source, cell_on_focus);
-        _selected_source->unselect();
-        std::for_each(_vd.begin(), _vd.end(), [](auto& cell) { cell->unselect(); });
-        _selected_source = nullptr;
-        _vd.clear();
-        switch_players();
-        switch_selection_modes();
-    }
+    _current_selection == SelectionMode::SOURCE
+        ? handle_source_selection(cell_on_focus)
+        : handle_destination_selection(cell_on_focus);
 }
 
 void Board::switch_players() {
@@ -113,11 +75,86 @@ void Board::switch_selection_modes() {
 
 void Board::move(CellRef src, CellRef dst) {
     // TODO: add proper error handling
-    // TODO: change arg types to Cell
     auto moving_figure = src->figure();
     dst->set_figure(moving_figure);
     src->set_figure(nullptr);
     moving_figure->set_coords(dst->coords());
+}
+
+void Board::handle_source_selection(CellRef cell_on_focus) {
+    if (cell_on_focus->figure() == nullptr) {
+        return;
+    }
+    if (_current_player != cell_on_focus->figure()->color()) {
+        return;
+    }
+    _vd = cell_on_focus->figure()->valid_destinations();
+    if (_vd.empty()) {
+        return;
+    }
+    cell_on_focus->select();
+    _selected_source = cell_on_focus;
+    std::for_each(_vd.begin(), _vd.end(), [](auto& cell) { cell->select(); });
+    switch_selection_modes();
+}
+
+void Board::handle_destination_selection(CellRef cell_on_focus) {
+    // the case we want to revert source selection
+    if (cell_on_focus == _selected_source) {
+        cell_on_focus->unselect();
+        std::for_each(_vd.begin(), _vd.end(),
+                      [](auto& cell) { cell->unselect(); });
+        switch_selection_modes();
+        return;
+    }
+    if (cell_on_focus->figure()) {
+        return;
+    }
+
+    if (std::find(_vd.begin(), _vd.end(), cell_on_focus) == _vd.end()) {
+        return;
+    }
+
+    move(_selected_source, cell_on_focus);
+    remove_figures_between(_selected_source, cell_on_focus);
+    _selected_source->unselect();
+    std::for_each(_vd.begin(), _vd.end(), [](auto& cell) { cell->unselect(); });
+    _selected_source = nullptr;
+    _vd.clear();
+    switch_players();
+    switch_selection_modes();
+}
+
+void Board::remove_figures_between(CellRef src, CellRef dst) {
+    auto src_x = src->coords()[1];
+    auto src_y = src->coords()[0];
+
+    auto dst_x = dst->coords()[1];
+    auto dst_y = dst->coords()[0];
+
+    if (std::abs(src_x - dst_x) != std::abs(src_y - dst_y)) {
+        throw std::runtime_error("bad capture");
+    }
+
+    if (std::abs(src_x - dst_x) == 1) {
+        return;
+    }
+
+    auto x_step = dst_x > src_x ? 1 : -1;
+    auto y_step = dst_y > src_y ? 1 : -1;
+
+    src_x += x_step;
+    src_y += y_step;
+
+    // dst_x -= x_step;
+    // dst_y -= y_step;
+
+    for (int x = src_x, y = src_y; x != dst_x && y != dst_y; x += x_step, y += y_step) {
+        if (at(x, y)->figure()) {
+            Logger::instance().info("removing: %d %d", x, y);
+            at(x, y)->set_figure(nullptr);
+        }
+    }
 }
 
 }  // namespace checkers

@@ -1,8 +1,6 @@
 #include "man.hpp"
 #include "board.hpp"
 
-#include <iostream>
-
 namespace checkers {
 
 Man::Man(core::Coords coords, int size, Color color, BoardRef board)
@@ -19,12 +17,10 @@ std::vector<CellRef> Man::valid_destinations() const {
     // consider up-left direction
     if (_board->is_valid_position(x + step, y - 1)) {
         if (_board->at(x + step, y - 1)->figure() == nullptr) {
-            std::cout << x + step << y - 1 << std::endl;
             result.push_back(_board->at(x + step, y - 1));
         } else if (_board->is_valid_position(x + 2 * step, y - 2) &&
                    _board->at(x + 2 * step, y - 2)->figure() == nullptr &&
                    _board->at(x + step, y - 1)->figure()->color() != _color) {
-            std::cout << x + 2 * step << y - 2 << std::endl;
             result.push_back(_board->at(x + 2 * step, y - 2));
         }
     }
@@ -32,16 +28,13 @@ std::vector<CellRef> Man::valid_destinations() const {
     // consider up-right direction
     if (_board->is_valid_position(x + step, y + 1)) {
         if (_board->at(x + step, y + 1)->figure() == nullptr) {
-            std::cout << x + step << y + 1 << std::endl;
             result.push_back(_board->at(x + step, y + 1));
         } else if (_board->is_valid_position(x + 2 * step, y + 2) &&
                    _board->at(x + 2 * step, y + 2)->figure() == nullptr &&
                    _board->at(x + step, y + 1)->figure()->color() != _color) {
-            std::cout << x + 2 * step << y + 2 << std::endl;
             result.push_back(_board->at(x + 2 * step, y + 2));
         }
     }
-    std::cout << "size : " << result.size();
     return result;
 }
 
