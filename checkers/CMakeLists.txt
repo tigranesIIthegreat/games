@@ -5,6 +5,8 @@ add_library(
     include/checkers/cell.hpp
 	include/checkers/figure.hpp
 	include/checkers/game.hpp
+    include/checkers/king.hpp
+    include/checkers/man.hpp
     include/checkers/play_state.hpp
 )
 
@@ -20,6 +22,8 @@ add_library(
     src/cell.cpp
     src/figure.cpp
     src/game.cpp
+    src/king.cpp
+    src/man.cpp
     src/play_state.cpp
 )
 
