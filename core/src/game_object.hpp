@@ -19,7 +19,7 @@ public:
     virtual void set_position(Rect position);
     virtual Rect position() const;
     bool mouse_hovers_over() const;
-    virtual void handle_inputs() = 0;
+    virtual void handle_inputs() {};
 
 protected:
     Rect _position;

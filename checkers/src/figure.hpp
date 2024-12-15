@@ -11,18 +11,11 @@ public:
     Figure(core::Coords coords, int size, Color color);
 
     Color color() const;
-    bool is_king() const;
-    bool is_selected() const;
     core::Coords coords() const;
     void set_coords(core::Coords cords);
 
-public:
-    virtual void handle_inputs() override;
-
 private:
     const Color _color;
-    bool _is_king;
-    bool _is_selected;
 
 private:
     static core::TextureRef _white_man_texture;
