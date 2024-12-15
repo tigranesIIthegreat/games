@@ -62,14 +62,23 @@ void Board::handle_inputs() {
         if (_current_player != cell_on_focus->figure()->color()) {
             return;
         }
-        // TODO: check move availability
+        _valid_destinations = cell_on_focus->figure()->valid_destinations();
+        if (_valid_destinations.empty()) {
+            return;
+        }
         cell_on_focus->select();
         _selected_source = cell_on_focus;
+        for (auto& cell : _valid_destinations) {
+            cell->select();
+        }
         switch_selection_modes();
     } else {
         // the case we want to revert source selection
         if (cell_on_focus == _selected_source) {
             cell_on_focus->unselect();
+            for (auto& cell : _valid_destinations) {
+                cell->unselect();
+            }
             switch_selection_modes();
             return;
         }
@@ -79,7 +88,11 @@ void Board::handle_inputs() {
 
         move(_selected_source, cell_on_focus);
         _selected_source->unselect();
+        for (auto& cell : _valid_destinations) {
+            cell->unselect();
+        }
         _selected_source = nullptr;
+        _valid_destinations.clear();
         switch_players();
         switch_selection_modes();
     }

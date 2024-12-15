@@ -9,7 +9,7 @@ core::TextureRef Cell::_green50_texture =
     std::make_shared<core::Texture>("green50");
 
 Cell::Cell(core::Coords coords, int size, FigureRef figure)
-    : core::GameObject(core::Rect{coords[0] * size, coords[1] * size, size, size}, nullptr) {
+    : core::GameObject(core::Rect{coords[0] * size, coords[1] * size, size, size}) {
     _components.push_back(figure);
 }
 
@@ -34,7 +34,7 @@ bool Cell::is_selected() const {
 }
 
 void Cell::select() {
-    _texture = _green50_texture;
+    _texture = _green25_texture;
     _is_selected = true;
 }
 

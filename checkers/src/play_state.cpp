@@ -17,10 +17,10 @@ PlayState::PlayState() {
     auto black_man_texture = std::make_shared<Texture>("man_black");
     Rect position{0, 0, cell_size, cell_size};
     for (int i{}; i < _figure_count / 2; ++i) {
-        _figures[Color::WHITE].insert(std::make_shared<Figure>(
-            core::Coords{0, 0}, cell_size, Color::WHITE));
-        _figures[Color::BLACK].insert(std::make_shared<Figure>(
-            core::Coords{0, 0}, cell_size, Color::BLACK));
+        _figures[Color::WHITE].insert(std::make_shared<Man>(
+            core::Coords{0, 0}, cell_size, Color::WHITE, board));
+        _figures[Color::BLACK].insert(std::make_shared<Man>(
+            core::Coords{0, 0}, cell_size, Color::BLACK, board));
     }
     _fill_board_with_figures();
     _current_player = Color::WHITE;

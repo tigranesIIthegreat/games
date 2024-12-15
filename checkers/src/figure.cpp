@@ -2,22 +2,10 @@
 
 namespace checkers {
 
-core::TextureRef Figure::_white_man_texture =
-    std::make_shared<core::Texture>("man_white");
-
-core::TextureRef Figure::_black_man_texture =
-    std::make_shared<core::Texture>("man_black");
-
-core::TextureRef Figure::_white_king_texture =
-    std::make_shared<core::Texture>("king_white");
-
-core::TextureRef Figure::_black_king_texture =
-    std::make_shared<core::Texture>("king_black");
-
-Figure::Figure(core::Coords coords, int size, Color color)
-    : GameObject{core::Rect{coords[0] * size, coords[1] * size, size, size}, nullptr}
-    , _color{color} {
-    _texture = (color == Color::WHITE) ? _white_man_texture : _black_man_texture;
+Figure::Figure(core::Coords coords, int size, Color color, BoardRef board)
+    : GameObject{core::Rect{coords[0] * size, coords[1] * size, size, size}}
+    , _color{color}
+    , _board{board} {
 }
 
 Color Figure::color() const {

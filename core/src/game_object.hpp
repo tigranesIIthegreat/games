@@ -11,7 +11,7 @@ namespace core {
 class GameObject {
 public:
     GameObject() = default;  // TODO: should be removed
-    GameObject(Rect position, TextureRef texture);
+    GameObject(Rect position, TextureRef texture = nullptr);
     virtual ~GameObject() = default;
 
 public:

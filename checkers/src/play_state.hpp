@@ -5,7 +5,8 @@
 #include <set>
 #include "board.hpp"
 #include "color.hpp"
-#include "figure.hpp"
+#include "man.hpp"
+#include "king.hpp"
 
 namespace checkers {
 

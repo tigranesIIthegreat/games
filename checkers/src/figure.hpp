@@ -6,22 +6,24 @@
 
 namespace checkers {
 
+class Board;
+using BoardRef = std::shared_ptr<Board>;
+
+class Cell;
+using CellRef = std::shared_ptr<Cell>;
+
 class Figure : public core::GameObject {
 public:
-    Figure(core::Coords coords, int size, Color color);
+    Figure(core::Coords coords, int size, Color color, BoardRef board);
 
     Color color() const;
     core::Coords coords() const;
     void set_coords(core::Coords cords);
+    virtual std::vector<CellRef> valid_destinations() const = 0;
 
-private:
+protected:
     const Color _color;
-
-private:
-    static core::TextureRef _white_man_texture;
-    static core::TextureRef _black_man_texture;
-    static core::TextureRef _white_king_texture;
-    static core::TextureRef _black_king_texture;
+    BoardRef _board;
 };
 
 using FigureRef = std::shared_ptr<Figure>;
