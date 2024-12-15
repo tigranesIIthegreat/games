@@ -1,4 +1,3 @@
 #! /usr/bin/env bash
 
-scripts/build.sh
-build/games
+scripts/build.sh && build/games

@@ -12,6 +12,8 @@ public:
     virtual void handle_inputs() override;
 
 public:
+    void select();
+    void unselect();
     bool can_be_selected() const;
     void set_can_be_selected(bool);
     bool is_selected() const;

@@ -1,16 +1,21 @@
 #include "board.hpp"
+#include <utils/log.hpp>
+
+#include <iostream> // TODO: remove
 
 namespace checkers {
 
 Board::Board(Rect position, TextureRef texture)
-    : GameObject{position, texture} {
+    : GameObject{position, texture}
+    , _current_player{Color::WHITE}
+    , _current_selection{SelectionMode::SOURCE} {
     decltype(auto) window = Window::instance();
-    float cell_size = std::min(window.width(), window.height()) / _size;
+    _cell_size = std::min(window.width(), window.height()) / _size;
     _components.reserve(_size * _size);
     for (size_t i{}; i < _size; ++i) {
         for (size_t j{}; j < _size; ++j) {
             auto position =
-                Rect{i * cell_size, j * cell_size, cell_size, cell_size};
+                Rect{i * _cell_size, j * _cell_size, _cell_size, _cell_size};
             _components.push_back(std::make_shared<Cell>(position));
         }
     }
@@ -31,11 +36,73 @@ size_t Board::size() {
 }
 
 void Board::handle_inputs() {
+    auto& input_manager = core::input::InputManager::instance();
+    bool mouse_clicked =
+        input_manager.is_clicked(core::input::MouseButton::LEFT);
+    if (mouse_clicked == false) {
+        return;
+    }
+    CellRef cell_on_focus{};
     for (size_t i{}; i < _size; ++i) {
         for (size_t j{}; j < _size; ++j) {
-            this->at(i, j)->handle_inputs();
+            auto current_cell = this->at(i, j);
+            if (current_cell->mouse_hovers_over()) {
+                cell_on_focus = current_cell;
+            }
         }
     }
+    if (cell_on_focus == nullptr) {
+        return;
+    }
+    if (_current_selection == SelectionMode::SOURCE) {
+        if (cell_on_focus->figure() == nullptr) {
+            return;
+        }
+        if (_current_player != cell_on_focus->figure()->color()) {
+            return;
+        }
+        // TODO: check move availability
+        cell_on_focus->select();
+        _selected_source = cell_on_focus;
+        switch_selection_modes();
+    } else {
+        // the case we want to revert source selection
+        if (cell_on_focus == _selected_source) {
+            cell_on_focus->unselect();
+            switch_selection_modes();
+            return;
+        }
+        if (cell_on_focus->figure()) {
+            return;
+        }
+
+        move(_selected_source, cell_on_focus);
+        _selected_source->unselect();
+        _selected_source = nullptr;
+        switch_players();
+        switch_selection_modes();
+    }
+}
+
+void Board::switch_players() {
+    int current = static_cast<int>(_current_player);
+    Logger::instance().info("switching players : %d -> %d", current, 1 - current);
+    _current_player = static_cast<Color>(1 - current);
+}
+
+void Board::switch_selection_modes() {
+    int current = static_cast<int>(_current_selection);
+    Logger::instance().info("switching selection modes : %d -> %d", current, 1 - current);
+    _current_selection = static_cast<SelectionMode>(1 - static_cast<int>(_current_selection));
+}
+
+void Board::move(CellRef src, CellRef dst) {
+    // TODO: add proper error handling
+    // TODO: change arg types to Cell
+    auto moving_figure = src->figure();
+    dst->set_figure(moving_figure);
+    src->set_figure(nullptr);
+    moving_figure->set_coords(dst->coords());
 }
 
 }  // namespace checkers

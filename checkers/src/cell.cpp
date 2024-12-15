@@ -19,18 +19,14 @@ FigureRef Cell::figure() {
 
 void Cell::set_figure(FigureRef figure) {
     _components[0] = figure;
+    if (figure == nullptr) {
+        return;
+    }
     figure->set_coords(core::Point{_position[0], _position[1]});
 }
 
 void Cell::handle_inputs() {
-    // TODO: add proper input handling
-    auto& input_manager = core::input::InputManager::instance();
-    bool mouse_clicked =
-        input_manager.is_clicked(core::input::MouseButton::LEFT);
-    bool a_is_pressed = input_manager.is_pressed(core::input::Key::A);
-    if (mouse_hovers_over() && (mouse_clicked || a_is_pressed)) {
-        _texture = _texture ? nullptr : _green50_texture;
-    }
+    // TODO: consider some input handling
 }
 
 bool Cell::can_be_selected() const {
@@ -47,6 +43,16 @@ bool Cell::is_selected() const {
 
 void Cell::set_selected(bool selected) {
     _is_selected = selected;
+}
+
+void Cell::select() {
+    _texture = _green50_texture;
+    _is_selected = true;
+}
+
+void Cell::unselect() {
+    _texture = nullptr;
+    _is_selected = false;
 }
 
 }  // namespace checkers

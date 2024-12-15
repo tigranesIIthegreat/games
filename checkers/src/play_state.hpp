@@ -9,8 +9,6 @@
 
 namespace checkers {
 
-enum class SelectionMode { SOURCE = 0, DESTINATION = 1 };
-
 class PlayState : public core::GameState {
 public:
     PlayState();
