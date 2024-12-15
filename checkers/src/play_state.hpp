@@ -1,11 +1,11 @@
 #pragma once
 
-#include "board.hpp"
-#include "color.hpp"
-#include "figure.hpp"
 #include <core/game_state.hpp>
 #include <core/window.hpp>
 #include <set>
+#include "board.hpp"
+#include "color.hpp"
+#include "figure.hpp"
 
 namespace checkers {
 
@@ -23,7 +23,6 @@ private:
     void _switch_players();
 
 private:
-
     // std::set<CellRef> _valid_sources_of(Color player);
     // std::set<CellRef> _valid_destinations_of(CellRef source);
     // void _move_figure(CellRef source, CellRef destination);
@@ -32,7 +31,7 @@ protected:
     virtual void handle_inputs() override;
 
 private:
-    static constexpr size_t _figure_count = 24;
+    static constexpr int _figure_count = 24;
 
 private:
     std::map<Color, std::set<FigureRef>> _figures;

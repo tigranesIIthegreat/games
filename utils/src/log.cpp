@@ -25,8 +25,8 @@ void Logger::log(LoggingLevel level, const char* format, ...) {
         "\e[1;31mERR: "   // ERROR
     };
 
-    std::cout << intro[static_cast<size_t>(level)] << buffer 
-              << default_setting << std::endl;
+    std::cout << intro[static_cast<int>(level)] << buffer << default_setting
+              << std::endl;
 
     va_end(args);
 #else
@@ -40,7 +40,10 @@ void Logger::log_time() {
     std::time_t now_c = std::chrono::system_clock::to_time_t(now);
     auto localTime = *std::localtime(&now_c);
     auto duration = now.time_since_epoch();
-    auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() % 1000;
+    auto millis =
+        std::chrono::duration_cast<std::chrono::milliseconds>(duration)
+            .count() %
+        1000;
 
     std::cout << std::put_time(&localTime, "[%H:%M:%S") << "."
               << std::setfill('0') << std::setw(3) << millis << "] ";

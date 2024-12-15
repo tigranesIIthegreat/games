@@ -6,7 +6,7 @@
 
 namespace core {
 
-size_t Window::_instance_count = 0;
+int Window::_instance_count = 0;
 
 Window& Window::instance() {
     static auto intance = Window("checkers", 512, 512);
@@ -19,7 +19,8 @@ Window::Window(const std::string& title, int width, int height)
         _initialize_system();
     set_sdl_window();
     set_sdl_renderer();
-    Logger::instance().info("Window created: %s (%d, %d)", title.data(), width, height);
+    Logger::instance().info("Window created: %s (%d, %d)", title.data(), width,
+                            height);
 }
 
 Window::~Window() {

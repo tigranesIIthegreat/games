@@ -17,11 +17,11 @@ private:
     float _frame_width;
     float _frame_height;
     SDL_Texture* _sdl_texture;
-    size_t _current_row;
-    size_t _current_col;
-    size_t _animation_speed;
-    size_t _row_count;
-    size_t _col_count;
+    int _current_row;
+    int _current_col;
+    int _animation_speed;
+    int _row_count;
+    int _col_count;
 };
 
 using TextureRef = std::shared_ptr<Texture>;
@@ -33,7 +33,7 @@ using TextureRef = std::shared_ptr<Texture>;
 
 // private:
 //     std::map<std::string, TextureRef> _textures;
-//     static size_t _instance_count;
+//     static int _instance_count;
 // };
 
 }  // namespace core

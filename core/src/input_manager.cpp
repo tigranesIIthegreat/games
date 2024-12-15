@@ -27,7 +27,7 @@ bool InputManager::is_down(Key key) const {
 }
 
 bool InputManager::is_down(MouseButton button) const {
-    return _current_mouse_state[static_cast<size_t>(button)];
+    return _current_mouse_state[static_cast<int>(button)];
 }
 
 bool InputManager::is_pressed(Key key) const {
@@ -36,8 +36,8 @@ bool InputManager::is_pressed(Key key) const {
 }
 
 bool InputManager::is_clicked(MouseButton button) const {
-    return !_previous_mouse_state[static_cast<size_t>(button)] &&
-           _current_mouse_state[static_cast<size_t>(button)];
+    return !_previous_mouse_state[static_cast<int>(button)] &&
+           _current_mouse_state[static_cast<int>(button)];
 }
 
 Point InputManager::mouse_position() const {
@@ -61,7 +61,9 @@ void InputManager::_update_mouse_state() {
     } else if (_event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
         _current_mouse_state[_event.button.button - 1] = false;
     } else if (_event.type == SDL_EVENT_MOUSE_MOTION) {
-        _mouse_position = {_event.motion.x, _event.motion.y};
+        int x_coord = static_cast<int>(_event.motion.x);
+        int y_coord = static_cast<int>(_event.motion.y);
+        _mouse_position = {x_coord, y_coord};
     }
 }
 

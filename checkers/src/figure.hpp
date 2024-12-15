@@ -8,12 +8,11 @@ namespace checkers {
 
 class Figure : public core::GameObject {
 public:
-    Figure(core::Rect position, Color color);
+    Figure(core::Coords coords, int size, Color color);
 
     Color color() const;
     bool is_king() const;
     bool is_selected() const;
-    void set_selected(bool selected);
 
 public:
     virtual void handle_inputs() override;

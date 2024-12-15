@@ -29,7 +29,7 @@ protected:
 protected:
     std::stack<GameStateRef> _states;
     bool _running;
-    const size_t _frame_delay;
+    const int _frame_delay;
 };
 
 }  // namespace core

@@ -7,7 +7,7 @@ using namespace core;
 PlayState::PlayState() {
     decltype(auto) window = Window::instance();
     auto board_size =
-        static_cast<float>(std::min(window.width(), window.height()));
+        static_cast<int>(std::min(window.width(), window.height()));
     auto board_texture = std::make_shared<Texture>("checkerboard");
     auto board = std::make_shared<Board>(Rect{0, 0, board_size, board_size},
                                          board_texture);
@@ -16,11 +16,11 @@ PlayState::PlayState() {
     auto white_man_texture = std::make_shared<Texture>("man_white");
     auto black_man_texture = std::make_shared<Texture>("man_black");
     Rect position{0, 0, cell_size, cell_size};
-    for (size_t i{}; i < _figure_count / 2; ++i) {
-        _figures[Color::WHITE].insert(
-            std::make_shared<Figure>(position, Color::WHITE));
-        _figures[Color::BLACK].insert(
-            std::make_shared<Figure>(position, Color::BLACK));
+    for (int i{}; i < _figure_count / 2; ++i) {
+        _figures[Color::WHITE].insert(std::make_shared<Figure>(
+            core::Coords{0, 0}, cell_size, Color::WHITE));
+        _figures[Color::BLACK].insert(std::make_shared<Figure>(
+            core::Coords{0, 0}, cell_size, Color::BLACK));
     }
     _fill_board_with_figures();
     _current_player = Color::WHITE;
@@ -31,7 +31,7 @@ void PlayState::_fill_board_with_figures() {
     auto _white_iter = _figures[Color::WHITE].begin();
     auto _black_iter = _figures[Color::BLACK].begin();
 
-    for (size_t i{}; i < _figure_count / 2; ++i, ++_white_iter, ++_black_iter) {
+    for (int i{}; i < _figure_count / 2; ++i, ++_white_iter, ++_black_iter) {
         auto size = board->size();
 
         // set a white figure on the top

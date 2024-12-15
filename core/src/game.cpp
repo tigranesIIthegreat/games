@@ -9,8 +9,8 @@ Game::Game(int fps) : _running{false}, _frame_delay(1000.0f / fps) {}
 
 void Game::run() {
     _running = true;
-    size_t frame_start{};
-    size_t frame_duration{};
+    int frame_start{};
+    int frame_duration{};
 
     while (_running) {
         frame_start = SDL_GetTicks();

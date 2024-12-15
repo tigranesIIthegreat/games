@@ -14,11 +14,11 @@ core::TextureRef Figure::_white_king_texture =
 core::TextureRef Figure::_black_king_texture =
     std::make_shared<core::Texture>("king_black");
 
-Figure::Figure(core::Rect position, Color color)
-    : GameObject{position, nullptr},
-      _color{color},
-      _is_king{false},
-      _is_selected{false} {
+Figure::Figure(core::Coords coords, int size, Color color)
+    : GameObject{core::Rect{coords[0] * size, coords[1] * size, size, size}, nullptr}
+    , _color{color}
+    , _is_king{false}
+    , _is_selected{false} {
     if (color == Color::WHITE) {
         _texture = _white_man_texture;
     } else {
@@ -35,10 +35,6 @@ bool Figure::is_king() const {
 }
 bool Figure::is_selected() const {
     return _is_selected;
-}
-
-void Figure::set_selected(bool selected) {
-    _is_selected = selected;
 }
 
 void Figure::handle_inputs() {

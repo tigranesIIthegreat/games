@@ -34,7 +34,7 @@ private:
     SDL_Renderer* _sdl_renderer{};
 
 private:
-    static size_t _instance_count;
+    static int _instance_count;
 };
 
 using WindowRef = std::shared_ptr<Window>;

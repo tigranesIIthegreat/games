@@ -20,22 +20,22 @@ public:
 
 public:
     void move(CellRef src, CellRef dst);
-    bool is_valid_position(size_t x, size_t y) const;
-    CellRef at(size_t x, size_t y);
-    static size_t size();
+    bool is_valid_position(int x, int y) const;
+    CellRef at(int x, int y);
+    static int size();
 
 private:
     void switch_players();
     void switch_selection_modes();
 
 private:
-    float _cell_size{};
+    int _cell_size{};
     Color _current_player;
     SelectionMode _current_selection;
     CellRef _selected_source{};
 
 private:
-    static constexpr size_t _size = 8;
+    static constexpr int _size = 8;
 };
 
 using BoardRef = std::shared_ptr<Board>;
