@@ -1,5 +1,6 @@
 #include "board.hpp"
 #include <utils/log.hpp>
+#include "king.hpp"
 
 namespace checkers {
 
@@ -117,6 +118,16 @@ void Board::handle_destination_selection(CellRef cell_on_focus) {
 
     move(_selected_source, cell_on_focus);
     remove_figures_between(_selected_source, cell_on_focus);
+    Logger::instance().info("%d : %d ", cell_on_focus->coords()[0], cell_on_focus->coords()[1]);
+    // TODO: use enable_shared_from_this
+    if (_current_player == Color::WHITE && cell_on_focus->coords()[1] == _size - 1) {
+        cell_on_focus->set_figure(std::make_shared<King>(
+            cell_on_focus->coords(), _cell_size, Color::WHITE, std::shared_ptr<Board>(this)));
+    }
+    if (_current_player == Color::BLACK && cell_on_focus->coords()[1] == 0) {
+        cell_on_focus->set_figure(std::make_shared<King>(
+            cell_on_focus->coords(), _cell_size, Color::BLACK, std::shared_ptr<Board>(this)));
+    }
     _selected_source->unselect();
     std::for_each(_vd.begin(), _vd.end(), [](auto& cell) { cell->unselect(); });
     _selected_source = nullptr;
