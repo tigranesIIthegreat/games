@@ -14,6 +14,8 @@ std::vector<CellRef> Man::valid_destinations() const {
     int x = _position[1] / _position[3];
     int y = _position[0] / _position[2];
 
+    // TODO: use array to avoid code duplication
+
     // consider up-left direction
     if (_board->is_valid_position(x + step, y - 1)) {
         if (_board->at(x + step, y - 1)->figure() == nullptr) {
