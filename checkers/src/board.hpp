@@ -13,7 +13,7 @@ using namespace core;
 
 enum class SelectionMode { SOURCE = 0, DESTINATION = 1 };
 
-class Board : public GameObject {
+class Board : public GameObject, public std::enable_shared_from_this<Board> {
 public:
     Board(Rect position, TextureRef texture);
     virtual void handle_inputs() override;
