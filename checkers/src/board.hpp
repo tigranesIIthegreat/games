@@ -36,7 +36,7 @@ private:
     Color _current_player;
     SelectionMode _current_selection;
     CellRef _selected_source{};
-    std::vector<CellRef> _vd{};
+    std::vector<CellRef> _valid_destinations{};
 
 private:
     static constexpr int _size = 8;

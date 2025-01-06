@@ -89,13 +89,14 @@ void Board::handle_source_selection(CellRef cell_on_focus) {
     if (_current_player != cell_on_focus->figure()->color()) {
         return;
     }
-    _vd = cell_on_focus->figure()->valid_destinations();
-    if (_vd.empty()) {
+    _valid_destinations = cell_on_focus->figure()->valid_destinations();
+    if (_valid_destinations.empty()) {
         return;
     }
     cell_on_focus->select();
     _selected_source = cell_on_focus;
-    std::for_each(_vd.begin(), _vd.end(), [](auto& cell) { cell->select(); });
+    std::for_each(_valid_destinations.begin(), _valid_destinations.end(),
+                  [](auto& cell) { cell->select(); });
     switch_selection_modes();
 }
 
@@ -103,7 +104,7 @@ void Board::handle_destination_selection(CellRef cell_on_focus) {
     // the case we want to revert source selection
     if (cell_on_focus == _selected_source) {
         cell_on_focus->unselect();
-        std::for_each(_vd.begin(), _vd.end(),
+        std::for_each(_valid_destinations.begin(), _valid_destinations.end(),
                       [](auto& cell) { cell->unselect(); });
         switch_selection_modes();
         return;
@@ -112,24 +113,29 @@ void Board::handle_destination_selection(CellRef cell_on_focus) {
         return;
     }
 
-    if (std::find(_vd.begin(), _vd.end(), cell_on_focus) == _vd.end()) {
+    if (std::find(_valid_destinations.begin(), _valid_destinations.end(),
+                  cell_on_focus) == _valid_destinations.end()) {
         return;
     }
 
     move(_selected_source, cell_on_focus);
     remove_figures_between(_selected_source, cell_on_focus);
-    if (_current_player == Color::WHITE && cell_on_focus->coords()[1] == _size - 1) {
-        cell_on_focus->set_figure(std::make_shared<King>(
-            cell_on_focus->coords(), _cell_size, Color::WHITE, shared_from_this()));
+    if (_current_player == Color::WHITE &&
+        cell_on_focus->coords()[1] == _size - 1) {
+        cell_on_focus->set_figure(
+            std::make_shared<King>(cell_on_focus->coords(), _cell_size,
+                                   Color::WHITE, shared_from_this()));
     }
     if (_current_player == Color::BLACK && cell_on_focus->coords()[1] == 0) {
-        cell_on_focus->set_figure(std::make_shared<King>(
-            cell_on_focus->coords(), _cell_size, Color::BLACK, shared_from_this()));
+        cell_on_focus->set_figure(
+            std::make_shared<King>(cell_on_focus->coords(), _cell_size,
+                                   Color::BLACK, shared_from_this()));
     }
     _selected_source->unselect();
-    std::for_each(_vd.begin(), _vd.end(), [](auto& cell) { cell->unselect(); });
+    std::for_each(_valid_destinations.begin(), _valid_destinations.end(),
+                  [](auto& cell) { cell->unselect(); });
     _selected_source = nullptr;
-    _vd.clear();
+    _valid_destinations.clear();
     switch_players();
     switch_selection_modes();
 }
@@ -158,7 +164,8 @@ void Board::remove_figures_between(CellRef src, CellRef dst) {
     // dst_x -= x_step;
     // dst_y -= y_step;
 
-    for (int x = src_x, y = src_y; x != dst_x && y != dst_y; x += x_step, y += y_step) {
+    for (int x = src_x, y = src_y; x != dst_x && y != dst_y;
+         x += x_step, y += y_step) {
         if (at(x, y)->figure()) {
             Logger::instance().info("removing: %d %d", x, y);
             at(x, y)->set_figure(nullptr);
