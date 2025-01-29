@@ -22,21 +22,11 @@ public:
     void move(CellRef src, CellRef dst);
     bool is_valid_position(int x, int y) const;
     CellRef at(int x, int y);
+    int cell_size() const;
     static int size();
 
 private:
-    void handle_source_selection(CellRef cell_on_focus);
-    void handle_destination_selection(CellRef cell_on_focus);
-    void remove_figures_between(CellRef src, CellRef dst);
-    void switch_players();
-    void switch_selection_modes();
-
-private:
     int _cell_size{};
-    Color _current_player;
-    SelectionMode _current_selection;
-    CellRef _selected_source{};
-    std::vector<CellRef> _valid_destinations{};
 
 private:
     static constexpr int _size = 8;

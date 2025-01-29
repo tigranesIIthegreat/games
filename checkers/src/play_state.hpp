@@ -23,6 +23,13 @@ private:
     void _fill_board_with_figures();
     void _switch_players();
 
+private:
+    void handle_source_selection(CellRef cell_on_focus);
+    void handle_destination_selection(CellRef cell_on_focus);
+    void remove_figures_between(CellRef src, CellRef dst);
+    void switch_players();
+    void switch_selection_modes();
+
 protected:
     virtual void handle_inputs() override;
 
@@ -32,6 +39,9 @@ private:
 private:
     std::map<Color, std::set<FigureRef>> _figures;
     Color _current_player;
+    SelectionMode _current_selection;
+    CellRef _selected_source{};
+    std::vector<CellRef> _valid_destinations{};
 };
 
 }  // namespace checkers

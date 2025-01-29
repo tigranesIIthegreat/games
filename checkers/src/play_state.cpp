@@ -1,10 +1,13 @@
 #include "play_state.hpp"
+#include <utils/log.hpp>
 
 namespace checkers {
 
 using namespace core;
 
-PlayState::PlayState() {
+PlayState::PlayState()
+    : _current_player{Color::WHITE}
+    , _current_selection{SelectionMode::SOURCE} {
     decltype(auto) window = Window::instance();
     auto board_size =
         static_cast<int>(std::min(window.width(), window.height()));
@@ -76,6 +79,133 @@ std::string PlayState::name() {
 void PlayState::handle_inputs() {
     auto board = std::static_pointer_cast<Board>(_components[0]);
     board->handle_inputs();
+    auto& input_manager = core::input::InputManager::instance();
+    bool mouse_clicked = input_manager.is_clicked(core::input::MouseButton::LEFT);
+    if (mouse_clicked == false) {
+        return;
+    }
+    CellRef cell_on_focus{};
+    for (int i{}; i < board->size(); ++i) {
+        for (int j{}; j < board->size(); ++j) {
+            auto current_cell = board->at(i, j);
+            if (current_cell->mouse_hovers_over()) {
+                cell_on_focus = current_cell;
+            }
+        }
+    }
+    if (cell_on_focus == nullptr) {
+        return;
+    }
+    _current_selection == SelectionMode::SOURCE
+        ? handle_source_selection(cell_on_focus)
+        : handle_destination_selection(cell_on_focus);
+}
+
+void PlayState::handle_source_selection(CellRef cell_on_focus) {
+    if (cell_on_focus->figure() == nullptr) {
+        return;
+    }
+    if (_current_player != cell_on_focus->figure()->color()) {
+        return;
+    }
+    _valid_destinations = cell_on_focus->figure()->valid_destinations();
+    if (_valid_destinations.empty()) {
+        return;
+    }
+    cell_on_focus->select();
+    _selected_source = cell_on_focus;
+    std::for_each(_valid_destinations.begin(), _valid_destinations.end(),
+                  [](auto& cell) { cell->select(); });
+    switch_selection_modes();
+}
+
+void PlayState::switch_players() {
+    int current = static_cast<int>(_current_player);
+    Logger::instance().info("switching players : %d -> %d", current,
+                            1 - current);
+    _current_player = static_cast<Color>(1 - current);
+}
+
+void PlayState::switch_selection_modes() {
+    int current = static_cast<int>(_current_selection);
+    Logger::instance().info("switching selection modes : %d -> %d", current,
+                            1 - current);
+    _current_selection =
+        static_cast<SelectionMode>(1 - static_cast<int>(_current_selection));
+}
+
+void PlayState::remove_figures_between(CellRef src, CellRef dst) {
+    auto src_x = src->coords()[1];
+    auto src_y = src->coords()[0];
+
+    auto dst_x = dst->coords()[1];
+    auto dst_y = dst->coords()[0];
+
+    if (std::abs(src_x - dst_x) != std::abs(src_y - dst_y)) {
+        throw std::runtime_error("bad capture");
+    }
+
+    if (std::abs(src_x - dst_x) == 1) {
+        return;
+    }
+
+    auto x_step = dst_x > src_x ? 1 : -1;
+    auto y_step = dst_y > src_y ? 1 : -1;
+
+    src_x += x_step;
+    src_y += y_step;
+
+    // dst_x -= x_step;
+    // dst_y -= y_step;
+    auto board = std::static_pointer_cast<Board>(_components[0]);
+    for (int x = src_x, y = src_y; x != dst_x && y != dst_y;
+         x += x_step, y += y_step) {
+        if (board->at(x, y)->figure()) {
+            Logger::instance().info("removing: %d %d", x, y);
+            board->at(x, y)->set_figure(nullptr);
+        }
+    }
+}
+
+void PlayState::handle_destination_selection(CellRef cell_on_focus) {
+    auto board = std::static_pointer_cast<Board>(_components[0]);
+    // the case we want to revert source selection
+    if (cell_on_focus == _selected_source) {
+        cell_on_focus->unselect();
+        std::for_each(_valid_destinations.begin(), _valid_destinations.end(),
+                      [](auto& cell) { cell->unselect(); });
+        switch_selection_modes();
+        return;
+    }
+    if (cell_on_focus->figure()) {
+        return;
+    }
+
+    if (std::find(_valid_destinations.begin(), _valid_destinations.end(),
+                  cell_on_focus) == _valid_destinations.end()) {
+        return;
+    }
+
+    board->move(_selected_source, cell_on_focus);
+    remove_figures_between(_selected_source, cell_on_focus);
+    if (_current_player == Color::WHITE &&
+        cell_on_focus->coords()[1] == board->size() - 1) {
+        cell_on_focus->set_figure(
+            std::make_shared<King>(cell_on_focus->coords(), board->cell_size(),
+                                   Color::WHITE, board));
+    }
+    if (_current_player == Color::BLACK && cell_on_focus->coords()[1] == 0) {
+        cell_on_focus->set_figure(
+            std::make_shared<King>(cell_on_focus->coords(), board->cell_size(),
+                                   Color::BLACK, board));
+    }
+    _selected_source->unselect();
+    std::for_each(_valid_destinations.begin(), _valid_destinations.end(),
+                  [](auto& cell) { cell->unselect(); });
+    _selected_source = nullptr;
+    _valid_destinations.clear();
+    switch_players();
+    switch_selection_modes();
 }
 
 }  // namespace checkers
