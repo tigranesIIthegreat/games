@@ -1,7 +1,7 @@
-#include "game.hpp"
+#include <core/game.hpp>
 
+#include <core/texture.hpp>
 #include <utils/vec.hpp>
-#include "texture.hpp"
 
 namespace core {
 

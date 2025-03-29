@@ -1,4 +1,4 @@
-#include "game_object.hpp"
+#include <core/game_object.hpp>
 
 namespace core {
 

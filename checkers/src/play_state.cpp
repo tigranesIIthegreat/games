@@ -1,4 +1,5 @@
-#include "play_state.hpp"
+#include <checkers/play_state.hpp>
+
 #include <utils/log.hpp>
 
 namespace checkers {

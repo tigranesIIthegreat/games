@@ -1,4 +1,4 @@
-#include "game.hpp"
+#include <checkers/game.hpp>
 
 namespace checkers {
 

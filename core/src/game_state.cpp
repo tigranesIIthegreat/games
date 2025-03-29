@@ -1,4 +1,4 @@
-#include "game_state.hpp"
+#include <core/game_state.hpp>
 
 namespace core {
 

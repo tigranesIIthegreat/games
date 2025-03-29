@@ -1,4 +1,4 @@
-#include "input_manager.hpp"
+#include <core/input_manager.hpp>
 
 #include <algorithm>
 namespace core::input {

@@ -1,5 +1,6 @@
-#include "man.hpp"
-#include "board.hpp"
+#include <checkers/man.hpp>
+
+#include <checkers/board.hpp>
 
 namespace checkers {
 

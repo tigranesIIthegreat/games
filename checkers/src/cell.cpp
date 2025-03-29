@@ -1,4 +1,4 @@
-#include "cell.hpp"
+#include <checkers/cell.hpp>
 
 namespace checkers {
 

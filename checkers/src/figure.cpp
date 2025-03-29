@@ -1,4 +1,4 @@
-#include "figure.hpp"
+#include <checkers/figure.hpp>
 
 namespace checkers {
 
