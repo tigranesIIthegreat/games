@@ -3,10 +3,10 @@
 namespace checkers {
 
 core::TextureRef Cell::_green25_texture =
-    std::make_shared<core::Texture>("green25");
+    core::TextureFactory::instance().create("green25");
 
 core::TextureRef Cell::_green50_texture =
-    std::make_shared<core::Texture>("green50");
+    core::TextureFactory::instance().create("green50");
 
 Cell::Cell(core::Coords coords, int size, FigureRef figure)
     : core::GameObject(core::Rect{coords[0] * size, coords[1] * size, size, size}) {

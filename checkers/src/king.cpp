@@ -64,9 +64,9 @@ std::vector<CellRef> King::valid_destinations() const {
 }
 
 core::TextureRef King::_white_king_texture =
-    std::make_shared<core::Texture>("king_white");
+    core::TextureFactory::instance().create("king_white");
 
 core::TextureRef King::_black_king_texture =
-    std::make_shared<core::Texture>("king_black");
+    core::TextureFactory::instance().create("king_black");
 
 }  // namespace checkers

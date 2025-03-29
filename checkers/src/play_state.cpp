@@ -12,13 +12,12 @@ PlayState::PlayState()
     decltype(auto) window = Window::instance();
     auto board_size =
         static_cast<int>(std::min(window.width(), window.height()));
-    auto board_texture = std::make_shared<Texture>("checkerboard");
+    auto board_texture = TextureFactory::instance().create("checkerboard");
     auto board = std::make_shared<Board>(Rect{0, 0, board_size, board_size},
                                          board_texture);
     _components.push_back(board);
     auto cell_size = board_size / board->size();
-    auto white_man_texture = std::make_shared<Texture>("man_white");
-    auto black_man_texture = std::make_shared<Texture>("man_black");
+
     Rect position{0, 0, cell_size, cell_size};
     for (int i{}; i < _figure_count / 2; ++i) {
         _figures[Color::WHITE].insert(std::make_shared<Man>(

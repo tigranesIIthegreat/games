@@ -42,9 +42,9 @@ std::vector<CellRef> Man::valid_destinations() const {
 }
 
 core::TextureRef Man::_white_man_texture =
-    std::make_shared<core::Texture>("man_white");
+    core::TextureFactory::instance().create("man_white");
 
 core::TextureRef Man::_black_man_texture =
-    std::make_shared<core::Texture>("man_black");
+    core::TextureFactory::instance().create("man_black");
 
 } // namespace checkers
