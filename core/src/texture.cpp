@@ -7,18 +7,20 @@
 
 namespace core {
 
-TextureResource::TextureResource(const std::string& asset_name) : _asset_name{asset_name} {
+TextureResource::TextureResource(const std::string& asset_name)
+    : _asset_name{asset_name} {
     static auto all_assets = available_assets();
     auto asset = all_assets[_asset_name];
     auto asset_path = "assets/" + std::string(asset["path"]);
     _frame_width = asset["frame_size"]["width"];
     _frame_height = asset["frame_size"]["height"];
-    _sdl_texture = IMG_LoadTexture(Window::instance().sdl_renderer(), asset_path.data());
+    _sdl_texture =
+        IMG_LoadTexture(Window::instance().sdl_renderer(), asset_path.data());
     float width{}, height{};
     SDL_GetTextureSize(_sdl_texture, &width, &height);
     _row_count = height / static_cast<int>(_frame_height);
     _col_count = width / static_cast<int>(_frame_width);
-    Logger::instance().info("TextureResource created: %s", asset_name.data());
+    Logger::info("TextureResource created: %s", asset_name.data());
 }
 
 TextureResource::~TextureResource() {
@@ -27,8 +29,8 @@ TextureResource::~TextureResource() {
 
 void TextureResource::render(Rect position, int row, int col) {
     SDL_FRect source{_frame_width * static_cast<float>(col),
-                     _frame_height * static_cast<float>(row),
-                     _frame_width, _frame_height};
+                     _frame_height * static_cast<float>(row), _frame_width,
+                     _frame_height};
     SDL_FRect sdl_destination{
         static_cast<float>(position[0]), static_cast<float>(position[1]),
         static_cast<float>(position[2]), static_cast<float>(position[3])};
@@ -52,10 +54,10 @@ nlohmann::json TextureResource::available_assets() {
 }
 
 Texture::Texture(TextureResourceRef resource, int animation_speed)
-    : _underlying_resource{resource}
-    , _animation_speed{animation_speed}
-    , _current_row{}
-    , _current_col{} {}
+    : _underlying_resource{resource},
+      _animation_speed{animation_speed},
+      _current_row{},
+      _current_col{} {}
 
 void Texture::update() {
     int ticks = static_cast<int>(SDL_GetTicks() / 50);
@@ -79,10 +81,10 @@ TextureFactory& TextureFactory::instance() {
 TextureRef TextureFactory::create(const std::string& asset_name) {
     auto& resource = _resources[asset_name];
     if (!resource) {
-        Logger::instance().info("Creating texture resource for %s", asset_name.data());
+        Logger::info("Creating texture resource for %s", asset_name.data());
         resource = TextureResource::make_shared(asset_name);
     } else {
-        Logger::instance().info("Reusing texture resource for %s", asset_name.data());
+        Logger::info("Reusing texture resource for %s", asset_name.data());
     }
     return Texture::make_shared(resource);
 }

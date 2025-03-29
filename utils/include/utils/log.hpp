@@ -7,22 +7,18 @@ enum class LoggingLevel { INFO, WARN, ERROR };
 
 class Logger {
 public:
-    static Logger& instance();
+    template <typename... Args>
+    static void info(const char* format, Args&&... args);
 
     template <typename... Args>
-    void info(const char* format, Args&&... args);
+    static void warn(const char* format, Args&&... args);
 
     template <typename... Args>
-    void warn(const char* format, Args&&... args);
-
-    template <typename... Args>
-    void error(const char* format, Args&&... args);
-private:
-    Logger() = default;
+    static void error(const char* format, Args&&... args);
 
 private:
-    void log(LoggingLevel level, const char* format, ...);
-    void log_time();
+    static void log(LoggingLevel level, const char* format, ...);
+    static void log_time();
 };
 
 template <typename... Args>

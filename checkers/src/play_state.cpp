@@ -7,8 +7,7 @@ namespace checkers {
 using namespace core;
 
 PlayState::PlayState()
-    : _current_player{Color::WHITE}
-    , _current_selection{SelectionMode::SOURCE} {
+    : _current_player{Color::WHITE}, _current_selection{SelectionMode::SOURCE} {
     decltype(auto) window = Window::instance();
     auto board_size =
         static_cast<int>(std::min(window.width(), window.height()));
@@ -80,7 +79,8 @@ void PlayState::handle_inputs() {
     auto board = std::static_pointer_cast<Board>(_components[0]);
     board->handle_inputs();
     auto& input_manager = core::input::InputManager::instance();
-    bool mouse_clicked = input_manager.is_clicked(core::input::MouseButton::LEFT);
+    bool mouse_clicked =
+        input_manager.is_clicked(core::input::MouseButton::LEFT);
     if (mouse_clicked == false) {
         return;
     }
@@ -121,15 +121,13 @@ void PlayState::handle_source_selection(CellRef cell_on_focus) {
 
 void PlayState::switch_players() {
     int current = static_cast<int>(_current_player);
-    Logger::instance().info("switching players : %d -> %d", current,
-                            1 - current);
+    Logger::info("switching players : %d -> %d", current, 1 - current);
     _current_player = static_cast<Color>(1 - current);
 }
 
 void PlayState::switch_selection_modes() {
     int current = static_cast<int>(_current_selection);
-    Logger::instance().info("switching selection modes : %d -> %d", current,
-                            1 - current);
+    Logger::info("switching selection modes : %d -> %d", current, 1 - current);
     _current_selection =
         static_cast<SelectionMode>(1 - static_cast<int>(_current_selection));
 }
@@ -161,7 +159,7 @@ void PlayState::remove_figures_between(CellRef src, CellRef dst) {
     for (int x = src_x, y = src_y; x != dst_x && y != dst_y;
          x += x_step, y += y_step) {
         if (board->at(x, y)->figure()) {
-            Logger::instance().info("removing: %d %d", x, y);
+            Logger::info("removing: %d %d", x, y);
             board->at(x, y)->set_figure(nullptr);
         }
     }
@@ -190,14 +188,12 @@ void PlayState::handle_destination_selection(CellRef cell_on_focus) {
     remove_figures_between(_selected_source, cell_on_focus);
     if (_current_player == Color::WHITE &&
         cell_on_focus->coords()[1] == board->size() - 1) {
-        cell_on_focus->set_figure(
-            std::make_shared<King>(cell_on_focus->coords(), board->cell_size(),
-                                   Color::WHITE, board));
+        cell_on_focus->set_figure(std::make_shared<King>(
+            cell_on_focus->coords(), board->cell_size(), Color::WHITE, board));
     }
     if (_current_player == Color::BLACK && cell_on_focus->coords()[1] == 0) {
-        cell_on_focus->set_figure(
-            std::make_shared<King>(cell_on_focus->coords(), board->cell_size(),
-                                   Color::BLACK, board));
+        cell_on_focus->set_figure(std::make_shared<King>(
+            cell_on_focus->coords(), board->cell_size(), Color::BLACK, board));
     }
     _selected_source->unselect();
     std::for_each(_valid_destinations.begin(), _valid_destinations.end(),

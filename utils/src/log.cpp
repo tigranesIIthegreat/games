@@ -5,11 +5,6 @@
 #include <iomanip>
 #include <iostream>
 
-Logger& Logger::instance() {
-    static auto instance = Logger();
-    return instance;
-}
-
 void Logger::log(LoggingLevel level, const char* format, ...) {
 #if defined(DEBUG)
     va_list args;
