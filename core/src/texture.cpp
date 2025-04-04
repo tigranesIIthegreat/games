@@ -20,7 +20,7 @@ TextureResource::TextureResource(const std::string& asset_name)
     SDL_GetTextureSize(_sdl_texture, &width, &height);
     _row_count = height / static_cast<int>(_frame_height);
     _col_count = width / static_cast<int>(_frame_width);
-    Logger::info("TextureResource created: %s", asset_name.data());
+    Logger::info(std::format("TextureResource created: {}", asset_name));
 }
 
 TextureResource::~TextureResource() {
@@ -41,7 +41,7 @@ void TextureResource::render(Rect position, int row, int col) {
 
 nlohmann::json TextureResource::available_assets() {
     static constexpr std::string_view assets_path = "assets/assets.json";
-    std::ifstream file(assets_path);
+    std::ifstream file(assets_path.data());
 
     if (!file.is_open()) {
         throw std::runtime_error("Failed to open file assets' file");
@@ -81,10 +81,10 @@ TextureFactory& TextureFactory::instance() {
 TextureRef TextureFactory::create(const std::string& asset_name) {
     auto& resource = _resources[asset_name];
     if (!resource) {
-        Logger::info("Creating texture resource for %s", asset_name.data());
+        Logger::info(std::format("Creating texture resource for {}", asset_name));
         resource = TextureResource::make_shared(asset_name);
     } else {
-        Logger::info("Reusing texture resource for %s", asset_name.data());
+        Logger::info(std::format("Reusing texture resource for {}", asset_name));
     }
     return Texture::make_shared(resource);
 }

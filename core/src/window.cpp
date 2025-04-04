@@ -19,7 +19,7 @@ Window::Window(const std::string& title, int width, int height)
         _initialize_system();
     set_sdl_window();
     set_sdl_renderer();
-    Logger::info("Window created: %s (%d, %d)", title.data(), width, height);
+    Logger::info(std::format("Window created: {} ({}, {})", title.data(), width, height));
 }
 
 Window::~Window() {
