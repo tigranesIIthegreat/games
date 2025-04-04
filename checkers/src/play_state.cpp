@@ -121,14 +121,15 @@ void PlayState::handle_source_selection(CellRef cell_on_focus) {
 
 void PlayState::switch_players() {
     int cur = static_cast<int>(_current_player);
-    Logger::info(std::format("switching players : {} -> {}", cur, 1 - cur));
+    // Logger::info(std::format("switching players : {} -> {}", cur, 1 - cur));
     _current_player = static_cast<Color>(1 - cur);
 }
 
 void PlayState::switch_selection_modes() {
     int cur = static_cast<int>(_current_selection);
-    Logger::info(std::format("switching selection modes : {} -> {}", cur, 1 - cur));
-    _current_selection = static_cast<SelectionMode>(1 - static_cast<int>(_current_selection));
+    // Logger::info(std::format("switching selection modes : {} -> {}", cur, 1 - cur));
+    _current_selection =
+        static_cast<SelectionMode>(1 - static_cast<int>(_current_selection));
 }
 
 void PlayState::remove_figures_between(CellRef src, CellRef dst) {
@@ -158,7 +159,7 @@ void PlayState::remove_figures_between(CellRef src, CellRef dst) {
     for (int x = src_x, y = src_y; x != dst_x && y != dst_y;
          x += x_step, y += y_step) {
         if (board->at(x, y)->figure()) {
-            Logger::info(std::format("removing: {} {}", x, y));
+            // Logger::info(std::format("removing: {} {}", x, y));
             board->at(x, y)->set_figure(nullptr);
         }
     }

@@ -1,0 +1,51 @@
+name: Build and Deploy the Game to GitHub Pages
+
+on:
+  push:
+    branches: [ "**" ]  # Trigger on any push to any branch
+  workflow_dispatch:  # Allow manual triggers
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout repository and submodules
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v3
+      with:
+        submodules: 'true'  # Ensure all submodules are initialized and updated
+
+    # Step 2: Update submodules (explicit update)
+    - name: Update submodules
+      run: git submodule update --init --recursive
+
+    # Step 3: Setup Emscripten
+    - name: Setup Emscripten
+      uses: mymindstorm/setup-emsdk@v12
+      with:
+        version: 3.1.58  # Specify the version of Emscripten to use
+
+    # Step 4: Build with Emscripten
+    - name: Build with Emscripten
+      run: |
+        mkdir build
+        cd build
+        emcmake cmake .. -DCMAKE_BUILD_TYPE=Release
+        emmake make CXXFLAGS="-s TOTAL_MEMORY=134217728 -s ALLOW_MEMORY_GROWTH=1 -s EXPORTED_FUNCTIONS='[\"_put_char\"]' -s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"cwrap\", \"FS\", \"stdout\"]'"
+
+    # Step 5: Prepare website files
+    - name: Prepare website files
+      run: |
+        mkdir -p public
+        cp build/games.html public/index.html || true
+        cp build/games.js public/ || true
+        cp build/games.wasm public/ || true
+        ls -la public
+
+    # Step 6: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub token for deployment
+        publish_dir: ./public  # Specify the directory to be deployed

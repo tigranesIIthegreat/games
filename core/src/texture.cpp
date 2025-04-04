@@ -20,7 +20,7 @@ TextureResource::TextureResource(const std::string& asset_name)
     SDL_GetTextureSize(_sdl_texture, &width, &height);
     _row_count = height / static_cast<int>(_frame_height);
     _col_count = width / static_cast<int>(_frame_width);
-    Logger::info(std::format("TextureResource created: {}", asset_name));
+    // Logger::info(std::format("TextureResource created: {}", asset_name));
 }
 
 TextureResource::~TextureResource() {
@@ -81,10 +81,10 @@ TextureFactory& TextureFactory::instance() {
 TextureRef TextureFactory::create(const std::string& asset_name) {
     auto& resource = _resources[asset_name];
     if (!resource) {
-        Logger::info(std::format("Creating texture resource for {}", asset_name));
+        // Logger::info(std::format("Creating texture resource for {}", asset_name));
         resource = TextureResource::make_shared(asset_name);
     } else {
-        Logger::info(std::format("Reusing texture resource for {}", asset_name));
+        // Logger::info(std::format("Reusing texture resource for {}", asset_name));
     }
     return Texture::make_shared(resource);
 }

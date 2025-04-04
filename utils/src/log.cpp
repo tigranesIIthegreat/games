@@ -25,17 +25,17 @@ void Logger::error(const std::string_view message,
 void Logger::log(LoggingLevel level, 
                  const std::string_view message,
                  const std::source_location location) {
-    static std::string intro[] = {
-        "\e[0;37m[INF] ",  // INFO
-        "\e[1;33m[WRN] ",  // WARN
-        "\e[1;31m[ERR] "   // ERROR
-    };
-    log_time();
-    static std::string default_setting = "\e[0;37m";
-    std::clog << intro[static_cast<int>(level)] 
-              << location.file_name() << ':'
-              << location.line() << " " 
-              << message << '\n' << default_setting;
+    // static std::string intro[] = {
+    //     "\e[0;37m[INF] ",  // INFO
+    //     "\e[1;33m[WRN] ",  // WARN
+    //     "\e[1;31m[ERR] "   // ERROR
+    // };
+    // log_time();
+    // static std::string default_setting = "\e[0;37m";
+    // std::clog << intro[static_cast<int>(level)] 
+    //           << location.file_name() << ':'
+    //           << location.line() << " " 
+    //           << message << '\n' << default_setting;
 }
 
 void Logger::log_time() {
