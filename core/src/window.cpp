@@ -41,7 +41,7 @@ void Window::_deinitialize_system() {
 }
 
 void Window::set_sdl_window() {
-    _sdl_window = SDL_CreateWindow(_title.data(), _width, _height, _flags);
+    _sdl_window = SDL_CreateWindow(_title.data(), 0, 0, _width, _height, _flags);
     if (_sdl_window == nullptr) {
         _deinitialize_system();
         throw std::runtime_error(std::string(SDL_GetError()));
@@ -49,7 +49,7 @@ void Window::set_sdl_window() {
 }
 
 void Window::set_sdl_renderer() {
-    _sdl_renderer = SDL_CreateRenderer(_sdl_window, nullptr);
+    _sdl_renderer = SDL_CreateRenderer(_sdl_window, 0, 0);
     if (_sdl_renderer == nullptr) {
         _deinitialize_system();
         throw std::runtime_error(std::string(SDL_GetError()));
