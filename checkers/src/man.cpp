@@ -6,7 +6,10 @@ namespace checkers {
 
 Man::Man(core::Coords coords, int size, Color color, BoardRef board)
     : Figure(coords, size, color, board) {
-    _texture = (color == Color::WHITE) ? _white_man_texture : _black_man_texture;
+    _texture = core::TextureFactory::instance().create(
+        color == Color::WHITE ? "man_white" : "man_black");
+    // TODO: understand why this does not work with emscripten
+    // _texture = (color == Color::WHITE) ? _white_man_texture : _black_man_texture;
 }
 
 std::vector<CellRef> Man::valid_destinations() const {

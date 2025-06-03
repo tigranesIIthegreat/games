@@ -8,7 +8,7 @@ namespace checkers {
 Board::Board(Rect position, TextureRef texture)
     : GameObject{position, texture} {
     decltype(auto) window = Window::instance();
-    _cell_size = std::min(window.width(), window.height()) / _size;
+    _cell_size = position[2] / _size;
     _components.reserve(_size * _size);
     for (int i{}; i < _size; ++i) {
         for (int j{}; j < _size; ++j) {

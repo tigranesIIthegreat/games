@@ -44,8 +44,8 @@ void Game::handle_inputs() {
 void Game::render() {
     decltype(auto) renderer = Window::instance().sdl_renderer();
     // TODO: understaand necessity of these two calls
-    // SDL_RenderClear(renderer);
-    // SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     _states.top()->render();
     SDL_RenderPresent(renderer);
 }

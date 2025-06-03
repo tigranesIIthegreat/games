@@ -12,7 +12,7 @@ int Window::_instance_count = 0;
 
 Window& Window::instance() {
     static auto intance = 
-        Window("games", canvas_get_width(), canvas_get_width());
+        Window("games", canvas_get_width(), canvas_get_height());
     return intance;
 }
 
