@@ -19,8 +19,8 @@ private:
 
 private:
     std::string _asset_name;
-    float _frame_width;
-    float _frame_height;
+    int _frame_width;
+    int _frame_height;
     SDL_Texture* _sdl_texture;
     int _row_count;
     int _col_count;

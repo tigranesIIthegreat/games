@@ -8,20 +8,16 @@ namespace core {
 Game::Game(int fps) : _running{false}, _frame_delay(1000.0f / fps) {}
 
 void Game::run() {
-    _running = true;
-    int frame_start{};
-    int frame_duration{};
-
-    while (_running) {
-        frame_start = SDL_GetTicks();
-        input::InputManager::instance().update();
-        handle_inputs();
-        render();
-        frame_duration = frame_start - SDL_GetTicks();
-        if (frame_duration < _frame_delay) {
-            SDL_Delay(static_cast<int>(_frame_delay - frame_duration));
-        }
-    }
+    // int frame_start{};
+    // int frame_duration{};
+    // frame_start = SDL_GetTicks();
+    input::InputManager::instance().update();
+    handle_inputs();
+    render();
+    // frame_duration = frame_start - SDL_GetTicks();
+    // if (frame_duration < _frame_delay) {
+        // SDL_Delay(static_cast<int>(_frame_delay - frame_duration));
+    // }
 }
 
 void Game::_push_state(GameStateRef state) {
@@ -48,8 +44,8 @@ void Game::handle_inputs() {
 void Game::render() {
     decltype(auto) renderer = Window::instance().sdl_renderer();
     // TODO: understaand necessity of these two calls
-    // SDL_RenderClear(renderer);
-    // SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     _states.top()->render();
     SDL_RenderPresent(renderer);
 }

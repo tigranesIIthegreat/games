@@ -49,18 +49,18 @@ bool InputManager::need_to_quit() const {
 }
 
 void InputManager::_update_quitting_necessity() {
-    _need_to_quit = _event.type == SDL_EVENT_QUIT;
+    _need_to_quit = _event.type == SDL_QUIT;
 }
 
 void InputManager::_update_mouse_state() {
     std::memcpy(_previous_mouse_state, _current_mouse_state,
                 sizeof(_previous_mouse_state));
     // TODO: check current state is not corrupted
-    if (_event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
+    if (_event.type == SDL_MOUSEBUTTONDOWN) {
         _current_mouse_state[_event.button.button - 1] = true;
-    } else if (_event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
+    } else if (_event.type == SDL_MOUSEBUTTONUP) {
         _current_mouse_state[_event.button.button - 1] = false;
-    } else if (_event.type == SDL_EVENT_MOUSE_MOTION) {
+    } else if (_event.type == SDL_MOUSEMOTION) {
         int x_coord = static_cast<int>(_event.motion.x);
         int y_coord = static_cast<int>(_event.motion.y);
         _mouse_position = {x_coord, y_coord};

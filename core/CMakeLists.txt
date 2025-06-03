@@ -38,8 +38,6 @@ target_link_libraries(
 target_include_directories(
     core_headers INTERFACE 
     ${CMAKE_SOURCE_DIR}/dependencies/json/include
-    ${CMAKE_SOURCE_DIR}/dependencies/SDL/include 
-    ${CMAKE_SOURCE_DIR}/dependencies/SDL_Image/include 
 )
 
 target_link_libraries(core_headers INTERFACE utils_headers)
@@ -49,6 +47,4 @@ target_link_libraries(
     PRIVATE 
     utils
     nlohmann_json::nlohmann_json
-    SDL3::SDL3
-    SDL3_image::SDL3_image
 )

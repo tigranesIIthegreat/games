@@ -1,0 +1,45 @@
+name: Build and Deploy the Game to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    - name: Update submodules
+      run: git submodule update --init --recursive
+
+    - name: Set up emsdk and build
+      run: |
+        cd dependencies/emsdk
+        ./emsdk install latest
+        ./emsdk activate latest
+        source ./emsdk_env.sh
+        cd ../../
+        echo "EMSDK path setup complete"
+        emcmake cmake -B build
+        cmake --build build
+
+    - name: Prepare website files
+      run: |
+        mkdir -p public
+        cp build/index.html public/
+        cp build/games.js public/
+        cp build/games.wasm public/
+        cp build/games.data public/
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public

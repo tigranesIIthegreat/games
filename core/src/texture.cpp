@@ -2,7 +2,7 @@
 
 #include <utils/log.hpp>
 
-#include <SDL3_image/SDL_image.h>
+#include <SDL2/SDL_image.h>
 #include <fstream>
 
 namespace core {
@@ -16,8 +16,8 @@ TextureResource::TextureResource(const std::string& asset_name)
     _frame_height = asset["frame_size"]["height"];
     _sdl_texture =
         IMG_LoadTexture(Window::instance().sdl_renderer(), asset_path.data());
-    float width{}, height{};
-    SDL_GetTextureSize(_sdl_texture, &width, &height);
+    int width{}, height{};
+    SDL_QueryTexture(_sdl_texture, nullptr, nullptr, &width, &height);
     _row_count = height / static_cast<int>(_frame_height);
     _col_count = width / static_cast<int>(_frame_width);
     Logger::info(std::format("TextureResource created: {}", asset_name));
@@ -28,15 +28,11 @@ TextureResource::~TextureResource() {
 }
 
 void TextureResource::render(Rect position, int row, int col) {
-    SDL_FRect source{_frame_width * static_cast<float>(col),
-                     _frame_height * static_cast<float>(row), _frame_width,
-                     _frame_height};
-    SDL_FRect sdl_destination{
-        static_cast<float>(position[0]), static_cast<float>(position[1]),
-        static_cast<float>(position[2]), static_cast<float>(position[3])};
+    SDL_Rect source{_frame_width * col, _frame_height * row, _frame_width, _frame_height};
+    SDL_Rect sdl_destination{position[0], position[1], position[2], position[3]};
 
     decltype(auto) renderer = Window::instance().sdl_renderer();
-    SDL_RenderTexture(renderer, _sdl_texture, &source, &sdl_destination);
+    SDL_RenderCopy(renderer, _sdl_texture, &source, &sdl_destination);
 }
 
 nlohmann::json TextureResource::available_assets() {

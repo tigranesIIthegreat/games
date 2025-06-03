@@ -9,8 +9,9 @@ using namespace core;
 PlayState::PlayState()
     : _current_player{Color::WHITE}, _current_selection{SelectionMode::SOURCE} {
     decltype(auto) window = Window::instance();
-    auto board_size =
-        static_cast<int>(std::min(window.width(), window.height()));
+
+    // TODO: auto board_size = static_cast<int>(std::min(window.width(), window.height()));
+    auto board_size = 512;
     auto board_texture = TextureFactory::instance().create("checkerboard");
     auto board = std::make_shared<Board>(Rect{0, 0, board_size, board_size},
                                          board_texture);
