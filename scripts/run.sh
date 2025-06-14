@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-# Kill any existing server on port 3000
-lsof -ti tcp:3000 | xargs kill -9 2>/dev/null || true
+# Kill any existing server on port 4000
+lsof -ti tcp:4000 | xargs kill -9 2>/dev/null || true
 
 # Activate emsdk
 source scripts/emsdk_activate.sh
@@ -12,11 +12,11 @@ emcmake cmake -B build . && \
 cmake --build build
 
 # Start server in background
-python3 -m http.server 3000 --directory build &
+python3 -m http.server 4000 --directory build &
 SERVER_PID=$!
 
 # Open in browser
-open http://localhost:3000
+open http://localhost:4000
 
 # Cleanup handler
 cleanup() {
