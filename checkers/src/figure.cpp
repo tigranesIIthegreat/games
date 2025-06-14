@@ -1,4 +1,5 @@
 #include <checkers/figure.hpp>
+#include <checkers/board.hpp>
 
 namespace checkers {
 
@@ -13,12 +14,13 @@ Color Figure::color() const {
 }
 
 core::Coords Figure::coords() const {
-    return {_position[0] / _position[2], _position[1] / _position[3]};
+    return {(_position[0] - _board->position()[0]) / _position[2], 
+            (_position[1] - _board->position()[1]) / _position[3]};
 }
 
 void Figure::set_coords(core::Coords coords) {
-    _position[0] = coords[0] * _position[2];
-    _position[1] = coords[1] * _position[3];
+    _position[0] = _board->position()[0] + coords[0] * _position[2];
+    _position[1] = _board->position()[1] + coords[1] * _position[3];
 }
 
 }  // namespace checkers

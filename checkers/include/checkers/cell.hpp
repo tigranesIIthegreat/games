@@ -6,7 +6,7 @@ namespace checkers {
 
 class Cell : public core::GameObject {
 public:
-    Cell(core::Coords coords, int size, FigureRef figure = nullptr);
+    Cell(core::Rect position, core::Coords coords, FigureRef figure = nullptr);
     FigureRef figure();
     void set_figure(FigureRef figure);
     virtual void handle_inputs() override;
@@ -20,6 +20,7 @@ public:
 
 private:
     bool _is_selected{};
+    core::Coords _coords{};
 
 private:
     static core::TextureRef _green25_texture;

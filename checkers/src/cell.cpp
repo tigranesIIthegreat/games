@@ -8,8 +8,9 @@ core::TextureRef Cell::_green25_texture =
 core::TextureRef Cell::_green50_texture =
     core::TextureFactory::instance().create("green50");
 
-Cell::Cell(core::Coords coords, int size, FigureRef figure)
-    : core::GameObject(core::Rect{coords[0] * size, coords[1] * size, size, size}) {
+Cell::Cell(core::Rect position, core::Coords coords, FigureRef figure)
+    : core::GameObject(position) {
+    _coords = coords;
     _components.push_back(figure);
 }
 
@@ -44,7 +45,7 @@ void Cell::unselect() {
 }
 
 core::Coords Cell::coords() const {
-    return {_position[0] / _position[2], _position[1] / _position[3]};
+    return _coords;
 }
 
 void Cell::set_coords(core::Coords coords) {

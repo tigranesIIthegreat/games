@@ -15,8 +15,8 @@ Man::Man(core::Coords coords, int size, Color color, BoardRef board)
 std::vector<CellRef> Man::valid_destinations() const {
     auto step = _color == Color::WHITE ? 1 : -1;
     std::vector<CellRef> result{};
-    int x = _position[1] / _position[3];
-    int y = _position[0] / _position[2];
+    int x = (_position[1] - _board->position()[1]) / _position[3];
+    int y = (_position[0] - _board->position()[0]) / _position[2];
 
     // TODO: use array to avoid code duplication
 

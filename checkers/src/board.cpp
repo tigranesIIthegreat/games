@@ -12,10 +12,11 @@ Board::Board(Rect position, TextureRef texture)
     _components.reserve(_size * _size);
     for (int i{}; i < _size; ++i) {
         for (int j{}; j < _size; ++j) {
-            auto position =
-                Rect{i * _cell_size, j * _cell_size, _cell_size, _cell_size};
+            auto cell_x = position[0] + i * _cell_size;
+            auto cell_y = position[1] + j * _cell_size;
+            auto position = Rect{cell_x, cell_y, _cell_size, _cell_size};
             auto coords = Coords{i, j};
-            _components.push_back(std::make_shared<Cell>(coords, _cell_size));
+            _components.push_back(std::make_shared<Cell>(position, coords));
         }
     }
 }
