@@ -13,8 +13,11 @@ PlayState::PlayState()
     // TODO: auto board_size = static_cast<int>(std::min(window.width(), window.height()));
     auto board_size = 512;
     auto board_texture = TextureFactory::instance().create("checkerboard");
-    auto board = std::make_shared<Board>(Rect{0, 0, board_size, board_size},
-                                         board_texture);
+    auto board_x = Window::instance().width() / 2 - board_size / 2;
+    auto board_y = Window::instance().height() / 2 - board_size / 2;
+    auto board_position = Rect{board_x, board_y, board_size, board_size};
+    auto board = std::make_shared<Board>(board_position, board_texture);
+
     _components.push_back(board);
     auto cell_size = board_size / board->size();
 
